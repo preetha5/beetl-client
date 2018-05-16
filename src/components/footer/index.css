@@ -1,0 +1,7 @@
+footer {
+    box-sizing: border-box;
+    height: 80px;
+    background-color: #5e5b5b;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 15px;
+  }
