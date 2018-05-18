@@ -37,9 +37,10 @@ const renderRadioGroup = ({ input, ...rest }) => (
   />
 );
 
-const renderSelectField = (
+export const renderSelectField = (
   { input, label, meta: { touched, error }, children, ...custom },
 ) => (
+    
   <SelectField
     floatingLabelText={label}
     errorText={touched && error}

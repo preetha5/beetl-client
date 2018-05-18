@@ -21,23 +21,20 @@ class Table1 extends Component {
         return (
         <div>
                 <BootstrapTable data={this.props.data} responsive>
-                    <TableHeaderColumn isKey dataField='product'>
+                    <TableHeaderColumn isKey dataField='issueId'>
+                    Issue ID
+                    </TableHeaderColumn>
+                    <TableHeaderColumn dataField='title'>
+                    Title
+                    </TableHeaderColumn>
+                    <TableHeaderColumn dataField='product'>
                     Product
                     </TableHeaderColumn>
-                    <TableHeaderColumn dataField='total'>
-                    Total Bugs
+                    <TableHeaderColumn dataField='status'>
+                    Status
                     </TableHeaderColumn>
-                    <TableHeaderColumn dataField='open'>
-                    Open
-                    </TableHeaderColumn>
-                    <TableHeaderColumn dataField='progress'>
-                    InProgress
-                    </TableHeaderColumn>
-                    <TableHeaderColumn dataField='fixed'>
-                    Fixed
-                    </TableHeaderColumn>
-                    <TableHeaderColumn dataField='closed'>
-                    Closed
+                    <TableHeaderColumn dataField='assignee'>
+                    Assignee
                     </TableHeaderColumn>
                 </BootstrapTable>
         </div>
@@ -46,9 +43,13 @@ class Table1 extends Component {
   }
 
   let data = [
-    {product: 'Salt shaker', total: 10, open: 2, progress: 5, fixed:3, closed:0},
-    {product: 'Water Filter', total: 5, open: 1, progress: 2, fixed: 2, closed:0}
-  ];
+    {issueId: 334455, title: "scan head cracked", product: "Scanner", status: 'open', assignee: "Joe Dev"},
+    {issueId: 334456, title: "Mirror not reflecting well", product: "Scanner", status: 'in-progress', assignee: "Alisha Dev"},
+    {issueId: 334455, title: "scan head cracked", product: "Scanner", status: 'open', assignee: "Joe Dev"},
+    {issueId: 334456, title: "Mirror not reflecting well", product: "Scanner", status: 'in-progress', assignee: "Alisha Dev"},
+    {issueId: 334455, title: "scan head cracked", product: "Scanner", status: 'open', assignee: "Joe Dev"},
+    {issueId: 334456, title: "Mirror not reflecting well", product: "Scanner", status: 'in-progress', assignee: "Alisha Dev"},
+   ];
 
 function AllIssues(props){
     const { classes } = props;
@@ -56,7 +57,7 @@ function AllIssues(props){
         <div>
         <Grid container>
             <Grid item xs={12} style={{textAlign: 'center'}}>
-                <h2>Issues at a glance</h2>
+                <h2>View (or) Search Issues</h2>
                 <Paper className={classes.root} elevation={4}>
                     <Table1 data={data}/>
                 </Paper>

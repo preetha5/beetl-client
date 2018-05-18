@@ -4,15 +4,22 @@ import './app.css';
 import {Header} from './header';
 import LandingPage from './landing-page';
 import {Main} from './main';
-import Dashboard from './main/dashboard';
 import Footer from './footer';
 import Login from './login';
 import SignUp from './signup';
+import CreateIssue from './main/create_issue';
+import ViewIssues from './main/view_issues';
+import Sidebar from './main/sidebar';
+import Help from './main/help';
 // Import for Material UI
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {deepOrange500} from 'material-ui/styles/colors';
 import {orange500} from 'material-ui/styles/colors';
+import Paper from '@material-ui/core/Paper';
+import Hidden from '@material-ui/core/Hidden';
+import Grid from '@material-ui/core/Grid';
+
 
 const muiTheme = getMuiTheme({
     palette: {
@@ -48,11 +55,23 @@ class App extends Component {
         <Router >
             <div>
                 <Header loggedIn={loggedIn}/>
-                <Route exact path="/" render={(props) => (
-                    <Main name="Joe Admin" role="admin" />
-                )}/>
+                <Grid container>
+                    <Grid item xs={2}>
+                        <Hidden xsDown>
+                            <Paper><Sidebar /></Paper>
+                        </Hidden>
+                    </Grid>
+                    <Grid item xs={10}>
+                        <Route exact path="/" render={(props) => (
+                            <Main name="Joe Admin" role="admin" />
+                        )}/>
+                        <Route exact path="/create_issue" component={CreateIssue} />
+                        <Route exact path="/view_issues" component={ViewIssues} />
+                        <Route exact path="/help" component={Help} />
+                    </Grid>
+                </Grid>
                 <Footer />
-            </div>
+                </div>
         </Router >
         </MuiThemeProvider>
     );

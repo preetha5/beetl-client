@@ -5,12 +5,14 @@ import './index.css';
 export default function Footer(){
 
     return(
-        <footer>
-            <Grid container spacing={24}>
-                <Grid item xs style={{textAlign: 'center'}}>
-                    <p>Copyright &copy; 2018 | Beetl Inc </p>
+        
+            <Grid container className="footer">
+                <Grid item xs={12} style={{textAlign: 'center'}}>
+                    <footer>
+                        <p>Copyright &copy; 2018 | Beetl Inc </p>
+                    </footer>
                 </Grid>
             </Grid>
-        </footer>
+       
     )
 }

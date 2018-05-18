@@ -1,0 +1,28 @@
+.sidebar {
+   width: 100px;
+}
+
+nav.sidebar-menu {
+    text-align: center;
+    height: 100vh;
+}
+
+.sidebar-left {
+    margin-right: 10px;
+}
+
+.sidebar-menu-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar-menu-list-item {
+    padding: 10px;
+    border-bottom: none;
+    display: block;
+}
+
+svg.MuiSvgIcon-root-120{
+    font-size: 2em;
+}

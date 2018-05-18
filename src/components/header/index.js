@@ -29,16 +29,17 @@ export class Header extends Component{
         this.setState({open: !this.state.open});
     }
 
-    closeMenu() { 
+    closeMenu = () => { 
         this.setState({open: false});
     }
     
     render(){
     const menulinks = this.props.loggedIn? (
         <div>
-            <MenuItem><a href="#">Create Issue</a></MenuItem>
-            <MenuItem><a href="#">View Issue</a></MenuItem>
-            <MenuItem><a href="#">Documentation</a></MenuItem>
+            <MenuItem><Link to="/" onClick={this.closeMenu}>Dashboard</Link></MenuItem>
+            <MenuItem><Link to="/create_issue" onClick={this.closeMenu}>Create Issue</Link></MenuItem>
+            <MenuItem><Link to="/view_issues" onClick={this.closeMenu}>View Issues</Link></MenuItem>
+            <MenuItem><Link to="/help" onClick={this.closeMenu}>Help</Link></MenuItem>
             <MenuItem><a href="#">Log Out</a></MenuItem>
         </div>):
         (<div>

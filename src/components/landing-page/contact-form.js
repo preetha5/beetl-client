@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-export default function HowItWorks(){
+export default function ContactForm(){
     return(
         <section>
             <h3>Want More Customizations? Contact Us.</h3>
