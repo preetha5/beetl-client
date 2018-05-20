@@ -9,8 +9,10 @@ import Login from './login';
 import SignUp from './signup';
 import CreateIssue from './main/create_issue';
 import ViewIssues from './main/view_issues';
+import IssueDetails from './main/issue_details';
 import Sidebar from './main/sidebar';
 import Help from './main/help';
+
 // Import for Material UI
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -67,7 +69,13 @@ class App extends Component {
                         )}/>
                         <Route exact path="/create_issue" component={CreateIssue} />
                         <Route exact path="/view_issues" component={ViewIssues} />
+                        <Route
+                            exact
+                            path="/view_issues/:bugId"
+                            component={IssueDetails}
+                        />
                         <Route exact path="/help" component={Help} />
+                        <Route exact path="/logout" component={LandingPage} />
                     </Grid>
                 </Grid>
                 <Footer />

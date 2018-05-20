@@ -21,7 +21,8 @@ class Table1 extends Component {
         return (
         <div>
                 <BootstrapTable data={this.props.data} responsive>
-                    <TableHeaderColumn isKey dataField='product'>
+                    <TableHeaderColumn columnTitle isKey 
+                        dataField='product' tdStyle={ { whiteSpace: 'normal'} }>
                     Product
                     </TableHeaderColumn>
                     <TableHeaderColumn dataField='total'>

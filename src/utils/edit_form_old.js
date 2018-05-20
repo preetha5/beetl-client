@@ -4,6 +4,7 @@ import {Field,select, reduxForm, formValueSelector} from 'redux-form';
 import {RadioButton} from 'material-ui/RadioButton';
 import MenuItem from 'material-ui/MenuItem';
 import {AutoComplete as MUIAutoComplete} from 'material-ui';
+import { load as loadAccount } from '../reducers/account';
 import {
   AutoComplete,
   Checkbox,
@@ -25,7 +26,6 @@ const email = value =>
   (value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
     ? 'Invalid email'
     : undefined);
-const tooManyPizzas = value => (value > 15 ? 'Are you mad?' : undefined);
 
 const renderSelectField = (
     { input, label, meta: { touched, error }, children, ...custom },
@@ -39,8 +39,17 @@ const renderSelectField = (
       {...custom}
     />
   );
+  const data = {
+    product:"Scanner",
+    component:'Mirror',
+    version:'1.0',
+    severity:'P1',
+    reporter:"Jane dev",
+    title:"scanner head broken",
+    description:"bad scanner"
+}
 
-class IssueForm extends Component {
+class EditForm extends Component {
   constructor(props){
       super(props);
       this.state = {
@@ -49,19 +58,13 @@ class IssueForm extends Component {
       }
       const {chosenProduct} = props;
       this.handleProductChange = this.handleProductChange.bind(this);
+      const data = {}
   }
 
   setEditing(editing){
       this.setState({
           editing
       })
-  }
-
-  componentDidMount() {
-    // this.ref // the Field
-    //   .getRenderedComponent() // on Field, returns ReduxFormMaterialUITextField
-    //   .getRenderedComponent() // on ReduxFormMaterialUITextField, returns TextField
-    //   .focus(); // on TextField
   }
 
   handleProductChange(val){
@@ -73,8 +76,13 @@ class IssueForm extends Component {
       console.log(this.state.components);
   }
 
+  handleEditClick(editing){
+    this.setState({
+        editing
+    })
+  }
   render() {
-    const {handleSubmit, pristine, numPizzas, reset, submitting} = this.props;
+    const {handleSubmit, load, pristine, reset, submitting} = this.props;
     const productsList = this.props.products.map((product, index) =>
         <MenuItem key={index} value={product.productName.toString().toLowerCase()} primaryText={product.productName}/>
     )
@@ -85,44 +93,35 @@ class IssueForm extends Component {
         <MenuItem key={index} value={user} primaryText={user}/>
     )
     console.log(componentList);
-    const BugTitle = (this.props.bugId) ? (<h2>Bug ID : {this.props.bugId}</h2>):null;
     
-    //Buttons added while form is used to create an issue
-    const CreateButtons = <div>
-                            <button type="submit" disabled={submitting}>Save</button>
-                            <button
-                                type="button"
-                                disabled={pristine || submitting}
-                                onClick={reset}
-                            >
-                                Clear
-                            </button>
-                            </div>;
-
     //Buttons added while form is used to edit/save an issue
     const EditButtons = this.state.editing ? (
         <div>
             <button type="submit" disabled={submitting}>Save</button>
             <button
                 type="button"
-                disabled={pristine || submitting}
-                onClick={reset}
+                onClick={() => this.handleEditClick(false)}
             >
-                Clear
+                Cancel
             </button>
         </div>)
-        :<button onClick={() => this.setEditing(true)}>Edit</button>;
+        :<button onClick={() => this.handleEditClick(true)}>Edit</button>;
 
     return (
         <div>
             <form onSubmit={handleSubmit} className="issueForm">
-                {BugTitle}
+                <h2>Bug ID : {this.props.bugId}</h2>
+                <div>
+                    <button type="button" onClick={() => { load(data); console.log(data); }} >Load Account</button>
+                </div>
                 <div>
                 <Field
-                    name="products"
+                    name="product"
                     component={renderSelectField}
                     label="Choose a product"
                     onChange={(e, val)=>{this.handleProductChange(val)}}
+                    ref="product"
+                    withRef
                     >
                     {productsList}
                 </Field>
@@ -141,7 +140,6 @@ class IssueForm extends Component {
                     component={renderSelectField}
                     label="Choose a component"
                     type="select"
-                    options={this.state.components}
                     >
                     {componentList}
                 </Field>
@@ -174,6 +172,8 @@ class IssueForm extends Component {
                     component={TextField}
                     hintText="Reporter"
                     floatingLabelText="Reporter"
+                    ref="reporter"
+                    withRef
                 />
                 </div>
                 <div>
@@ -214,34 +214,26 @@ class IssueForm extends Component {
                     validate={required}
                 />
                 </div>
-            
-                
-                {CreateButtons}
-                
+                {EditButtons}
             </form>
+            
         </div>
     );
   }
 }
 
-const selector = formValueSelector('issueForm');
+const selector = formValueSelector('editForm');
+console.log(this.state);
+EditForm = connect(
+    state => (
+        {
+        initialValues: state.account.data
+    }),
+    {load: loadAccount},
+    )(EditForm);
 
-IssueForm = connect(
-    state => {
-        const selectedProduct = selector(state, 'product')
-        return {
-            selectedProduct
-        }
-    })(IssueForm);
+EditForm = reduxForm({
+  form: 'editForm',
+})(EditForm);
 
-IssueForm = reduxForm({
-  form: 'issueForm',
-  initialValues: {
-    delivery: 'delivery',
-    name: 'Jane Doe',
-    cheese: 'Cheddar',
-    pizzas: 1,
-  },
-})(IssueForm);
-
-export default IssueForm;
+export default EditForm;

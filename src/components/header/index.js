@@ -40,11 +40,11 @@ export class Header extends Component{
             <MenuItem><Link to="/create_issue" onClick={this.closeMenu}>Create Issue</Link></MenuItem>
             <MenuItem><Link to="/view_issues" onClick={this.closeMenu}>View Issues</Link></MenuItem>
             <MenuItem><Link to="/help" onClick={this.closeMenu}>Help</Link></MenuItem>
-            <MenuItem><a href="#">Log Out</a></MenuItem>
+            <MenuItem><Link to="/logout" onClick={this.closeMenu}>Log Out</Link></MenuItem>
         </div>):
         (<div>
             <MenuItem><Link to="/login" onClick={this.closeMenu}>Login</Link></MenuItem>
-            <MenuItem><Link to="/signup">Sign Up</Link></MenuItem>
+            <MenuItem><Link to="/signup" onClick={this.closeMenu}>Sign Up</Link></MenuItem>
         </div>);
     return (
         <div>

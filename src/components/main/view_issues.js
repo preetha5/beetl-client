@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import propTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 import {BootstrapTable, 
     TableHeaderColumn} from 'react-bootstrap-table';
 import '../../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css'
@@ -16,12 +17,20 @@ const styles = theme => ({
     }),
   });
 
+function bugIdFormatter(cell, row){
+    console.log('calling formatter', {cell});
+    return (
+        <Link to={`/view_issues/${cell}`}>{cell}</Link>
+    );
+}
+
 class Table1 extends Component {
     render() {
         return (
         <div>
-                <BootstrapTable data={this.props.data} responsive>
-                    <TableHeaderColumn isKey dataField='issueId'>
+                <BootstrapTable data={this.props.data} responsive search searchPlaceholder='Enter search...' version='4'>
+                    <TableHeaderColumn isKey dataField='issueId' 
+                        dataFormat={bugIdFormatter}>
                     Issue ID
                     </TableHeaderColumn>
                     <TableHeaderColumn dataField='title'>
