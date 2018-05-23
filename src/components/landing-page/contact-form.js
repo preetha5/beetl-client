@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 export default function ContactForm(){
     return(
         <section>
-            <h3>Want More Customizations? Contact Us.</h3>
             <form class='signup-form'>
             <div>
               <label for="first-name">First name</label>

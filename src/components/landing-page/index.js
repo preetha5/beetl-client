@@ -36,6 +36,7 @@ export default class LandingPage extends Component{
                         <HowItWorks />
                     </Grid>
                     <Grid item xs={12} style={{textAlign: 'center'}}>
+                        <h3>Want Beetl Customized for your Company? Contact Us.</h3>
                         <ContactForm />
                     </Grid>
             </Grid>

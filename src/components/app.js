@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './app.css';
 import {Header} from './header';
 import LandingPage from './landing-page';
@@ -12,6 +12,11 @@ import ViewIssues from './main/view_issues';
 import IssueDetails from './main/issue_details';
 import Sidebar from './main/sidebar';
 import Help from './main/help';
+import ManageUsers from './main/manage/manage_users';
+import UserPage from './main/manage/userPage';
+import NewUser from './main/manage/newUser';
+import ManageProducts from './main/manage/manage_products';
+
 
 // Import for Material UI
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -54,7 +59,7 @@ class App extends Component {
     }
     return (
         <MuiThemeProvider muiTheme={muiTheme}>
-        <Router >
+        <Router>
             <div>
                 <Header loggedIn={loggedIn}/>
                 <Grid container>
@@ -64,22 +69,26 @@ class App extends Component {
                         </Hidden>
                     </Grid>
                     <Grid item xs={10}>
-                        <Route exact path="/" render={(props) => (
-                            <Main name="Joe Admin" role="admin" />
-                        )}/>
-                        <Route exact path="/create_issue" component={CreateIssue} />
-                        <Route exact path="/view_issues" component={ViewIssues} />
-                        <Route
-                            exact
-                            path="/view_issues/:bugId"
-                            component={IssueDetails}
-                        />
-                        <Route exact path="/help" component={Help} />
-                        <Route exact path="/logout" component={LandingPage} />
+                        <Switch>
+                            <Route exact path="/" render={(props) => (
+                                <Main name="Joe Admin" role="admin" />
+                            )}/>
+                            <Route path="/users" component={ManageUsers} />
+                            <Route path="/products" component={ManageProducts} />
+                            <Route exact path="/create_issue" component={CreateIssue} />
+                            <Route exact path="/view_issues" component={ViewIssues} />
+                            <Route
+                                exact
+                                path="/view_issues/:bugId"
+                                component={IssueDetails}
+                            />
+                            <Route exact path="/help" component={Help} />
+                            <Route exact path="/logout" component={LandingPage} />
+                        </Switch>
                     </Grid>
                 </Grid>
                 <Footer />
-                </div>
+            </div>
         </Router >
         </MuiThemeProvider>
     );

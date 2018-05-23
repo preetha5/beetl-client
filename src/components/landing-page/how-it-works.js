@@ -11,20 +11,20 @@ export default function HowItWorks(){
                     <h3>How it Works</h3>
                 </Grid>
                 <Grid item xs="12" sm="4" style={{textAlign: 'center'}}>
-                    <Paper class="step">
-                        <p>Add products and users</p>
+                <p>Add products and users</p>    
+                <Paper class="step">
                         <img src="http://via.placeholder.com/150x150" />
                     </Paper>
                 </Grid>
                 <Grid item xs="12" sm="4" style={{textAlign: 'center'}}>
+                    <p>Create issues and assign to your team</p>
                     <Paper class="step">
-                        <p>Create issues and assign to your team</p>
                         <img src="http://via.placeholder.com/150x150" />
                     </Paper>
                 </Grid>
                 <Grid item xs="12" sm="4" style={{textAlign: 'center'}}>
+                <p>Update and track issues during all their stages from open to built.</p>
                     <Paper class="step">
-                        <p>Update and track issues during all their stages from open to built.</p>
                         <img src="http://via.placeholder.com/150x150" />
                     </Paper>
                 </Grid>

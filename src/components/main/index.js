@@ -4,6 +4,7 @@ import MyBugs from './myBugs';
 import Sidebar from './sidebar';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 // Material ui import
+import MenuItem from 'material-ui/MenuItem';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
@@ -33,7 +34,12 @@ export function Main (props){
     let role = props.role;
     console.log(role);
     let summary = null;
+    let managelinks = '';
     if(role === 'admin'){
+        managelinks = <div>
+        <MenuItem><Link to="/products" >Manage Products</Link></MenuItem>
+        <MenuItem><Link to="/users" >Manage Users</Link></MenuItem>
+        </div>;
         summary = <AllIssues item="hello" />;
     } else
         summary = <MyBugs />
@@ -43,6 +49,7 @@ export function Main (props){
                 
                     <Grid item xs={12} sm={10}>
                         {summary}
+                        {managelinks}
                     </Grid>
 
     )

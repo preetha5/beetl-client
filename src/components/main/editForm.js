@@ -5,6 +5,7 @@ import { load as loadAccount } from '../../reducers/account';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 import DatePicker from 'material-ui/DatePicker';
+import Button from '@material-ui/core/Button';
 import {
     //DatePicker,
     TimePicker,
@@ -82,6 +83,10 @@ class EditForm extends React.Component {
         this.props.load(data);
     }
 
+    deleteIssue(event) {
+       // this.props.actions.deleteIssue(this.state.issue)
+      }
+    
     handleChangeMinDate = (event, date) => {
         this.setState({
           minDate: date,
@@ -129,156 +134,155 @@ class EditForm extends React.Component {
         
     return date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
     }
+
     render() {
-    const { handleSubmit, load, pristine, reset, submitting } = this.props;
-    
-    // const productsList = this.props.products.map((product, index) =>
-    //     <MenuItem key={index} value={product.productName.toString().toLowerCase()} primaryText={product.productName}/>
-    // );
 
-    const componentList = this.state.components.map((item, index) => 
-        <MenuItem key={index} value={item.toString().toLowerCase()} primaryText={item}/>
-    );
-    const usersList = this.props.users.map((user, index) =>
-        <MenuItem key={index} value={user} primaryText={user}/>
-    );
-    console.log(this.state.dueDate);
-    //Buttons added while form is used to edit/save an issue
-    const EditButtons = this.state.editing ? (
-        <div>
-            <button type="submit" disabled={submitting}>Save</button>
-            <button
-                type="button"
-                onClick={() => this.handleEditClick(false)}
-            >
-                Cancel
-            </button>
-        </div>)
-        :<button onClick={() => this.handleEditClick(true)}>Edit</button>;
+        const { handleSubmit, load, pristine, reset, submitting } = this.props;
+        const componentList = this.state.components.map((item, index) => 
+            <MenuItem key={index} value={item.toString().toLowerCase()} primaryText={item}/>
+        );
+        const usersList = this.props.users.map((user, index) =>
+            <MenuItem key={index} value={user} primaryText={user}/>
+        );
+        console.log(this.state.dueDate);
+        //Buttons added while form is used to edit/save an issue
+        const EditButtons = this.state.editing ? (
+            <div>
+                <Button variant="raised"
+                type="submit" disabled={submitting}>Save</Button>
+                
+                <Button variant="raised"
+                    onClick={() => this.handleEditClick(false)}
+                >
+                    Cancel
+                </Button>
+            </div>)
+            :<Button variant="raised" onClick={() => this.handleEditClick(true)}>Edit</Button>;
 
-      return (
-        <form onSubmit={handleSubmit} className="issueForm">
-            <h2>Bug ID : {this.props.bugId}</h2>
+        return (
+            <form onSubmit={handleSubmit} className="issueForm">
+                <h2>Bug ID : {this.props.bugId}</h2>
+                
+            <div>
+                <Field name="product" component="select"
+                onChange={(e, val)=>{this.handleProductChange(val)}}
+                >
+                <option value="">Select a product...</option>
+                {this.props.products.map(product => (
+                    <option value={product.productName} key={product.productName}>
+                    {product.productName}
+                    </option>
+                ))}
+                </Field>
+            </div>
             
-        <div>
-            <Field name="product" component="select"
-            onChange={(e, val)=>{this.handleProductChange(val)}}
-            >
-              <option value="">Select a product...</option>
-              {this.props.products.map(product => (
-                <option value={product.productName} key={product.productName}>
-                  {product.productName}
-                </option>
-              ))}
-            </Field>
-          </div>
-        
-        <div>
-        <Field name="component" component="select">
-        <option value="">Select a Component...</option>
-        {this.state.components.map(colorOption => (
-          <option value={colorOption} key={colorOption}>
-            {colorOption}
-          </option>
-        ))}
-      </Field>
-          </div>
-        <div>
-          <Field
-              name="version"
-              component={TextField}
-              hintText="1.0"
-              floatingLabelText="Enter a version"
-          />
-      </div>
-      <div>
-            <Field
-                name="status"
-                component={renderSelectField}
-                label="status"
-            >
-                <MenuItem value="open" primaryText="Open" />
-                <MenuItem value="in-progress" primaryText="In Progress" />
-                <MenuItem value="fixed" primaryText="Fixed" />
-                <MenuItem value="closed" primaryText="Closed" />
-            </Field>
-        </div>
-      <div>
-        <Field 
-            name="severity" 
-            component={renderSelectField} label="severity">
-            <MenuItem value="low" primaryText="low" />
-            <MenuItem value="medium" primaryText="medium" />
-            <MenuItem value="high" primaryText="high" />
+            <div>
+            <Field name="component" component="select">
+            <option value="">Select a Component...</option>
+            {this.state.components.map(colorOption => (
+            <option value={colorOption} key={colorOption}>
+                {colorOption}
+            </option>
+            ))}
         </Field>
-        </div>
-    
-        
-        <div>
+            </div>
+            <div>
             <Field
-                name="priority"
-                component={renderSelectField}
-                label="priority"
-            >
-                <MenuItem value="p1" primaryText="P1" />
-                <MenuItem value="p2" primaryText="P2" />
-                <MenuItem value="p3" primaryText="P3" />
+                name="version"
+                component={TextField}
+                hintText="1.0"
+                floatingLabelText="Enter a version"
+            />
+        </div>
+        <div>
+                <Field
+                    name="status"
+                    component={renderSelectField}
+                    label="status"
+                >
+                    <MenuItem value="open" primaryText="Open" />
+                    <MenuItem value="in-progress" primaryText="In Progress" />
+                    <MenuItem value="fixed" primaryText="Fixed" />
+                    <MenuItem value="closed" primaryText="Closed" />
+                </Field>
+            </div>
+        <div>
+            <Field 
+                name="severity" 
+                component={renderSelectField} label="severity">
+                <MenuItem value="low" primaryText="low" />
+                <MenuItem value="medium" primaryText="medium" />
+                <MenuItem value="high" primaryText="high" />
             </Field>
-        </div>
+            </div>
         
-        <div>
-        <Field
-            name="reporter"
-            component={TextField}
-            hintText="Reporter"
-            floatingLabelText="Reporter"
-            ref="reporter"
-            withRef
-        />
-        </div>
-        <div>
-        <Field
-            name="title"
-            component={TextField}
-            hintText="Issue Title"
-            floatingLabelText="IssueTitle"
-            validate={required}
-            ref="title"
-            withRef
-        />
-        </div>
-        <div>
-        <Field
-            name="description"
-            component={TextField}
-            hintText="Issue Description"
-            floatingLabelText="Issue Description"
-            multiLine
-            rows={2}
-        />
-        </div>
-        <Field
-            name="assignee"
-            component={renderSelectField}
-            label="Select an assignee"
-            type="select"
-            >
-            {usersList}
-        </Field>
-        <div>
-          <DatePicker
-            onChange={this.handleChangeDate}
-            autoOk={this.state.autoOk}
-            floatingLabelText="Due Date"
-            defaultDate={this.state.dueDate}
-          />
-        </div>
-         
-          {EditButtons}
-        </form>
-      );
+            
+            <div>
+                <Field
+                    name="priority"
+                    component={renderSelectField}
+                    label="priority"
+                >
+                    <MenuItem value="p1" primaryText="P1" />
+                    <MenuItem value="p2" primaryText="P2" />
+                    <MenuItem value="p3" primaryText="P3" />
+                </Field>
+            </div>
+            
+            <div>
+            <Field
+                name="reporter"
+                component={TextField}
+                hintText="Reporter"
+                floatingLabelText="Reporter"
+                ref="reporter"
+                withRef
+            />
+            </div>
+            <div>
+            <Field
+                name="title"
+                component={TextField}
+                hintText="Issue Title"
+                floatingLabelText="IssueTitle"
+                validate={required}
+                ref="title"
+                withRef
+            />
+            </div>
+            <div>
+            <Field
+                name="description"
+                component={TextField}
+                hintText="Issue Description"
+                floatingLabelText="Issue Description"
+                multiLine
+                rows={2}
+            />
+            </div>
+            <Field
+                name="assignee"
+                component={renderSelectField}
+                label="Select an assignee"
+                type="select"
+                >
+                {usersList}
+            </Field>
+            <div>
+            <DatePicker
+                onChange={this.handleChangeDate}
+                autoOk={this.state.autoOk}
+                floatingLabelText="Due Date"
+                defaultDate={this.state.dueDate}
+            />
+            </div>
+            
+            {EditButtons}
+            <Button variant="raised" onClick={this.deleteIssue} className="btn btn-default  ">delete</Button>
+            </form>
+        );
+        }
     }
-  }
   
   // Decorate with reduxForm(). It will read the initialValues prop provided by connect()
   EditForm = reduxForm({
