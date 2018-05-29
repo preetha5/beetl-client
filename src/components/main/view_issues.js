@@ -4,6 +4,8 @@ import {Link} from 'react-router-dom';
 import {BootstrapTable, 
     TableHeaderColumn} from 'react-bootstrap-table';
 import '../../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css'
+import RequiresLogin from '../requires-login';
+
 // Material UI
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -80,4 +82,4 @@ AllIssues.propTypes = {
     classes: propTypes.object.isRequired
 }
 
-export default withStyles(styles)(AllIssues);
+export default RequiresLogin()(withStyles(styles)(AllIssues));

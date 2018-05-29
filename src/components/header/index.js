@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import './index.css';
 import logo from './logo.svg';
 import AppBar from 'material-ui/AppBar';
@@ -10,6 +11,8 @@ import Close from 'material-ui/svg-icons/navigation/close';
 import {Route, Link, Redirect} from 'react-router-dom';
 import {withRouter} from 'react-router';
 import Login from '../login';
+import {clearAuth} from '../../actions/auth';
+import {clearAuthToken} from '../../utils/localStorage';
 
 export class Header extends Component{
     constructor(props){
@@ -32,15 +35,23 @@ export class Header extends Component{
     closeMenu = () => { 
         this.setState({open: false});
     }
+
+    logOut = () => {
+        console.log("Logging out :going to clear auth");
+        clearAuthToken();
+        this.props.dispatch(clearAuth());
+        this.setState({open: false});
+    }
     
     render(){
+    console.log("inside header loggedin", this.props.loggedIn);
     const menulinks = this.props.loggedIn? (
         <div>
             <MenuItem><Link to="/" onClick={this.closeMenu}>Dashboard</Link></MenuItem>
             <MenuItem><Link to="/create_issue" onClick={this.closeMenu}>Create Issue</Link></MenuItem>
             <MenuItem><Link to="/view_issues" onClick={this.closeMenu}>View Issues</Link></MenuItem>
             <MenuItem><Link to="/help" onClick={this.closeMenu}>Help</Link></MenuItem>
-            <MenuItem><Link to="/logout" onClick={this.closeMenu}>Log Out</Link></MenuItem>
+            <MenuItem><Link to="/logout" onClick={this.logOut}>Log Out</Link></MenuItem>
         </div>):
         (<div>
             <MenuItem><Link to="/login" onClick={this.closeMenu}>Login</Link></MenuItem>
@@ -60,3 +71,9 @@ export class Header extends Component{
     )
     }
 }
+
+const mapStateToProps = state => ({
+    loggedIn: state.authReducer.currentUser !== null
+});
+
+export default connect(mapStateToProps)(Header);

@@ -20,7 +20,7 @@ const styles = theme => ({
     },
   });
 
-class ProductForm extends Component{
+class NewProductForm extends Component{
     constructor(props){
         super(props);
     }
@@ -65,7 +65,7 @@ class ProductForm extends Component{
                 </div>
                 <div>
                     <Button variant="raised"
-                    type="submit" disabled={invalid|| submitting || pristine}>Save</Button>
+                    type="submit" disabled={invalid|| submitting || pristine}>Add</Button>
                 </div>
             </form>
             </div>
@@ -73,9 +73,9 @@ class ProductForm extends Component{
     }
 }
 
-ProductForm.propTypes = {
+NewProductForm.propTypes = {
     classes: PropTypes.object.isRequired,
   };
 
   
-export default withStyles(styles)(ProductForm);
+export default withStyles(styles)(NewProductForm);

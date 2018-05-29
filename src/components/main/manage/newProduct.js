@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
 import {bindActionCreators} from 'redux';
 import * as Actions from '../../../actions/productActions';
-import ProductForm from './productForm';
+import NewProductForm from './newProductForm';
 
 class NewProduct extends React.Component{
     constructor(props){
@@ -42,8 +42,8 @@ class NewProduct extends React.Component{
         return(
             <div>
                 <h2>Add Product</h2>
-                <ProductForm product={this.state.product}
-                onSave={this.createProduct} 
+                <NewProductForm product={this.state.product}
+                onSubmit={this.createProduct} 
                 onChange= {field =>this.updateProductState(field) }/>
             </div>
         );

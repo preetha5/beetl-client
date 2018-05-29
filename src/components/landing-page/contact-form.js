@@ -1,31 +1,75 @@
-import React, {Component} from 'react';
+import React from 'react';
+import { Field, reduxForm } from 'redux-form';
+import TextField from 'material-ui/TextField';
+import SelectField from 'material-ui/SelectField';
+import asyncValidate from '../../utils/asyncValidate';
+import validate from '../../utils/validate';
 
-export default function ContactForm(){
+const renderTextField = (
+    { input, label, meta: { touched, error }, ...custom },
+  ) => (
+    <TextField
+      hintText={label}
+      floatingLabelText={label}
+      errorText={touched && error}
+      {...input}
+      {...custom}
+    />
+  );
+  
+  export const renderSelectField = (
+    { input, label, meta: { touched, error }, children, ...custom },
+  ) => (
+      
+    <SelectField
+      floatingLabelText={label}
+      errorText={touched && error}
+      {...input}
+      onChange={(event, index, value) => input.onChange(value)}
+      children={children}
+      {...custom}
+    />
+  );
+
+//export default function ContactForm(){
+const ContactForm = props => {
+        const { handleSubmit, pristine, reset, submitting } = props;
     return(
         <section>
-            <form class='signup-form'>
+            <form className='contactForm' onSubmit={handleSubmit(values => props.onSubmit(values))}>
             <div>
-              <label for="first-name">First name</label>
-              <input placeholder='First Name' type="text" name='first-name' id='first-name' />
+                <Field name="firstName" component={renderTextField} label="First Name" />
             </div>
             <div>
-              <label for="last-name">Last name</label>
-              <input type="text" name='last-name' id='last-name' placeholder='Last Name' />
+                <Field name="lastName" component={renderTextField} label="Last Name" />
             </div>
             <div>
-              <label for="username">Email</label>
-              <input type="text" name='username' id='username' />
+                <Field name="email" component={renderTextField} label="Email" />
             </div>
             <div>
-              <label for="company">Company</label>
-              <input type="text" name='company' id='company' />
+                <Field name="company" component={renderTextField} label="Company" />
             </div>
             <div>
-              <label for="message">Message</label>
-           <textarea rows="6" cols="20">Enter your message</textarea>
+                <Field
+                name="message"
+                component={renderTextField}
+                label="Message"
+                multiLine={true}
+                rows={2}
+                />
             </div>
-            <button type='submit'>Send Message</button>
+            <div>
+                <button type="submit" disabled={pristine || submitting}>Submit</button>
+                <button type="button" disabled={pristine || submitting} onClick={reset}>
+                Clear Values</button>
+            </div>
         </form>
         </section>
     )
 }
+
+export default reduxForm({
+    form: 'ContactForm', // a unique identifier for this form
+    validate,
+    asyncValidate,
+  })(ContactForm);

@@ -11,3 +11,8 @@
 .textCenter{
     text-align: center;
 }
+
+.productForm, .userForm{
+    margin: 20px auto 120px;
+    text-align: center;
+}

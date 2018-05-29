@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import AllIssues from './allIssues';
 import MyBugs from './myBugs';
-import Sidebar from './sidebar';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import RequiresLogin from '../requires-login';
+
 // Material ui import
 import MenuItem from 'material-ui/MenuItem';
-import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -45,12 +45,11 @@ export function Main (props){
         summary = <MyBugs />
 
     return (
-
-                
-                    <Grid item xs={12} sm={10}>
-                        {summary}
-                        {managelinks}
-                    </Grid>
-
+        <Grid item xs={12} sm={10}>
+            {summary}
+            {managelinks}
+        </Grid>
     )
 }
+
+export default RequiresLogin()(Main);

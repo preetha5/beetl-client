@@ -6,7 +6,12 @@ import {Redirect} from 'react-router';
 //temp code until backend is ready
 let temp = Math.floor(Math.random()*20);
 let indexOfProductToUpdate='';
-export const productsReducer =(state=[], action) => {
+const initialState = {
+    products: [],
+    error: null
+};
+
+export const productsReducer =(state=initialState, action) => {
     switch(action.type) {
         case actions.LOAD_PRODUCTS_SUCCESS:
             console.log(action.products);
@@ -25,8 +30,9 @@ export const productsReducer =(state=[], action) => {
             const fieldUpdateState = [...state.products];
             console.log(fieldUpdateState);
             indexOfProductToUpdate = state.products.findIndex((product) => {
-                return product.id == action.product.id
+                return product._id == action.product._id
               })
+            console.log("indexOfProductToUpdate ", indexOfProductToUpdate);
             fieldUpdateState[indexOfProductToUpdate] = action.product;
             console.log(fieldUpdateState);
             return Object.assign({}, state,{products:fieldUpdateState});
@@ -45,11 +51,16 @@ export const productsReducer =(state=[], action) => {
         const newState = [...state.products];
             console.log(action.product);
             const indexOfProductToDelete = state.products.findIndex((product) => {
-                return product.id == action.product.id
+                return product._id == action.productId;
               })
             newState.splice(indexOfProductToDelete, 1);
             console.log(newState);
             return Object.assign({}, state,{products:newState});
+
+        case actions.PRODUCTS_ERROR:
+            return Object.assign({}, state, {
+                error: action.error
+            });
         default:
         return state
     }

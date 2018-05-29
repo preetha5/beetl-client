@@ -1,5 +1,8 @@
 import React from 'react';
 import {Redirect} from 'react-router';
+import {SubmissionError} from 'redux-form';
+import {API_BASE_URL} from '../config';
+import {normalizeResponseErrors} from '../utils/normalizeErrors';
 
 export const LOAD_USERS_SUCCESS = 'LOAD_USERS_SUCCESS';
 export const loadUsersSuccess = users => ({
@@ -26,9 +29,9 @@ export const updateUserFieldSuccess = user => ({
 });
 
 export const DELETE_USER_SUCCESS = 'DELETE_USER_SUCCESS';
-export const deleteUserSuccess = user => ({
+export const deleteUserSuccess = userId => ({
     type: DELETE_USER_SUCCESS,
-    user
+    userId
 });
 
 const userArr= [{
@@ -47,24 +50,75 @@ const userArr= [{
     role:'developer'
 }];
 
+export const registerUser = user => dispatch => {
+    console.log('dispatching user ', user);
+    return fetch(`${API_BASE_URL}/users`, {
+        //mode: 'cors',
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(user)
+        })
+        .then(res => {console.log(res); normalizeResponseErrors(res)})
+        .then(res => res.json())
+        .catch(err => {
+            const {reason, message, location} = err;
+            if (reason === 'ValidationError') {
+                // Convert ValidationErrors into SubmissionErrors for Redux Form
+                return Promise.reject(
+                    new SubmissionError({
+                        [location]: message
+                    })
+                );
+            }
+        });
+};
+
 export const loadUsers = () => dispatch => {
-    // return fetch('/api/users').then(res => {
-    //     if (!res.ok) {
-    //         return Promise.reject(res.statusText);
-    //     }
-    //     return res.json();
-    // }).then(users => {
-    //     dispatch(loadUsersSuccess(users));
-    // });
-    console.log("dispatching loadUsers..");
-    dispatch(loadUsersSuccess(userArr));
-    return;
+    return fetch(`${API_BASE_URL}/users`,{
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json'
+        }
+        })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then(users => {
+            dispatch(loadUsersSuccess(users));
+        });
 };
 
 export const createUser = (NewUser) => dispatch => {
     console.log("dispatching create user..", NewUser);
-    dispatch(createUserSuccess(NewUser));
-    return ;
+    return fetch(`${API_BASE_URL}/users`, {
+        //mode: 'cors',
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(NewUser)
+        })
+        .then(res => {
+            if (!res.ok) {
+                return Promise.reject(res.statusText);
+            }
+            return res.json();
+        })
+        .then((user) => {
+            dispatch(createUserSuccess(user));
+        })
+        .catch(err => {
+            const {reason, message, location} = err;
+            if (reason === 'ValidationError') {
+                // Convert ValidationErrors into SubmissionErrors for Redux Form
+                return Promise.reject(
+                    new SubmissionError({
+                        [location]: message
+                    })
+                );
+            }
+        });
 }
 
 export const updateUserField = (user) => dispatch =>{
@@ -73,31 +127,35 @@ export const updateUserField = (user) => dispatch =>{
     return;
 }
 
-export const updateUser = (user) => dispatch => {
-    // return fetch('/api/users').then(res => {
-    //     if (!res.ok) {
-    //         return Promise.reject(res.statusText);
-    //     }
-    //     return res.json();
-    // }).then(users => {
-    //     dispatch(loadUsersSuccess(users));
-    // });
-    console.log("saving changes to DB and dispatching update user..", user);
-    dispatch(updateUserSuccess(user));
-    return;
+export const updateUser = (userId, user) => dispatch => {
+    fetch(`${API_BASE_URL}/users/${userId}`,{
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(user => {
+        dispatch(updateUserSuccess(user));
+    })
+    .catch(err =>{
+        console.log(err);
+    });
 }
 
-export const deleteUser = (user) => dispatch => {
-    // return fetch('/api/users').then(res => {
-    //     if (!res.ok) {
-    //         return Promise.reject(res.statusText);
-    //     }
-    //     return res.json();
-    // }).then(users => {
-    //     dispatch(loadUsersSuccess(users));
-    // });
-    console.log("deleting..", user);
-    dispatch(deleteUserSuccess(user));
-    // <Redirect to='/users' />
-    return;
+export const deleteUser = (userId) => dispatch => {
+    return fetch(`${API_BASE_URL}/users/${userId}`,{
+        method: 'DELETE',
+        headers: {
+            'content-type': 'application/json'
+        }
+        })
+        .then(res => normalizeResponseErrors(res))
+        .then(() => dispatch(deleteUserSuccess(userId)))
+        .catch(err => {
+            console.log(err);
+            //dispatch(productsError(err));
+    })
+    console.log("deleting..", userId);
 }

@@ -177,24 +177,24 @@ class EditForm extends React.Component {
             </div>
             
             <div>
-            <Field name="component" component="select">
-            <option value="">Select a Component...</option>
-            {this.state.components.map(colorOption => (
-            <option value={colorOption} key={colorOption}>
-                {colorOption}
-            </option>
-            ))}
-        </Field>
+                <Field name="component" component="select">
+                <option value="">Select a Component...</option>
+                {this.state.components.map(colorOption => (
+                <option value={colorOption} key={colorOption}>
+                    {colorOption}
+                </option>
+                ))}
+                </Field>
             </div>
             <div>
-            <Field
-                name="version"
-                component={TextField}
-                hintText="1.0"
-                floatingLabelText="Enter a version"
-            />
-        </div>
-        <div>
+                <Field
+                    name="version"
+                    component={TextField}
+                    hintText="1.0"
+                    floatingLabelText="Enter a version"
+                />
+            </div>
+            <div>
                 <Field
                     name="status"
                     component={renderSelectField}
@@ -206,17 +206,15 @@ class EditForm extends React.Component {
                     <MenuItem value="closed" primaryText="Closed" />
                 </Field>
             </div>
-        <div>
-            <Field 
-                name="severity" 
-                component={renderSelectField} label="severity">
-                <MenuItem value="low" primaryText="low" />
-                <MenuItem value="medium" primaryText="medium" />
-                <MenuItem value="high" primaryText="high" />
-            </Field>
+            <div>
+                <Field 
+                    name="severity" 
+                    component={renderSelectField} label="severity">
+                    <MenuItem value="low" primaryText="low" />
+                    <MenuItem value="medium" primaryText="medium" />
+                    <MenuItem value="high" primaryText="high" />
+                </Field>
             </div>
-        
-            
             <div>
                 <Field
                     name="priority"
@@ -228,7 +226,6 @@ class EditForm extends React.Component {
                     <MenuItem value="p3" primaryText="P3" />
                 </Field>
             </div>
-            
             <div>
             <Field
                 name="reporter"
@@ -240,15 +237,15 @@ class EditForm extends React.Component {
             />
             </div>
             <div>
-            <Field
-                name="title"
-                component={TextField}
-                hintText="Issue Title"
-                floatingLabelText="IssueTitle"
-                validate={required}
-                ref="title"
-                withRef
-            />
+                <Field
+                    name="title"
+                    component={TextField}
+                    hintText="Issue Title"
+                    floatingLabelText="IssueTitle"
+                    validate={required}
+                    ref="title"
+                    withRef
+                />
             </div>
             <div>
             <Field

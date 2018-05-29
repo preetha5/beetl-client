@@ -34,6 +34,9 @@ class ManageProducts extends Component{
     }
 
     render(){
+        const errorMsg = this.props.error ? 
+        `<div>${this.props.error}</div>`:null
+        
         console.log(this.props.products);
         return(
             <Grid container>
@@ -45,8 +48,8 @@ class ManageProducts extends Component{
                 <Grid item xs={12} sm={3} >
                     <Paper style={style} zdepth={3}>
                     <List>
-                    { this.props.products && this.props.products.map(({name, id}) => 
-                        <ListItem key={id} primaryText={ <Link to={`/products/${id}`} > {name} </Link> }/>       
+                    { this.props.products && this.props.products.map(({name, _id}) => 
+                        <ListItem key={_id} primaryText={ <Link to={`/products/${_id}`}> {name} </Link> }/>       
                     )}
                     </List>
                 </Paper>
@@ -57,6 +60,9 @@ class ManageProducts extends Component{
                         <Route path={`/products/:productId`} component={ProductPage} />
                     </Switch>
                 </Grid>
+                <Grid item xs={12} sm={9}>
+                    {errorMsg}
+                </Grid>
             </Grid> 
 
         )
@@ -64,10 +70,10 @@ class ManageProducts extends Component{
 }
 
 const mapStateToProps = (state, props) => {
-        
     console.log(state);
      return {
-         products:state.productsReducer.products
+         products:state.productsReducer.products,
+         error: state.productsReducer.error
      } 
 }
 

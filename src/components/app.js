@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {BrowserRouter as Router, Route, withRouter, Switch} from 'react-router-dom';
 import './app.css';
-import {Header} from './header';
+import Header from './header';
 import LandingPage from './landing-page';
-import {Main} from './main';
+import Main from './main';
 import Footer from './footer';
 import Login from './login';
 import SignUp from './signup';
@@ -16,6 +17,8 @@ import ManageUsers from './main/manage/manage_users';
 import UserPage from './main/manage/userPage';
 import NewUser from './main/manage/newUser';
 import ManageProducts from './main/manage/manage_products';
+import {refreshAuthToken} from '../actions/auth';
+import {loadAuthToken} from '../utils/localStorage';
 
 
 // Import for Material UI
@@ -35,33 +38,71 @@ const muiTheme = getMuiTheme({
     }
   });
 
-class App extends Component {
+export class App extends Component {
     constructor(props){
         super(props);
     }
-    
-  render() {
-    let loggedIn = true;
-    if (!loggedIn){
-        return (
-            <MuiThemeProvider muiTheme={muiTheme}>
-                <Router >
-                    <div>
-                    <Header loggedIn={loggedIn} />
-                    <Route exact path="/" component={LandingPage} />
-                    <Route exact path="/login" component={Login} />
-                    <Route exact path="/signup" component={SignUp} />
-                    <Footer />
-                </div>
-                </Router>
-            </MuiThemeProvider>
-        )
+    componentDidMount(){
+        // Check for token and update application state if required
+        //console.log(localStorage.getItem('authToken'));
+        if(localStorage.getItem('authToken')) {
+            // Try to get a fresh auth token if we had an existing one in
+            // localStorage
+            //props.dispatch(refreshAuthToken);
+        }
     }
+    componentDidUpdate(prevProps) {
+        if (!prevProps.loggedIn && this.props.loggedIn) {
+            // When we are logged in, refresh the auth token periodically
+            this.startPeriodicRefresh();
+        } else if (prevProps.loggedIn && !this.props.loggedIn) {
+            // Stop refreshing when we log out
+            this.stopPeriodicRefresh();
+        }
+    }
+
+    componentWillUnmount() {
+        this.stopPeriodicRefresh();
+    }
+
+    startPeriodicRefresh() {
+        this.refreshInterval = setInterval(
+            () => this.props.dispatch(refreshAuthToken()),
+            60 * 60 * 1000 // One hour
+        );
+    }
+
+    stopPeriodicRefresh() {
+        if (!this.refreshInterval) {
+            return;
+        }
+
+        clearInterval(this.refreshInterval);
+    }
+
+  render() {
+    console.log("inside app.js ", this.props.loggedIn);
+    // if (!this.props.loggedIn){
+    //     return (
+    //         <MuiThemeProvider muiTheme={muiTheme}>
+    //             <Router >
+    //                 <div>
+    //                 <Header loggedIn={this.props.loggedIn} />
+    //                 <Route exact path="/" component={LandingPage} />
+    //                 <Route exact path="/login" component={Login} />
+    //                 <Route exact path="/signup" component={SignUp} />
+    //                 <Footer />
+    //             </div>
+    //             </Router>
+    //         </MuiThemeProvider>
+    //     )
+    // }
+    //console.log("rendering dash");
     return (
         <MuiThemeProvider muiTheme={muiTheme}>
         <Router>
             <div>
-                <Header loggedIn={loggedIn}/>
+                <Header />
                 <Grid container>
                     <Grid item xs={2}>
                         <Hidden xsDown>
@@ -70,7 +111,10 @@ class App extends Component {
                     </Grid>
                     <Grid item xs={10}>
                         <Switch>
-                            <Route exact path="/" render={(props) => (
+                        <Route exact path="/" component={LandingPage} />
+                            <Route exact path="/login" component={Login} />
+                            <Route exact path="/signup" component={SignUp} />
+                            <Route exact path="/dashboard" render={(props) => (
                                 <Main name="Joe Admin" role="admin" />
                             )}/>
                             <Route path="/users" component={ManageUsers} />
@@ -83,16 +127,21 @@ class App extends Component {
                                 component={IssueDetails}
                             />
                             <Route exact path="/help" component={Help} />
-                            <Route exact path="/logout" component={LandingPage} />
+                            { /*<Route exact path="/logout" component={LandingPage} /> */}
                         </Switch>
                     </Grid>
                 </Grid>
                 <Footer />
             </div>
-        </Router >
+        </Router>
         </MuiThemeProvider>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+    hasAuthToken: state.authReducer.authToken !== null,
+    loggedIn: state.authReducer.currentUser !== null
+});
+
+export default withRouter(connect(mapStateToProps))(App);

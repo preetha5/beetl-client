@@ -3,15 +3,15 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
 import {bindActionCreators} from 'redux';
 import * as Actions from '../../../actions/userActions';
-import UserForm from './userForm';
+import NewUserForm from './newUserForm';
 
 class NewUser extends React.Component{
     constructor(props){
         super(props);
         //temp code until backend is ready
-        let temp = Math.floor(Math.random()*2000);
+        //let temp = Math.floor(Math.random()*2000);
         this.state = {
-            user:{id:temp,firstName:"", lastName:"", email:"", role:""},
+            user:{username:"", password:"", firstName:"",lastName:"", email:"", role:""},
             adding:false
         }
         this.createUser = this.createUser.bind(this);
@@ -42,8 +42,8 @@ class NewUser extends React.Component{
         return(
             <div>
                 <h2>Add User</h2>
-                <UserForm user={this.state.user}
-                onSave={this.createUser} 
+                <NewUserForm user={this.state.user}
+                onSubmit={this.createUser} 
                 onChange= {field =>this.updateUserState(field) }/>
             </div>
         );

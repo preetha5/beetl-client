@@ -8,7 +8,7 @@ let temp = Math.floor(Math.random()*20);
 
 let indexOfUserToUpdate='';
 
-export const usersReducer =(state=[], action) => {
+export const usersReducer =(state={users:[]}, action) => {
     switch(action.type) {
         case actions.LOAD_USERS_SUCCESS:
             console.log(action.users);
@@ -55,10 +55,10 @@ export const usersReducer =(state=[], action) => {
             // Object.assign({}, action.user)]
         case actions.DELETE_USER_SUCCESS:
             const newState = [...state.users];
-            console.log(action.user);
+            console.log(action.userId);
             console.log(newState);
             const indexOfUserToDelete = state.users.findIndex((user) => {
-                return user.id == action.user.id
+                return user.id == action.userId;
               })
             console.log("index",indexOfUserToDelete);
             newState.splice(indexOfUserToDelete, 1);

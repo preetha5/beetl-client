@@ -14,12 +14,16 @@ class ProductPage extends Component{
         this.state = {
             product:this.props.product,
             editing:false,
-            deleting:false
+            redirect:false
         }
         this.saveProduct = this.saveProduct.bind(this);
         this.handleDeleteProduct = this.handleDeleteProduct.bind(this);
         this.handleEditProduct = this.handleEditProduct.bind(this);
         this.updateProductState = this.updateProductState.bind(this);
+    }
+
+    componentDidMount(){
+        
     }
 
     handleEditProduct(){
@@ -39,37 +43,39 @@ class ProductPage extends Component{
 
     saveProduct(event){
         event.preventDefault();
+        console.log("updating...", this.props.product);
+        this.props.actions.updateProduct(
+            this.props.productId, this.props.product);
         this.setState(
-            {editing:false}
+            {redirect:true}
         )
-        this.props.actions.updateProduct(this.props.product);  
     }
 
-    handleDeleteProduct(event){
-        this.props.actions.deleteProduct(this.props.product);
+    handleDeleteProduct(){
+        this.props.actions.deleteProduct(this.props.productId);
         this.setState({
-            deleting:true
+            redirect:true
         })
     }
     
     render(){
         console.log(this.props);
-        if(this.state.deleting){ 
+        if(this.state.redirect){ 
             return (<Redirect to='/products' />);
         }
-        console.log(this.props.products);
+
         if(this.state.editing){
              return(
                 <ProductForm product={this.props.product}
-                onSave={this.saveProduct}  
+                onSubmit={this.saveProduct}  
                 onChange= {field =>this.updateProductState(field)}/>
              )   
         }
         return(
             <div>
-                <p> Name: {this.props.product.name} </p>
-                <p> Title: {this.props.product.title} </p>
-                <p> Description: {this.props.product.description} </p>
+                <p> Name: {this.props && this.props.product.name} </p>
+                <p> Title: {this.props && this.props.product.title} </p>
+                <p> Description: {this.props && this.props.product.description} </p>
                 <Button variant="raised"
                 onClick={() => this.handleEditProduct()}>
                 Edit
@@ -91,11 +97,13 @@ const mapDispatchToProps = (dispatch) => {
   }
 
 const mapStateToProps = (state, props) => {
-    const productId = parseInt(props.match.params.productId);
-    console.log(productId);
-    const currentProduct = state.productsReducer.products.filter(product => product.id == productId);
-    console.log(currentProduct[0]);
-    return {product:currentProduct[0]};  
+    const productId = props.match.params.productId;
+    const products = state.productsReducer.products;
+    console.log(products)
+    const currentProduct = state.productsReducer.products.find(product =>
+        product._id === productId);
+    console.log(currentProduct);
+    return {product:currentProduct , productId};  
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);

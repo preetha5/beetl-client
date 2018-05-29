@@ -6,8 +6,9 @@ import Create from '@material-ui/icons/Create';
 import ViewList from '@material-ui/icons/ViewList';
 import HelpOutline from '@material-ui/icons/HelpOutline';
 import MenuItem from 'material-ui/MenuItem';
+import RequiresLogin from '../requires-login';
 
-export default function Sidebar(props) {
+export function Sidebar(props) {
     const sideMenuList = ['Dashboard', 'Create Issue', 'View Issues', 'Documentation']
     const links = sideMenuList.map((menu ,index) =>
         <li key={index} className="folder-menu-list-item">
@@ -19,7 +20,7 @@ export default function Sidebar(props) {
         <div className="sidebar sidebar-left">
             <nav className="sidebar-menu">
                 <ul className="sidebar-menu-list">
-                    <Link className="sidebar-menu-list-item" to="/"><Dashboard/></Link>
+                    <Link className="sidebar-menu-list-item" to="/dashboard"><Dashboard/></Link>
                     <Link className="sidebar-menu-list-item" to="/create_issue"><Create/></Link>
                     <Link className="sidebar-menu-list-item" to="/view_issues"><ViewList/></Link>
                     <Link className="sidebar-menu-list-item" to="/help"><HelpOutline/></Link>
@@ -28,3 +29,5 @@ export default function Sidebar(props) {
         </div>
     );
 }
+
+export default RequiresLogin()(Sidebar);

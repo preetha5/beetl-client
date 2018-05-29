@@ -4,6 +4,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import validate from '../../../utils/validate';
+import asyncValidate from '../../../utils/asyncValidate';
 
 const styles = theme => ({
     container: {
@@ -20,7 +22,7 @@ const styles = theme => ({
     },
   });
 
-class UserForm extends Component{
+class NewUserForm extends Component{
     constructor(props){
         super(props);
     }
@@ -69,6 +71,17 @@ class UserForm extends Component{
                 required
                 />
                 <TextField
+                id="password"
+                label="password"
+                placeholder="temppassword"
+                className={classes.textField}
+                value={this.props.user.password}
+                onChange={this.props.onChange('password')}
+                margin="normal"
+                required
+                />
+        
+                <TextField
                 id="role"
                 label="role"
                 placeholder="developer (or) tester"
@@ -80,7 +93,7 @@ class UserForm extends Component{
                 />
                 <div>
                     <Button variant="raised"
-                    type="submit" disabled={invalid|| submitting || pristine}>Save</Button>
+                    type="submit" disabled={invalid|| submitting }>Add</Button>
                 </div>
             </form>
             </div>
@@ -88,9 +101,16 @@ class UserForm extends Component{
     }
 }
 
-UserForm.propTypes = {
+NewUserForm.propTypes = {
     classes: PropTypes.object.isRequired,
   };
 
-  
-export default withStyles(styles)(UserForm);
+export default withStyles(styles)(
+    reduxForm({
+    enableReinitialize: true,
+    form: `NewUserForm`,
+    validate
+    })(NewUserForm)
+);
+
+//export default withStyles(styles)(NewUserForm);

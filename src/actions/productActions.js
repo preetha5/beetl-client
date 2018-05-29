@@ -1,5 +1,8 @@
 import React from 'react';
 import {Redirect} from 'react-router';
+import {SubmissionError} from 'redux-form';
+import {API_BASE_URL} from '../config';
+import {normalizeResponseErrors} from '../utils/normalizeErrors';
 
 export const LOAD_PRODUCTS_SUCCESS = 'LOAD_PRODUCTS_SUCCESS';
 export const loadProductsSuccess = products => ({
@@ -26,9 +29,15 @@ export const updateProductSuccess = product => ({
 });
 
 export const DELETE_PRODUCT_SUCCESS = 'DELETE_PRODUCT_SUCCESS';
-export const deleteProductSuccess = product => ({
+export const deleteProductSuccess = productId => ({
     type: DELETE_PRODUCT_SUCCESS,
-    product
+    productId
+});
+
+export const PRODUCTS_ERROR = 'PRODUCTS_ERROR';
+export const productsError = error => ({
+    type: PRODUCTS_ERROR,
+    error
 });
 
 const prodArr= [{
@@ -53,14 +62,38 @@ const NewProduct = {
 
 export const loadProducts = () => dispatch => {
     console.log("dispatching load products..");
-    dispatch(loadProductsSuccess(prodArr));
-    return;
+    return fetch(`${API_BASE_URL}/products`,{
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json'
+        }
+        })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then((productArray) => dispatch(loadProductsSuccess(productArray)))
+        .catch(err => {
+            dispatch(productsError(err));
+        })
 };
 
-export const createProduct = (NewProduct) => dispatch => {
-    console.log("dispatching create prod..", NewProduct);
-    dispatch(createProductSuccess(NewProduct));
-    return ;
+export const createProduct = (newProduct) => dispatch => {
+    console.log("dispatching create prod..", newProduct);
+    fetch(`${API_BASE_URL}/products`,{
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(newProduct)
+        })
+        .then(res => {
+            if (!res.ok) {
+                return Promise.reject(res.statusText);
+            }
+            return res.json();
+        })
+        .then((product) => {
+            dispatch(createProductSuccess(product));
+        });
 }
 
 export const updateProductField = (product) => dispatch =>{
@@ -69,15 +102,36 @@ export const updateProductField = (product) => dispatch =>{
     return;
 }
 
-export const updateProduct = (product) => dispatch => {
-    console.log("saving changes to DB and dispatching update product..", product);
-    dispatch(updateProductSuccess(product));
-    return;
+export const updateProduct = (id, updatedProd) => dispatch => {
+    console.log("saving changes to DB and dispatching update product..", updatedProd);
+    return fetch(`${API_BASE_URL}/products/${id}`,{
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(updatedProd)
+        })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then((productArray) => dispatch(updateProductSuccess(updatedProd)))
+        .catch(err => {
+            dispatch(productsError(err));
+    })
 }
 
-export const deleteProduct = (product) => dispatch => {
+export const deleteProduct = (productId) => dispatch => {
     
-    console.log("deleting..", product);
-    dispatch(deleteProductSuccess(product));
-    return;
+    console.log("deleting..", productId);
+    return fetch(`${API_BASE_URL}/products/${productId}`,{
+        method: 'DELETE',
+        headers: {
+            'content-type': 'application/json'
+        }
+        })
+        .then(res => normalizeResponseErrors(res))
+        .then(() => dispatch(deleteProductSuccess(productId)))
+        .catch(err => {
+            console.log(err);
+            dispatch(productsError(err));
+    })
 }
