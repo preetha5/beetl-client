@@ -29,6 +29,11 @@ export class Login extends React.Component{
                     <LoginForm onSubmit ={(values) => this.handleSubmit(values)}/>
                     <p>New User? <Link to="/signup">Sign Up Here</Link></p>
                 </Grid>
+                <Grid item xs={12}>
+                    <p>Demo Login use: </p>
+                    <p>Email: admin@beetl.com</p>
+                    <p>Password: test1234</p>
+                </Grid>
             </Grid>
         )
     }
