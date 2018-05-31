@@ -10,6 +10,33 @@ import {connect} from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+
+
+// the Card component style of Mui-UI
+const styles = {
+  card: {
+    maxWidth: 400,
+  },
+  media: {
+    height: 150,
+    width: 150
+  },
+  details: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  content: {
+    flex: '1 0 auto',
+  },
+};
+
 export function LandingPage(props){
     // If we are logged in redirect straight to the user's dashboard
     console.log("inside landing page", props.loggedIn);
@@ -17,23 +44,35 @@ export function LandingPage(props){
         console.log("redirecting to dash");
         return <Redirect to="/dashboard" />;
     }
+
+    const { classes } = props;
+
     return(
         <div>
             <Grid container spacing={24}>
-                <Grid item xs={12} style={{textAlign: 'center'}}>
-                    <h1> Welcome to BEETL </h1>
-                    <p><em>A Lightweight Bug Tracker </em></p>
-                </Grid>
-                <Grid item xs={12} style={{textAlign: 'center'}}>
-                    <section className="beetlIntro">
-                        <h3>Easily track your issues</h3>
-                        <img src="http://via.placeholder.com/350x150" />
-                        <p>Beetl is an issue tracking system that can be easily integrated
-                        into your software development cycles. Manage the issues related to all your products
-                        in one responsive app.
-                        </p>
-                    </section>
-                </Grid>
+                <Card className={classes.card}>
+                    // Update this to be PAPER and then use 
+                    // it for the HOW IT WORKS component
+                    <div className={classes.details}>
+                        <CardMedia
+                          className={classes.media}
+                          image="http://via.placeholder.com/550x150"
+                          title="Programmers"
+                        />
+                    </div>
+                    <CardContent>
+                      <h3>
+                        TRACK BUGS EASILY
+                      </h3>
+                      <p>
+                        Beetl is an issue tracking system that can be easily integrated
+                        into your software development cycles. Manage the issues related 
+                        to all your productsin one responsive app.
+                      </p>
+                      <h6>BEETLE | A Lightweight Bug Trackeing System</h6>
+                    </CardContent>
+                </Card>
+
                 <Grid item xs={12} style={{textAlign: 'center'}}>
                     <HowItWorks />
                 </Grid>
@@ -50,4 +89,10 @@ const mapStateToProps = state => ({
     loggedIn: state.authReducer.currentUser !== null
 });
 
-export default connect(mapStateToProps)(LandingPage);
+LandingPage.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+
+const styledComponent = withStyles(styles)(LandingPage);
+export default connect(mapStateToProps)(styledComponent);

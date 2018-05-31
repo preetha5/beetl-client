@@ -20,12 +20,16 @@ import ManageProducts from './main/manage/manage_products';
 import {refreshAuthToken} from '../actions/auth';
 import {loadAuthToken} from '../utils/localStorage';
 
-
 // Import for Material UI
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+import { createMuiTheme } from '@material-ui/core/styles';
+import amber from '@material-ui/core/colors/amber';
+import orange from '@material-ui/core/colors/orange';
+
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import {deepOrange500} from 'material-ui/styles/colors';
-import {orange500} from 'material-ui/styles/colors';
+// import yellow from 'material-ui/styles/colors';
+// import {orange} from 'material-ui/styles/colors';
 import Paper from '@material-ui/core/Paper';
 import Hidden from '@material-ui/core/Hidden';
 import Grid from '@material-ui/core/Grid';
@@ -33,8 +37,8 @@ import Grid from '@material-ui/core/Grid';
 
 const muiTheme = getMuiTheme({
     palette: {
-      primary1Color: orange500,
-      accent1Color: deepOrange500
+      primary1Color: amber[500],
+      accent1Color: orange[500]
     }
   });
 
@@ -103,13 +107,16 @@ export class App extends Component {
         <Router>
             <div>
                 <Header />
-                <Grid container>
-                    <Grid item xs={2}>
+                <Grid container
+                    direction='row'
+                    justify='center'
+                >
+                    <Grid item>
                         <Hidden xsDown>
                             <Paper><Sidebar /></Paper>
                         </Hidden>
                     </Grid>
-                    <Grid item xs={10}>
+                    <Grid item xs={12} sm={10}>
                         <Switch>
                         <Route exact path="/" component={LandingPage} />
                             <Route exact path="/login" component={Login} />
