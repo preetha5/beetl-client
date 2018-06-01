@@ -38,7 +38,7 @@ function Footer(props){
     <Grid container className="footer">
         <Grid item xs={12}>
 	      	<Grid item xs={12} sm={6} md={6}>
-	      		<h6 className={classes.logo}>BEETLE {"\n"}<span className={classes.tagline}>A Lightweight Bug Tracking System</span></h6>
+	      		<h6 className={classes.logo}>BEETL {"\n"}<span className={classes.tagline}>A Lightweight Bug Tracking System</span></h6>
 					</Grid>
 					<Grid item xs={12} sm={6} md={6}>
 						<p className={classes.legalease}>Copyright &copy; 2018 | Beetl Inc </p>

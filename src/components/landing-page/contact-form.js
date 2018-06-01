@@ -1,11 +1,28 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+
+// Material UI
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
+import Grid from '@material-ui/core/Grid';
+// import PropTypes from 'prop-types';
+// import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+
 import asyncValidate from '../../utils/asyncValidate';
 import validate from '../../utils/validate';
 
-import Grid from '@material-ui/core/Grid';
+const style = {
+    display: 'flex',
+    flexWrap: 'wrap',
+};
+
+const btnstyle = {
+  marginRight: '1em',
+  marginTop: '2em',
+  // backgroundColor: '#2269fa',
+  // color: 'white',
+};
 
 const renderTextField = (
     { input, label, meta: { touched, error }, ...custom },
@@ -22,7 +39,6 @@ const renderTextField = (
   export const renderSelectField = (
     { input, label, meta: { touched, error }, children, ...custom },
   ) => (
-      
     <SelectField
       floatingLabelText={label}
       errorText={touched && error}
@@ -35,39 +51,66 @@ const renderTextField = (
 
 //export default function ContactForm(){
 const ContactForm = props => {
-        const { handleSubmit, pristine, reset, submitting } = props;
-    return(
-        <section>
-            <form className='contactForm' onSubmit={handleSubmit(values => props.onSubmit(values))}>
-            <Grid item>
-                <Field name="firstName" component={renderTextField} label="First Name" />
-            </Grid>
-            <Grid item>
-                <Field name="lastName" component={renderTextField} label="Last Name" />
-            </Grid>
-            <Grid item>
-                <Field name="email" component={renderTextField} label="Email" />
-            </Grid>
-            <Grid item>
-                <Field name="company" component={renderTextField} label="Company" />
-            </Grid>
-            <Grid item>
-                <Field
-                name="message"
-                component={renderTextField}
-                label="Message"
-                multiLine={true}
-                rows={2}
-                />
-            </Grid>
-            <Grid item>
-                <button type="submit" disabled={pristine || submitting}>Submit</button>
-                <button type="button" disabled={pristine || submitting} onClick={reset}>
-                Clear Values</button>
-            </Grid>
-        </form>
-        </section>
-    )
+  const { handleSubmit, pristine, reset, submitting } = props;
+  return(
+      <section>
+          <form style={style} onSubmit={handleSubmit(values => props.onSubmit(values))}>
+          <Grid item xs={12} sm={6}>
+              <Field 
+              name="firstName" 
+              component={renderTextField} 
+              label="First Name" 
+              margin='dense' 
+              />
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+              <Field 
+              name="lastName" 
+              component={renderTextField} 
+              label="Last Name" 
+              margin='dense' 
+              />
+          </Grid>
+          
+          <Grid item xs={12} sm={6}>
+              <Field 
+              name="email" 
+              component={renderTextField} 
+              label="Email" 
+              margin='dense' 
+              />
+          </Grid>
+          
+          <Grid item xs={12} sm={6}>
+              <Field 
+              name="company" 
+              component={renderTextField} 
+              label="Company"
+              margin='dense'  
+              />
+          </Grid>
+          
+          <Grid item xs={12} sm={6}>
+              <Field
+              name="message"
+              component={renderTextField}
+              label="Message"
+              rows={1}
+              margin='dense' 
+              />
+          </Grid>
+          
+          <Grid item xs={12} sm={6}>
+              <Button variant="raised" color="secondary" style={btnstyle} type="submit" disabled={pristine || submitting}>Submit</Button>
+              <Button variant="raised" style={btnstyle} type="button" disabled={pristine || submitting} onClick={reset}>
+                Clear Values
+              </Button>
+          </Grid>
+
+      </form>
+      </section>
+  )
 }
 
 export default reduxForm({
@@ -75,3 +118,5 @@ export default reduxForm({
     validate,
     asyncValidate,
   })(ContactForm);
+
+

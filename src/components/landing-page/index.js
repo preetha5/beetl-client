@@ -16,7 +16,6 @@ import amber from '@material-ui/core/colors/amber';
 import deepPurple from '@material-ui/core/colors/deepPurple';
 import blueGrey from '@material-ui/core/colors/blueGrey';
 
-
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -70,6 +69,14 @@ const styles = theme => ({
     letterSpacing: '0',
     color: blueGrey[700]
   },
+  headline: {
+    fontFamily: 'Libre Franklin, sans-serif',
+    fontWeight: 200,
+    letterSpacing: '0',
+    color: blueGrey[300],
+    fontSize: '2.5rem',
+    paddingBottom: '5px'
+  },
   tiny_headline: {
     fontFamily: 'Libre Franklin, sans-serif',
     fontWeight: 200,
@@ -86,7 +93,10 @@ const styles = theme => ({
     display: 'grid'
   },
   mainForm:{
-    backgroundColor: amber[500]
+    backgroundColor: amber[500],
+    marginTop: '1.5%',
+    marginBottom: '150px',
+    paddingBottom: '50px !important'
   }
 });
 
@@ -111,17 +121,17 @@ export function LandingPage(props){
                         title="Programmers"
                     />
                    <div className={classes.details}>
-
                         <CardContent className={classes.content}>
-                            <h3>
+                            <h3 className={classes.headline}>
                                 TRACK BUGS EASILY
                             </h3>
                             <p>
-                                Beetl is an issue tracking system that can be easily integrated
-                                into your software development cycles. Manage the issues related 
-                                to all your productsin one responsive app.
+                                <span className={classes.accent}> Easily & Efficiently </span> manage the issues related to all your products 
+                                in one responsive app. BEETL is an issue tracking system that can be 
+                                easily integrated into all of your software development cycles. 
+                                Killing Bugs has never been so much fun.
                             </p>
-                            <h6>BEETLE | A Lightweight Bug Trackeing System</h6>
+                            <h6 className={classes.logo}>BEETL {"\n"}<span className={classes.tagline}>A Lightweight Bug Tracking System</span></h6>
                         </CardContent>
                     </div>
                 </Card>
@@ -144,9 +154,9 @@ export function LandingPage(props){
                           <p>
                             Add products and users
                             Praesent ac odio at erat ullamcorper finibus id a leo. Nunc tellus tellus, 
-                            cursus sed finibus id, consequat eu quam.
+                            cursus sed finibus id, consequat eu.
                           </p>
-                          <h6 className={classes.logo}>BEETLE {"\n"}<span className={classes.tagline}>A Lightweight Bug Tracking System</span></h6>
+                          <h6 className={classes.logo}>BEETL {"\n"}<span className={classes.tagline}>A Lightweight Bug Tracking System</span></h6>
                         </CardContent>
                     </Card>
                 </Grid>
@@ -163,14 +173,14 @@ export function LandingPage(props){
                         <CardContent>
                           <h6 className={classes.gridded}>
                             SOLVE COMPLEX ISSUES <span className={classes.tiny_headline}>TOGETHER {"\n"}</span> 
-                            <span className={classes.accent}>EASILY</span>
+                            <span className={classes.accent}>EFFECTIVELY</span>
                           </h6>
                           <p>
                             Create issues and assign to your team
                             Praesent ac odio at erat ullamcorper finibus id a leo. Nunc tellus tellus, 
                             cursus sed finibus id.
                           </p>
-                          <h6 className={classes.logo}>BEETLE {"\n"}<span className={classes.tagline}>A Lightweight Bug Tracking System</span></h6>
+                          <h6 className={classes.logo}>BEETL {"\n"}<span className={classes.tagline}>A Lightweight Bug Tracking System</span></h6>
                         </CardContent>
                     </Card>
                 </Grid>
@@ -191,8 +201,9 @@ export function LandingPage(props){
                           </h6>
                           <p className={classes.content}>
                             Update and track issues during all their stages from open to built. 
-                            Praesent ac odio at erat ullamcorper finibus id a leo. Nunc tellus tellus.                          </p> 
-                          <h6 className={classes.logo}>BEETLE {"\n"}<span className={classes.tagline}>A Lightweight Bug Tracking System</span></h6>
+                            Praesent ac odio at erat ullamcorper finibus id a leo. Nunc tellus.
+                          </p> 
+                          <h6 className={classes.logo}>BEETL {"\n"}<span className={classes.tagline}>A Lightweight Bug Tracking System</span></h6>
                         </CardContent>
                     </Card>
                 </Grid>
