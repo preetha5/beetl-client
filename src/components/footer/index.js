@@ -14,7 +14,7 @@ const styles = {
     fontWeight: 800,
     letterSpacing: '.2rem',
     whiteSpace: 'pre-wrap',
-    color: '#0057ff',
+    color: '#216afa',
     paddingBottom: '2.5rem'
 
   },

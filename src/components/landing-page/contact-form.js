@@ -5,6 +5,8 @@ import SelectField from 'material-ui/SelectField';
 import asyncValidate from '../../utils/asyncValidate';
 import validate from '../../utils/validate';
 
+import Grid from '@material-ui/core/Grid';
+
 const renderTextField = (
     { input, label, meta: { touched, error }, ...custom },
   ) => (
@@ -37,19 +39,19 @@ const ContactForm = props => {
     return(
         <section>
             <form className='contactForm' onSubmit={handleSubmit(values => props.onSubmit(values))}>
-            <div>
+            <Grid item>
                 <Field name="firstName" component={renderTextField} label="First Name" />
-            </div>
-            <div>
+            </Grid>
+            <Grid item>
                 <Field name="lastName" component={renderTextField} label="Last Name" />
-            </div>
-            <div>
+            </Grid>
+            <Grid item>
                 <Field name="email" component={renderTextField} label="Email" />
-            </div>
-            <div>
+            </Grid>
+            <Grid item>
                 <Field name="company" component={renderTextField} label="Company" />
-            </div>
-            <div>
+            </Grid>
+            <Grid item>
                 <Field
                 name="message"
                 component={renderTextField}
@@ -57,12 +59,12 @@ const ContactForm = props => {
                 multiLine={true}
                 rows={2}
                 />
-            </div>
-            <div>
+            </Grid>
+            <Grid item>
                 <button type="submit" disabled={pristine || submitting}>Submit</button>
                 <button type="button" disabled={pristine || submitting} onClick={reset}>
                 Clear Values</button>
-            </div>
+            </Grid>
         </form>
         </section>
     )

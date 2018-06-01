@@ -26,6 +26,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { createMuiTheme } from '@material-ui/core/styles';
 import amber from '@material-ui/core/colors/amber';
 import deepPurple from '@material-ui/core/colors/deepPurple';
+import blueGrey from '@material-ui/core/colors/blueGrey';
 
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 // import yellow from 'material-ui/styles/colors';
@@ -41,6 +42,10 @@ const muiTheme = getMuiTheme({
       accent1Color: deepPurple['A700']
     }
   });
+
+const style = {
+  background: blueGrey[500],
+}
 
 export class App extends Component {
     constructor(props){
@@ -110,6 +115,7 @@ export class App extends Component {
                 <Grid container
                     direction='row'
                     justify='center'
+                    style={style}
                 >
                     <Grid item>
                         <Hidden xsDown>

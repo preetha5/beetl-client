@@ -12,6 +12,7 @@ import Paper from '@material-ui/core/Paper';
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import amber from '@material-ui/core/colors/amber';
 import deepPurple from '@material-ui/core/colors/deepPurple';
 import blueGrey from '@material-ui/core/colors/blueGrey';
 
@@ -24,6 +25,20 @@ import CardMedia from '@material-ui/core/CardMedia';
 const styles = theme => ({
   card: {
     spacing: '16',
+  },
+  topcard: {
+    display: 'flex',
+    padding: '10px',
+    margin: '25px 10px 5px',
+  },
+  cover: {
+    width: 650,
+    height: 'auto',
+    display: 'flex'
+  },
+  details: {
+    display: 'flex',
+    flexDirection: 'column',
   },
   media: {
     height: 0,
@@ -60,7 +75,8 @@ const styles = theme => ({
     fontWeight: 200,
     letterSpacing: '0',
     color: blueGrey[300],
-    fontSize: '2.2rem'
+    fontSize: 'x-large',
+    paddingBottom: '5px'
   },
   accent: {
     fontWeight: 800,
@@ -68,6 +84,9 @@ const styles = theme => ({
   },
   gridded: {
     display: 'grid'
+  },
+  mainForm:{
+    backgroundColor: amber[500]
   }
 });
 
@@ -84,31 +103,27 @@ export function LandingPage(props){
     return(
         <div>
             <Grid container spacing={24}>
+                <Card className={classes.topcard}>
+                    <CardMedia
+                        className={classes.cover}
+                        image="http://via.placeholder.com/650x200"
+                        title="Programmers"
+                    />
+                   <div className={classes.details}>
 
-
-                <Paper className={classes.card}>
-                    <div className={classes.details}>
-                        <CardMedia
-                          className={classes.papermedia}
-                          image="http://via.placeholder.com/550x150"
-                          title="Programmers"
-                        />
+                        <CardContent className={classes.content}>
+                            <h3>
+                                TRACK BUGS EASILY
+                            </h3>
+                            <p>
+                                Beetl is an issue tracking system that can be easily integrated
+                                into your software development cycles. Manage the issues related 
+                                to all your productsin one responsive app.
+                            </p>
+                            <h6>BEETLE | A Lightweight Bug Trackeing System</h6>
+                        </CardContent>
                     </div>
-                    <CardContent>
-                      <h3>
-                        TRACKS BUGS EASILY
-                      </h3>
-                      <p>
-                        Beetl is an issue tracking system that can be easily integrated
-                        into your software development cycles. Manage the issues related 
-                        to all your productsin one responsive app.
-                      </p>
-                      <h6>BEETLE | A Lightweight Bug Trackeing System</h6>
-                    </CardContent>
-                </Paper>
-
-
-
+                </Card>
 
                 <Grid item xs={12} sm={4} >
                     <Card className={classes.card}>
@@ -121,7 +136,7 @@ export function LandingPage(props){
                         </div>
                         <CardContent>
                           <h6 className={classes.gridded}>
-                            ADD PRODCTS + USERS THEN<span className={classes.tiny_headline}>BUILD TEAMS </span> 
+                            ADD PRODCTS + USERS<span className={classes.tiny_headline}>BUILD TEAMS </span> 
                             <span className={classes.accent}>EASILY</span>
                           </h6>
                           <p>
@@ -180,8 +195,8 @@ export function LandingPage(props){
                     </Card>
                 </Grid>
 
-                <Grid item xs={12} style={{textAlign: 'center'}}>
-                    <h3>Want Beetl Customized for your Company? Contact Us.</h3>
+                <Grid item xs={12} sm={12} className={classes.mainForm} style={{textAlign: 'center'}}>
+                    <h3>Need a Customized Version? Make Contact</h3>
                     <ContactForm />
                 </Grid>
             </Grid>
