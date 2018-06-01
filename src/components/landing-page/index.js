@@ -12,30 +12,64 @@ import Paper from '@material-ui/core/Paper';
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import deepPurple from '@material-ui/core/colors/deepPurple';
+import blueGrey from '@material-ui/core/colors/blueGrey';
+
 
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 
-
-// the Card component style of Mui-UI
-const styles = {
+const styles = theme => ({
   card: {
-    maxWidth: 400,
+    spacing: '16',
   },
   media: {
-    height: 150,
-    width: 150
-  },
-  details: {
-    display: 'flex',
-    flexDirection: 'column',
+    height: 0,
+    paddingTop: '61%',
   },
   content: {
     flex: '1 0 auto',
+    color: blueGrey[700] 
   },
-};
+  paper: {
+    padding: theme.spacing.unit * 2,
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+  papermedia: {
+    height: 0,
+    paddingTop: '31%',
+  },
+  logo: {
+    fontFamily: 'Kanit, sans-serif',
+    fontWeight: 800,
+    letterSpacing: '.2rem',
+    whiteSpace: 'pre-wrap',
+    color: '#0057ff'
+  },
+  tagline: {
+    fontFamily: 'Libre Franklin, sans-serif',
+    fontWeight: 400,
+    letterSpacing: '0',
+    color: blueGrey[700]
+  },
+  tiny_headline: {
+    fontFamily: 'Libre Franklin, sans-serif',
+    fontWeight: 200,
+    letterSpacing: '0',
+    color: blueGrey[300],
+    fontSize: '2.2rem'
+  },
+  accent: {
+    fontWeight: 800,
+    color: '#0057ff'
+  },
+  gridded: {
+    display: 'grid'
+  }
+});
 
 export function LandingPage(props){
     // If we are logged in redirect straight to the user's dashboard
@@ -50,19 +84,19 @@ export function LandingPage(props){
     return(
         <div>
             <Grid container spacing={24}>
-                <Card className={classes.card}>
-                    // Update this to be PAPER and then use 
-                    // it for the HOW IT WORKS component
+
+
+                <Paper className={classes.card}>
                     <div className={classes.details}>
                         <CardMedia
-                          className={classes.media}
+                          className={classes.papermedia}
                           image="http://via.placeholder.com/550x150"
                           title="Programmers"
                         />
                     </div>
                     <CardContent>
                       <h3>
-                        TRACK BUGS EASILY
+                        TRACKS BUGS EASILY
                       </h3>
                       <p>
                         Beetl is an issue tracking system that can be easily integrated
@@ -71,16 +105,86 @@ export function LandingPage(props){
                       </p>
                       <h6>BEETLE | A Lightweight Bug Trackeing System</h6>
                     </CardContent>
-                </Card>
+                </Paper>
 
-                <Grid item xs={12} style={{textAlign: 'center'}}>
-                    <HowItWorks />
+
+
+
+                <Grid item xs={12} sm={4} >
+                    <Card className={classes.card}>
+                        <div className={classes.details}>
+                            <CardMedia
+                              className={classes.media}
+                              image="http://via.placeholder.com/327x200"
+                              title="ADD PRODUCTS SCREEN SHOT"
+                            />
+                        </div>
+                        <CardContent>
+                          <h6 className={classes.gridded}>
+                            ADD PRODCTS + USERS THEN<span className={classes.tiny_headline}>BUILD TEAMS </span> 
+                            <span className={classes.accent}>EASILY</span>
+                          </h6>
+                          <p>
+                            Add products and users
+                            Praesent ac odio at erat ullamcorper finibus id a leo. Nunc tellus tellus, 
+                            cursus sed finibus id, consequat eu quam.
+                          </p>
+                          <h6 className={classes.logo}>BEETLE {"\n"}<span className={classes.tagline}>A Lightweight Bug Tracking System</span></h6>
+                        </CardContent>
+                    </Card>
                 </Grid>
+                
+                <Grid item xs={12} sm={4} >
+                    <Card className={classes.card}>
+                        <div className={classes.details}>
+                            <CardMedia
+                              className={classes.media}
+                              image="http://via.placeholder.com/327x200"
+                              title="SOLVE ISSUES"
+                            />
+                        </div>
+                        <CardContent>
+                          <h6 className={classes.gridded}>
+                            SOLVE COMPLEX ISSUES <span className={classes.tiny_headline}>TOGETHER {"\n"}</span> 
+                            <span className={classes.accent}>EASILY</span>
+                          </h6>
+                          <p>
+                            Create issues and assign to your team
+                            Praesent ac odio at erat ullamcorper finibus id a leo. Nunc tellus tellus, 
+                            cursus sed finibus id.
+                          </p>
+                          <h6 className={classes.logo}>BEETLE {"\n"}<span className={classes.tagline}>A Lightweight Bug Tracking System</span></h6>
+                        </CardContent>
+                    </Card>
+                </Grid>
+
+                <Grid item xs={12} sm={4} >
+                    <Card className={classes.card}>
+                        <div className={classes.details}>
+                            <CardMedia
+                              className={classes.media}
+                              image="http://via.placeholder.com/327x200"
+                              title="TRACK THE LIFE OF A BUG"
+                            />
+                        </div>
+                        <CardContent>
+                          <h6 className={classes.gridded}>
+                            TRACK ALL STAGES <span className={classes.tiny_headline}>BIRTH to DEATH </span> 
+                            <span className={classes.accent}>EASILY</span>
+                          </h6>
+                          <p className={classes.content}>
+                            Update and track issues during all their stages from open to built. 
+                            Praesent ac odio at erat ullamcorper finibus id a leo. Nunc tellus tellus.                          </p> 
+                          <h6 className={classes.logo}>BEETLE {"\n"}<span className={classes.tagline}>A Lightweight Bug Tracking System</span></h6>
+                        </CardContent>
+                    </Card>
+                </Grid>
+
                 <Grid item xs={12} style={{textAlign: 'center'}}>
                     <h3>Want Beetl Customized for your Company? Contact Us.</h3>
                     <ContactForm />
                 </Grid>
-        </Grid>
+            </Grid>
         </div>
     )
 }

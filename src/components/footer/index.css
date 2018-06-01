@@ -1,10 +1,9 @@
 .footer {
     box-sizing: border-box;
-    height: 120px;
+    height: 100px;
     background-color: #000000;
     border-top: 1px solid #e0e0e0;
-    padding-top: 15px;
+    padding: 20px 2rem;
     position: fixed;
     bottom: 0;
-    text-align: center;
   }

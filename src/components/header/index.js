@@ -75,7 +75,7 @@ export class Header extends Component{
         return (
             <div>
                 <AppBar 
-                    title={<Link style={logo_style} to="/">BEETL</Link>}
+                    title={<Link style={logo_style} to="/">BEETLE</Link>}
                     iconElementLeft={
                         <IconButton 
                         onClick={this.handleToggle}>{this.state.open ? <Close /> : <Menu />}</IconButton>}>

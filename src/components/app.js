@@ -25,7 +25,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import { createMuiTheme } from '@material-ui/core/styles';
 import amber from '@material-ui/core/colors/amber';
-import orange from '@material-ui/core/colors/orange';
+import deepPurple from '@material-ui/core/colors/deepPurple';
 
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 // import yellow from 'material-ui/styles/colors';
@@ -38,7 +38,7 @@ import Grid from '@material-ui/core/Grid';
 const muiTheme = getMuiTheme({
     palette: {
       primary1Color: amber[500],
-      accent1Color: orange[500]
+      accent1Color: deepPurple['A700']
     }
   });
 
@@ -118,7 +118,7 @@ export class App extends Component {
                     </Grid>
                     <Grid item xs={12} sm={10}>
                         <Switch>
-                        <Route exact path="/" component={LandingPage} />
+                            <Route exact path="/" component={LandingPage} />
                             <Route exact path="/login" component={Login} />
                             <Route exact path="/signup" component={SignUp} />
                             <Route exact path="/dashboard" render={(props) => (
