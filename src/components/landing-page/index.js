@@ -89,6 +89,16 @@ const styles = theme => ({
     fontWeight: 800,
     color: '#0057ff'
   },
+  bug:{
+    width: '50px',
+    height: '60px',
+    position: 'absolute',
+    backgroundColor: '#df0f0f',
+    display: 'grid',
+    overflowX: 'overlay',
+    marginLeft: '-60px',
+    marginTop: '7px',
+  },
   gridded: {
     display: 'grid'
   },
@@ -125,6 +135,7 @@ export function LandingPage(props){
                             <h3 className={classes.headline}>
                                 TRACK BUGS EASILY
                             </h3>
+                            <div className={classes.bug}></div>
                             <p>
                                 <span className={classes.accent}> Easily & Efficiently </span> manage the issues related to all your products 
                                 in one responsive app. BEETL is an issue tracking system that can be 
@@ -225,6 +236,6 @@ LandingPage.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-
 const styledComponent = withStyles(styles)(LandingPage);
 export default connect(mapStateToProps)(styledComponent);
+
