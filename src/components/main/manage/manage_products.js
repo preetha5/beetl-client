@@ -6,11 +6,11 @@ import ProductPage from './productPage';
 import NewProduct from './newProduct';
 import {bindActionCreators} from 'redux';
 import * as productActions from '../../../actions/productActions';
+//import {loadProducts} from '../../../actions/productActions';
 
 //Material UI imports
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import {loadProducts} from '../../../actions/productActions';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import Icon from '@material-ui/core/Icon';

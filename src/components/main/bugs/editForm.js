@@ -1,16 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { load as loadAccount } from '../../reducers/account';
+import { load as loadAccount } from '../../../reducers/bugsReducer';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 import DatePicker from 'material-ui/DatePicker';
 import Button from '@material-ui/core/Button';
 import {
     //DatePicker,
-    TimePicker,
+    //TimePicker,
     //SelectField,
-    Slider,
+    //Slider,
     TextField,
   } from 'redux-form-material-ui';
 
@@ -80,7 +80,8 @@ class EditForm extends React.Component {
     }
 
     componentWillMount() {
-        this.props.load(data);
+        //this.props.load(data);
+        console.log(this.props.currentBug);
     }
 
     deleteIssue(event) {
@@ -116,6 +117,7 @@ class EditForm extends React.Component {
              components : [...comps]
             });
         console.log(this.state.components);
+
     }
 
     handleChangeDate = (event, date) => {
@@ -136,7 +138,7 @@ class EditForm extends React.Component {
     }
 
     render() {
-
+        
         const { handleSubmit, load, pristine, reset, submitting } = this.props;
         const componentList = this.state.components.map((item, index) => 
             <MenuItem key={index} value={item.toString().toLowerCase()} primaryText={item}/>
@@ -144,7 +146,7 @@ class EditForm extends React.Component {
         const usersList = this.props.users.map((user, index) =>
             <MenuItem key={index} value={user} primaryText={user}/>
         );
-        console.log(this.state.dueDate);
+        console.log(this.props.currentBug);
         //Buttons added while form is used to edit/save an issue
         const EditButtons = this.state.editing ? (
             <div>
@@ -169,7 +171,9 @@ class EditForm extends React.Component {
                 >
                 <option value="">Select a product...</option>
                 {this.props.products.map(product => (
-                    <option value={product.productName} key={product.productName}>
+                    <option value={product.productName} key={product.productName}
+                    selected={product._id === this.props.bugId ? 'true' : 'false'}
+                    >
                     {product.productName}
                     </option>
                 ))}
@@ -290,7 +294,7 @@ class EditForm extends React.Component {
   // You have to connect() to any reducers that you wish to connect to yourself
   EditForm = connect(
     state => ({
-      initialValues: state.account.data // pull initial values from account reducer
+      initialValues: state.bugsReducer.data // pull initial values from bugsReducer reducer
     }),
     { load: loadAccount } // bind account loading action creator
   )(EditForm);

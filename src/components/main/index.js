@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import AllIssues from './allIssues';
-import MyBugs from './myBugs';
+import AllIssues from './bugs/allIssues';
+import MyBugs from './bugs/myBugs';
 import {Link} from 'react-router-dom';
 import RequiresLogin from '../requires-login';
 

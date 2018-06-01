@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import propTypes from 'prop-types';
 import {BootstrapTable, 
     TableHeaderColumn} from 'react-bootstrap-table';
-import '../../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css'
+import '../../../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css'
 // Material UI
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
