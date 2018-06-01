@@ -29,7 +29,7 @@ const styles = theme => ({
   topcard: {
     display: 'flex',
     padding: '10px',
-    margin: '25px 10px 5px',
+    margin: '0px',
   },
   cover: {
     width: 650,
@@ -102,7 +102,8 @@ export function LandingPage(props){
 
     return(
         <div>
-            <Grid container spacing={24}>
+            <Grid container spacing={24} justify='center'>
+            <Grid item xs={11} sm={12} >
                 <Card className={classes.topcard}>
                     <CardMedia
                         className={classes.cover}
@@ -124,8 +125,9 @@ export function LandingPage(props){
                         </CardContent>
                     </div>
                 </Card>
-
-                <Grid item xs={12} sm={4} >
+            </Grid>
+                
+                <Grid item xs={11} sm={4} >
                     <Card className={classes.card}>
                         <div className={classes.details}>
                             <CardMedia
@@ -149,7 +151,7 @@ export function LandingPage(props){
                     </Card>
                 </Grid>
                 
-                <Grid item xs={12} sm={4} >
+                <Grid item xs={11} sm={4} >
                     <Card className={classes.card}>
                         <div className={classes.details}>
                             <CardMedia
@@ -173,7 +175,7 @@ export function LandingPage(props){
                     </Card>
                 </Grid>
 
-                <Grid item xs={12} sm={4} >
+                <Grid item xs={11} sm={4} >
                     <Card className={classes.card}>
                         <div className={classes.details}>
                             <CardMedia
