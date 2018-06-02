@@ -2,12 +2,15 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 // Material UI
-import TextField from 'material-ui/TextField';
+ import TextField from 'material-ui/TextField';
+
 import SelectField from 'material-ui/SelectField';
 import Grid from '@material-ui/core/Grid';
 // import PropTypes from 'prop-types';
 // import { withStyles } from '@material-ui/core/styles';
+
 import Button from '@material-ui/core/Button';
+import deepPurple from '@material-ui/core/colors/deepPurple';
 
 import asyncValidate from '../../utils/asyncValidate';
 import validate from '../../utils/validate';
@@ -20,8 +23,6 @@ const style = {
 const btnstyle = {
   marginRight: '1em',
   marginTop: '2em',
-  // backgroundColor: '#2269fa',
-  // color: 'white',
 };
 
 const renderTextField = (
@@ -52,7 +53,8 @@ const renderTextField = (
 //export default function ContactForm(){
 const ContactForm = props => {
   const { handleSubmit, pristine, reset, submitting } = props;
-  return(
+  
+  return (
       <section>
           <form style={style} onSubmit={handleSubmit(values => props.onSubmit(values))}>
           <Grid item xs={12} sm={6}>
@@ -60,7 +62,8 @@ const ContactForm = props => {
               name="firstName" 
               component={renderTextField} 
               label="First Name" 
-              margin='dense' 
+              margin='dense'
+              inputStyle={{ color: '#216afa' }}
               />
           </Grid>
 
@@ -69,7 +72,8 @@ const ContactForm = props => {
               name="lastName" 
               component={renderTextField} 
               label="Last Name" 
-              margin='dense' 
+              margin='dense'
+              inputStyle={{ color: '#216afa' }}
               />
           </Grid>
           
@@ -78,7 +82,8 @@ const ContactForm = props => {
               name="email" 
               component={renderTextField} 
               label="Email" 
-              margin='dense' 
+              margin='dense'
+              inputStyle={{ color: '#216afa' }}
               />
           </Grid>
           
@@ -87,7 +92,8 @@ const ContactForm = props => {
               name="company" 
               component={renderTextField} 
               label="Company"
-              margin='dense'  
+              margin='dense'
+              inputStyle={{ color: '#216afa' }}
               />
           </Grid>
           
@@ -97,12 +103,13 @@ const ContactForm = props => {
               component={renderTextField}
               label="Message"
               rows={1}
-              margin='dense' 
+              margin='dense'
+              inputStyle={{ color: '#216afa' }}
               />
           </Grid>
           
           <Grid item xs={12} sm={6}>
-              <Button variant="raised" color="secondary" style={btnstyle} type="submit" disabled={pristine || submitting}>Submit</Button>
+              <Button variant="raised" color="primary" style={btnstyle} type="submit" disabled={pristine || submitting}>Submit</Button>
               <Button variant="raised" style={btnstyle} type="button" disabled={pristine || submitting} onClick={reset}>
                 Clear Values
               </Button>
