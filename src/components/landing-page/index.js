@@ -91,17 +91,18 @@ const styles = theme => ({
   },
   bug:{
     width: '60px',
-    height: '75px',
+    height: '90px',
     position: 'absolute',
     // backgroundColor: 'rgba(0, 0, 255, 0)', //transparent
     backgroundColor: '#fff',
-    backgroundImage: `url(static/images/tiny_bug.png)`,  // The preferred way
+    backgroundImage: `url(static/images/bug_landing_page.png)`,  // The preferred way
     backgroundRepeat: 'no-repeat',
-    backgroundSize: 'contain',
+    backgroundPosition: 'center',
+    backgroundSize: '70%',
     display: 'grid',
     overflowX: 'overlay',
     marginLeft: '-63px',
-    marginTop: '-2px',
+    marginTop: '-16px',
   },
   gridded: {
     display: 'grid'
