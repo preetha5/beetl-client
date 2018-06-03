@@ -21,6 +21,8 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 
+//import Bug1 from ' /img/bug.png';
+
 const styles = theme => ({
   card: {
     spacing: '16',
@@ -90,10 +92,15 @@ const styles = theme => ({
     color: '#0057ff'
   },
   bug:{
-    width: '50px',
-    height: '60px',
+    width: '65px',
+    height: '75px',
     position: 'absolute',
-    backgroundColor: '#df0f0f',
+    backgroundColor: 'rgba(0, 0, 255, 0)',
+    //backgroundImage: `url(${Bug1})`,// The preferred way
+    // What is working:
+    backgroundImage: `url('https://i.pinimg.com/564x/e6/c9/54/e6c954d0d99c396548b0e1caba8b8f26.jpg')`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'contain',
     display: 'grid',
     overflowX: 'overlay',
     marginLeft: '-60px',
@@ -127,7 +134,7 @@ export function LandingPage(props){
                 <Card className={classes.topcard}>
                     <CardMedia
                         className={classes.cover}
-                        image="http://via.placeholder.com/650x200"
+                        image="https://images.unsplash.com/photo-1515188027261-e7f35b9b61bc?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=663f07a80438eac1be1be9da06b7e865&auto=format&fit=crop&w=2200&q=80"
                         title="Programmers"
                     />
                    <div className={classes.details}>
@@ -153,7 +160,7 @@ export function LandingPage(props){
                         <div className={classes.details}>
                             <CardMedia
                               className={classes.media}
-                              image="http://via.placeholder.com/327x200"
+                              image="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=cbbd27149a8243a42eb2bd0bd918ba8f&auto=format&fit=crop&w=1500&q=80"
                               title="ADD PRODUCTS SCREEN SHOT"
                             />
                         </div>
@@ -177,7 +184,7 @@ export function LandingPage(props){
                         <div className={classes.details}>
                             <CardMedia
                               className={classes.media}
-                              image="http://via.placeholder.com/327x200"
+                              image="https://images.unsplash.com/photo-1498622566531-8459261af8f0?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=e7cd0567d2120a2d88ad2cbadfac1642&auto=format&fit=crop&w=1500&q=80"
                               title="SOLVE ISSUES"
                             />
                         </div>
@@ -201,14 +208,14 @@ export function LandingPage(props){
                         <div className={classes.details}>
                             <CardMedia
                               className={classes.media}
-                              image="http://via.placeholder.com/327x200"
+                              image="https://images.unsplash.com/photo-1501780392773-287d506245a5?ixlib=rb-0.3.5&s=a2fc99299dda2a5f290b48c904b09dd0&auto=format&fit=crop&w=2100&q=80"
                               title="TRACK THE LIFE OF A BUG"
                             />
                         </div>
                         <CardContent>
                           <h6 className={classes.gridded}>
                             TRACK ALL STAGES <span className={classes.tiny_headline}>BIRTH to DEATH </span> 
-                            <span className={classes.accent}>EASILY</span>
+                            <span className={classes.accent}>EFFICIENTLY</span>
                           </h6>
                           <p className={classes.content}>
                             Update and track issues during all their stages from open to built. 
