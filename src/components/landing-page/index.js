@@ -74,7 +74,6 @@ const styles = theme => ({
     fontWeight: 200,
     letterSpacing: '0',
     color: blueGrey[300],
-    fontSize: '2.5rem',
     paddingBottom: '5px'
   },
   tiny_headline: {
@@ -109,7 +108,7 @@ const styles = theme => ({
     backgroundImage: `url(static/images/bug_landing_page.png)`,  // The preferred way
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
-    backgroundSize: '70%',
+    backgroundSize: '55%',
     display: 'grid',
     overflowX: 'overlay',
     marginLeft: '-63px',
@@ -148,9 +147,9 @@ export function LandingPage(props){
                     />
                    <div className={classes.details}>
                         <CardContent className={classes.content}>
-                            <h3 className={classes.headline}>
+                            <h2 className={classes.headline}>
                                 TRACK BUGS EASILY
-                            </h3>
+                            </h2>
                             <div className={classes.bug}></div>
                             <p>
                                 <span className={classes.accent}> Easily & Efficiently </span> manage the issues related to all your products 
