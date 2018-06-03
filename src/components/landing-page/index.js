@@ -85,6 +85,17 @@ const styles = theme => ({
     fontSize: 'x-large',
     paddingBottom: '5px'
   },
+  med_headline: {
+    fontFamily: 'Libre Franklin, sans-serif',
+    fontWeight: 400,
+    letterSpacing: '0',
+    color: blueGrey[500],
+    paddingBottom: '5px'
+  },
+  accentDark: {
+    fontWeight: 400,
+    color: blueGrey[700],
+  },
   accent: {
     fontWeight: 800,
     color: '#0057ff'
@@ -225,7 +236,7 @@ export function LandingPage(props){
                 </Grid>
 
                 <Grid item xs={12} sm={12} className={classes.mainForm} style={{textAlign: 'center'}}>
-                    <h3>Need a Customized Version? Make Contact</h3>
+                    <h3 className={classes.med_headline}>Need a Customized Version? <span className={classes.accentDark}>Make Contact</span></h3>
                     <ContactForm />
                 </Grid>
             </Grid>

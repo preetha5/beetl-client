@@ -56,7 +56,7 @@ const ContactForm = props => {
   
   return (
       <section>
-          <form style={style} onSubmit={handleSubmit(values => props.onSubmit(values))}>
+        <form style={style} onSubmit={handleSubmit(values => props.onSubmit(values))}>
           <Grid item xs={12} sm={6}>
               <Field 
               name="firstName" 
@@ -114,8 +114,7 @@ const ContactForm = props => {
                 Clear Values
               </Button>
           </Grid>
-
-      </form>
+        </form>
       </section>
   )
 }
