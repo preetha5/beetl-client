@@ -34,21 +34,11 @@ export const deleteUserSuccess = userId => ({
     userId
 });
 
-const userArr= [{
-    id:0,
-    firstName:"Jane",
-    lastName:"Dev",
-
-    email:"jane@microsoft.com",
-    role:'developer'
-    },{
-    id:1,
-    firstName:"John",
-    lastName:"Dev",
-
-    email:"john@microsoft.com",
-    role:'developer'
-}];
+export const USERS_ERROR = 'USERS_ERROR';
+export const usersError = error => ({
+    type: USERS_ERROR,
+    error
+});
 
 export const registerUser = user => dispatch => {
     console.log('dispatching user ', user);
@@ -118,6 +108,7 @@ export const createUser = (NewUser) => dispatch => {
                     })
                 );
             }
+            dispatch(usersError(err));
         });
 }
 
@@ -141,6 +132,7 @@ export const updateUser = (userId, user) => dispatch => {
     })
     .catch(err =>{
         console.log(err);
+        dispatch(usersError(err));
     });
 }
 
@@ -154,8 +146,7 @@ export const deleteUser = (userId) => dispatch => {
         .then(res => normalizeResponseErrors(res))
         .then(() => dispatch(deleteUserSuccess(userId)))
         .catch(err => {
-            console.log(err);
-            //dispatch(productsError(err));
-    })
+            dispatch(usersError(err));
+        })
     console.log("deleting..", userId);
 }

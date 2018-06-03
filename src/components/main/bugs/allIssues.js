@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import propTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import {BootstrapTable, 
     TableHeaderColumn} from 'react-bootstrap-table';
 import '../../../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css'
@@ -7,6 +9,8 @@ import '../../../../node_modules/react-bootstrap-table/css/react-bootstrap-table
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
+import * as productActions from '../../../actions/productActions';
+import RequiresLogin from '../../requires-login';
 
 const styles = theme => ({
     root: theme.mixins.gutters({
@@ -22,7 +26,7 @@ class Table1 extends Component {
         <div>
                 <BootstrapTable data={this.props.data} responsive>
                     <TableHeaderColumn columnTitle isKey 
-                        dataField='product' tdStyle={ { whiteSpace: 'normal'} }>
+                        dataField='productName' tdStyle={ { whiteSpace: 'normal'} }>
                     Product
                     </TableHeaderColumn>
                     <TableHeaderColumn dataField='total'>
@@ -31,7 +35,7 @@ class Table1 extends Component {
                     <TableHeaderColumn dataField='open'>
                     Open
                     </TableHeaderColumn>
-                    <TableHeaderColumn dataField='progress'>
+                    <TableHeaderColumn dataField='in-progress'>
                     InProgress
                     </TableHeaderColumn>
                     <TableHeaderColumn dataField='fixed'>
@@ -46,29 +50,63 @@ class Table1 extends Component {
     }
   }
 
-  let data = [
-    {product: 'Salt shaker', total: 10, open: 2, progress: 5, fixed:3, closed:0},
-    {product: 'Water Filter', total: 5, open: 1, progress: 2, fixed: 2, closed:0}
-  ];
 
-function AllIssues(props){
-    const { classes } = props;
-    return(
-        <div>
-        <Grid container>
-            <Grid item xs={12} style={{textAlign: 'center'}}>
-                <h2>Issues at a glance</h2>
-                <Paper className={classes.root} elevation={4}>
-                    <Table1 data={data}/>
-                </Paper>
-        </Grid>
-        </Grid>
-        </div>
+export class AllIssues extends Component{
+
+    componentWillMount(){
+        console.log(this.props);
+        this.props.actions.loadProducts();
+    }
+
+    render(){
+
+        const { classes } = this.props;
+
+        const bugSummary = this.props.products && this.props.products.map(product =>{
+        
+            let _product = product;
+            let buglist = product.bugList;
+            _product['productName'] = product.name;
+            _product['total'] = product.bugList.length;
+            _product['open'] = (buglist.filter(bug => bug.status === 'open')).length;
+            _product['in-progress'] = (buglist.filter(bug => bug.status === 'inProgress')).length;
+            _product['fixed'] = (buglist.filter(bug => bug.status === 'fixed')).length;
+            _product['closed'] = (buglist.filter(bug => bug.status === 'closed')).length;
+            
+            return _product;
+        })
+
+        return(
+            <div>
+            <Grid container align="center">
+                <Grid item xs={12} style={{textAlign: 'center'}}>
+                    <h2>Issues at a glance</h2>
+                    <Paper className={classes.root} elevation={4}>
+                        <Table1 data={bugSummary}/>
+                    </Paper>
+            </Grid>
+            </Grid>
+            </div>
     )
-}
+    }//End Render()
+}//End AllIssues Class
 
 AllIssues.propTypes = {
     classes: propTypes.object.isRequired
 }
 
-export default withStyles(styles)(AllIssues);
+const mapStateToProps = (state) => {
+    console.log(state);
+    return {
+        products:state.productsReducer.products
+    }   
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+    actions: bindActionCreators(Object.assign(
+        {}, productActions), dispatch)
+    };
+    }
+
+export default RequiresLogin()(withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(AllIssues)));

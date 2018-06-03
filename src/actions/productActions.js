@@ -40,25 +40,6 @@ export const productsError = error => ({
     error
 });
 
-const prodArr= [{
-    id:0,
-    name:'printer',
-    title:"Printing Machine",
-    description:"A machine that prints digital content on paper"
-    },{
-    id:1,
-    name:'scanner',
-    title:"Scanner Machine",
-    description:"A machine that scans paper and produces digital copy"
-    }
-];
-
-const NewProduct = {
-    id:3,
-    name:'copier',
-    title:"Copy Machine",
-    description:"A machine that makes a paper copy"
-}
 
 export const loadProducts = () => dispatch => {
     console.log("dispatching load products..");

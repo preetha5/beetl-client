@@ -46,10 +46,12 @@ class CreateIssue extends React.Component{
         event.preventDefault();
         this.state.bug.bugId = this.createBugId();
         console.log(this.state.bug);
-        this.props.actions.createBug(this.state.bug);
-        this.setState(
-            {adding:true}
-        );
+        this.props.actions.createBug(this.state.bug)
+        .then(() =>{
+            this.setState(
+                {adding:true}
+            );
+        })
     }
 
     updateBugState = (field) => event =>{
@@ -70,9 +72,9 @@ class CreateIssue extends React.Component{
       };
 
     render(){
-        // if(this.state.adding){
-        //     return( <Redirect to="/bugs" />);
-        //  }
+        if(this.state.adding){
+            return( <Redirect to="/view_issues" />);
+         }
         console.log(this.state.bug);
         return(
             <Grid container>

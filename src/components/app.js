@@ -104,12 +104,12 @@ export class App extends Component {
             <div>
                 <Header />
                 <Grid container>
-                    <Grid item xs={2}>
+                    <Grid item xs={2} align="center">
                         <Hidden xsDown>
                             <Paper><Sidebar /></Paper>
                         </Hidden>
                     </Grid>
-                    <Grid item xs={10}>
+                    <Grid item xs={10} align="center">
                         <Switch>
                         <Route exact path="/" component={LandingPage} />
                             <Route exact path="/login" component={Login} />

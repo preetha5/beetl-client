@@ -215,7 +215,7 @@ class NewBugForm extends Component {
                     >
                         <MenuItem value="low" >low </MenuItem>
                         <MenuItem value="medium">medium </MenuItem>
-                        <MenuItem value="high" > "high" </MenuItem>
+                        <MenuItem value="high" > high </MenuItem>
                     </Select>
                 </FormControl>
                 <div>

@@ -34,6 +34,9 @@ class ManageUsers extends Component{
     }
 
     render(){
+        const errorMsg = this.props.error ? 
+        `${this.props.error}`:null
+
         console.log(this.props);
         return(
             <Grid container>
@@ -58,21 +61,20 @@ class ManageUsers extends Component{
                         <Route path={`/users/:userId`} component={UserPage} />
                     </Switch>
                 </Grid>
+                <Grid item xs={12} sm={9} className='errorMsg'>
+                    {errorMsg}
+                </Grid>
             </Grid> 
 
         )
     }
 }
 
-// ManageUsers.propTypes  = {
-//     users:PropTypes.array.isRequired,
-//     children: PropTypes.object
-// }
-
 const mapStateToProps = (state, props) => {
      console.log(state);
      return {
-         users:state.usersReducer.users
+         users:state.usersReducer.users,
+         error: state.usersReducer.error
      }   
 }
 

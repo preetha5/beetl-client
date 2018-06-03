@@ -37,20 +37,20 @@ class Table1 extends Component {
         return (
         <div>
                 <BootstrapTable data={this.props.data} responsive search searchPlaceholder='Enter search...' version='4'>
-                    <TableHeaderColumn isKey dataField='bugId' 
-                        dataFormat={bugIdFormatter}>
+                    <TableHeaderColumn dataField='bugId' 
+                        dataFormat={bugIdFormatter} isKey={true}>
                     BUG ID
                     </TableHeaderColumn>
-                    <TableHeaderColumn dataField='title'>
+                    <TableHeaderColumn dataField='title' >
                     Title
                     </TableHeaderColumn>
-                    <TableHeaderColumn dataField='productName'>
+                    <TableHeaderColumn dataField='productName' >
                     Product
                     </TableHeaderColumn>
-                    <TableHeaderColumn dataField='status'>
+                    <TableHeaderColumn dataField='status' >
                     Status
                     </TableHeaderColumn>
-                    <TableHeaderColumn dataField='assigneeName'>
+                    <TableHeaderColumn dataField='assigneeName' >
                     Assignee
                     </TableHeaderColumn>
                 </BootstrapTable>
@@ -58,15 +58,6 @@ class Table1 extends Component {
       );
     }
   }
-
-//   let data = [
-//     {issueId: 334455, title: "scan head cracked", product: "Scanner", status: 'open', assignee: "Joe Dev"},
-//     {issueId: 334456, title: "Mirror not reflecting well", product: "Scanner", status: 'in-progress', assignee: "Alisha Dev"},
-//     {issueId: 334455, title: "scan head cracked", product: "Scanner", status: 'open', assignee: "Joe Dev"},
-//     {issueId: 334456, title: "Mirror not reflecting well", product: "Scanner", status: 'in-progress', assignee: "Alisha Dev"},
-//     {issueId: 334455, title: "scan head cracked", product: "Scanner", status: 'open', assignee: "Joe Dev"},
-//     {issueId: 334456, title: "Mirror not reflecting well", product: "Scanner", status: 'in-progress', assignee: "Alisha Dev"},
-//    ];
 
 export class ViewIssues extends Component{
     componentWillMount(){
@@ -80,10 +71,10 @@ export class ViewIssues extends Component{
     const { classes } = this.props;
     
     //Function to prep incoming bugObject with additional data fields
-    const buglist = this.props.bugs.map(bug =>{
+    const buglist = this.props.bugs && this.props.bugs.map(bug =>{
         
         let _bug = bug;
-    
+        console.log(bug);
        _bug['productName'] = bug.productId.name;
        _bug['assigneeName'] = bug.assignee.email;
         

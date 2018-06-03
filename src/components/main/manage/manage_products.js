@@ -35,7 +35,7 @@ class ManageProducts extends Component{
 
     render(){
         const errorMsg = this.props.error ? 
-        `<div>${this.props.error}</div>`:null
+        `${this.props.error}`:null
         
         console.log(this.props.products);
         return(
@@ -60,7 +60,7 @@ class ManageProducts extends Component{
                         <Route path={`/products/:productId`} component={ProductPage} />
                     </Switch>
                 </Grid>
-                <Grid item xs={12} sm={9}>
+                <Grid item xs={12} sm={9} className='errorMsg'>
                     {errorMsg}
                 </Grid>
             </Grid> 
