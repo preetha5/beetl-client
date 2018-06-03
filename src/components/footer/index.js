@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 
+import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import blueGrey from '@material-ui/core/colors/blueGrey';
+import amber from '@material-ui/core/colors/amber';
 
 import './index.css';
 
@@ -14,7 +16,8 @@ const styles = {
     letterSpacing: '.2rem',
     whiteSpace: 'pre-wrap',
     color: '#216afa',
-    paddingBottom: '2.5rem'
+    paddingBottom: '2.5rem',
+    marginLeft: '4rem',
 
   },
   tagline: {
@@ -26,6 +29,14 @@ const styles = {
   legalease: {
   	color: blueGrey[600],
   	fontSize: '.75rem',
+  },
+  bug:{
+    position: 'absolute',
+    backgroundColor: amber[500],
+    backgroundImage: `url(static/images/tiny_bug.png)`,  // The preferred way
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: '60%',
+    backgroundPosition: 'center'
   }
 };
 
@@ -37,7 +48,8 @@ function Footer(props){
     <Grid container className="footer">
         <Grid item xs={12}>
 	      	<Grid item xs={12} sm={6} md={6}>
-	      		<h6 className={classes.logo}>BEETL {"\n"}<span className={classes.tagline}>A Lightweight Bug Tracking System</span></h6>
+            <Avatar alt="" className={classes.bug} />
+            <h6 className={classes.logo}>BEETL {"\n"}<span className={classes.tagline}>A Lightweight Bug Tracking System</span></h6>
 					</Grid>
 					<Grid item xs={12} sm={6} md={6}>
 						<p className={classes.legalease}>Copyright &copy; 2018 | Beetl Inc </p>

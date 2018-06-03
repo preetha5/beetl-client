@@ -21,8 +21,6 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 
-//import Bug1 from ' /img/bug.png';
-
 const styles = theme => ({
   card: {
     spacing: '16',
@@ -92,19 +90,18 @@ const styles = theme => ({
     color: '#0057ff'
   },
   bug:{
-    width: '65px',
+    width: '60px',
     height: '75px',
     position: 'absolute',
-    backgroundColor: 'rgba(0, 0, 255, 0)',
-    //backgroundImage: `url(${Bug1})`,// The preferred way
-    // What is working:
-    backgroundImage: `url('https://i.pinimg.com/564x/e6/c9/54/e6c954d0d99c396548b0e1caba8b8f26.jpg')`,
+    // backgroundColor: 'rgba(0, 0, 255, 0)', //transparent
+    backgroundColor: '#fff',
+    backgroundImage: `url(static/images/tiny_bug.png)`,  // The preferred way
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'contain',
     display: 'grid',
     overflowX: 'overlay',
-    marginLeft: '-60px',
-    marginTop: '7px',
+    marginLeft: '-63px',
+    marginTop: '-2px',
   },
   gridded: {
     display: 'grid'
