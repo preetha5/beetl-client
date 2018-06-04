@@ -14,6 +14,19 @@ import Login from '../login';
 import {clearAuth} from '../../actions/auth';
 import {clearAuthToken} from '../../utils/localStorage';
 
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
+
+// easy and its affecting the styles of Mui-UI
+const logo_style = {
+    flexGrow: 1,
+    padding: '0 2rem 0rem 1rem',
+    fontFamily: 'Kanit, sans-serif',
+    fontWeight: 800,
+    letterSpacing: '.2rem',
+    fontSize: '1em'
+};
+
 export class Header extends Component{
     constructor(props){
         super(props);
@@ -42,38 +55,42 @@ export class Header extends Component{
         this.props.dispatch(clearAuth());
         this.setState({open: false});
     }
-    
+
     render(){
-    console.log("inside header loggedin", this.props.loggedIn);
-    const menulinks = this.props.loggedIn? (
-        <div>
-            <MenuItem><Link to="/" onClick={this.closeMenu}>Dashboard</Link></MenuItem>
-            <MenuItem><Link to="/create_issue" onClick={this.closeMenu}>Create Issue</Link></MenuItem>
-            <MenuItem><Link to="/view_issues" onClick={this.closeMenu}>View Issues</Link></MenuItem>
-            <MenuItem><Link to="/help" onClick={this.closeMenu}>Help</Link></MenuItem>
-            <MenuItem><Link to="/logout" onClick={this.logOut}>Log Out</Link></MenuItem>
-        </div>):
-        (<div>
-            <MenuItem><Link to="/login" onClick={this.closeMenu}>Login</Link></MenuItem>
-            <MenuItem><Link to="/signup" onClick={this.closeMenu}>Sign Up</Link></MenuItem>
-        </div>);
-    return (
-        <div>
-            <AppBar 
-                title={<Link to="/">Beetl</Link>}
-                iconElementLeft={<IconButton 
-                    onClick={this.handleToggle}>{this.state.open ? <Close /> : <Menu />}</IconButton>}>
-            </AppBar>
-            <Drawer width={200} openSecondary={true} open={this.state.open}>
-                {menulinks}
-            </Drawer>
-        </div>
-    )
+        console.log("inside header loggedin", this.props.loggedIn);
+        const menulinks = this.props.loggedIn? (
+            <div>
+                <MenuItem><Link to="/" onClick={this.closeMenu}>Dashboard</Link></MenuItem>
+                <MenuItem><Link to="/create_issue" onClick={this.closeMenu}>Create Issue</Link></MenuItem>
+                <MenuItem><Link to="/view_issues" onClick={this.closeMenu}>View Issues</Link></MenuItem>
+                <MenuItem><Link to="/help" onClick={this.closeMenu}>Help</Link></MenuItem>
+                <MenuItem><Link to="/logout" onClick={this.logOut}>Log Out</Link></MenuItem>
+            </div>)
+
+            :(<div>
+                <MenuItem><Link to="/login" onClick={this.closeMenu}>Login</Link></MenuItem>
+                <MenuItem><Link to="/signup" onClick={this.closeMenu}>Sign Up</Link></MenuItem>
+            </div>);
+        
+        return (
+            <div>
+                <AppBar 
+                    title={<Link style={logo_style} to="/">BEETL</Link>}
+                    iconElementLeft={
+                        <IconButton 
+                        onClick={this.handleToggle}>{this.state.open ? <Close /> : <Menu />}</IconButton>}>
+                </AppBar>
+                <Drawer width={200} openSecondary={true} open={this.state.open}>
+                    {menulinks}
+                </Drawer>
+            </div>
+        )
     }
 }
 
 const mapStateToProps = state => ({
     loggedIn: state.authReducer.currentUser !== null
 });
+
 
 export default connect(mapStateToProps)(Header);

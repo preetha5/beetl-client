@@ -1,10 +1,10 @@
 .footer {
     box-sizing: border-box;
-    height: 80px;
-    background-color: #5e5b5b;
+    height: 150px;
+    background-color: #000000;
     border-top: 1px solid #e0e0e0;
-    padding-top: 15px;
+    padding: 20px 15px;
     position: fixed;
     bottom: 0;
-    text-align: center;
+    z-index: 1;
   }
