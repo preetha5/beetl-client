@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import AllIssues from './allIssues';
-import MyBugs from './myBugs';
+import AllIssues from './bugs/allIssues';
+import MyBugs from './bugs/myBugs';
 import {Link} from 'react-router-dom';
 import RequiresLogin from '../requires-login';
 
@@ -36,10 +36,14 @@ export function Main (props){
     let summary = null;
     let managelinks = '';
     if(role === 'admin'){
-        managelinks = <div>
-        <MenuItem><Link to="/products" >Manage Products</Link></MenuItem>
-        <MenuItem><Link to="/users" >Manage Users</Link></MenuItem>
-        </div>;
+        managelinks = <Grid container align="center">
+        <Grid item xs={12} sm={6}>
+            <MenuItem><Link to="/products" >Manage Products</Link></MenuItem>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+            <MenuItem><Link to="/users" >Manage Users</Link></MenuItem>
+        </Grid>
+        </Grid>;
         summary = <AllIssues item="hello" />;
     } else
         summary = <MyBugs />

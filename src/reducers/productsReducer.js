@@ -13,10 +13,12 @@ const initialState = {
 
 export const productsReducer =(state=initialState, action) => {
     switch(action.type) {
+
         case actions.LOAD_PRODUCTS_SUCCESS:
             console.log(action.products);
             console.log("state in load products",state);
             return Object.assign({}, state, {products:action.products});
+
         case actions.CREATE_PRODUCT_SUCCESS:
             console.log(action.product);
             console.log("state in create product ",state);
@@ -48,7 +50,7 @@ export const productsReducer =(state=initialState, action) => {
               return Object.assign({}, state,{products:updateProductState});
 
         case actions.DELETE_PRODUCT_SUCCESS:
-        const newState = [...state.products];
+            const newState = [...state.products];
             console.log(action.product);
             const indexOfProductToDelete = state.products.findIndex((product) => {
                 return product._id == action.productId;
@@ -61,6 +63,7 @@ export const productsReducer =(state=initialState, action) => {
             return Object.assign({}, state, {
                 error: action.error
             });
+            
         default:
         return state
     }

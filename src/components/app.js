@@ -8,9 +8,9 @@ import Main from './main';
 import Footer from './footer';
 import Login from './login';
 import SignUp from './signup';
-import CreateIssue from './main/create_issue';
-import ViewIssues from './main/view_issues';
-import IssueDetails from './main/issue_details';
+import CreateIssue from './main/bugs/create_issue';
+import ViewIssues from './main/bugs/view_issues';
+import IssueDetails from './main/bugs/issue_details';
 import Sidebar from './main/sidebar';
 import Help from './main/help';
 import ManageUsers from './main/manage/manage_users';
@@ -60,15 +60,7 @@ export class App extends Component {
     constructor(props){
         super(props);
     }
-    componentDidMount(){
-        // Check for token and update application state if required
-        //console.log(localStorage.getItem('authToken'));
-        if(localStorage.getItem('authToken')) {
-            // Try to get a fresh auth token if we had an existing one in
-            // localStorage
-            //props.dispatch(refreshAuthToken);
-        }
-    }
+    
     componentDidUpdate(prevProps) {
         if (!prevProps.loggedIn && this.props.loggedIn) {
             // When we are logged in, refresh the auth token periodically

@@ -40,7 +40,7 @@ const renderSelectField = (
     />
   );
 
-class IssueForm extends Component {
+class NewBugForm extends Component {
   constructor(props){
       super(props);
       this.state = {
@@ -115,7 +115,7 @@ class IssueForm extends Component {
 
     return (
         <div>
-            <form onSubmit={handleSubmit} className="issueForm">
+            <form onSubmit={this.props.onSubmit} className="issueForm">
                 {BugTitle}
                 <div>
                 <Field
@@ -226,15 +226,15 @@ class IssueForm extends Component {
 
 const selector = formValueSelector('issueForm');
 
-IssueForm = connect(
+NewBugForm = connect(
     state => {
         const selectedProduct = selector(state, 'product')
         return {
             selectedProduct
         }
-    })(IssueForm);
+    })(NewBugForm);
 
-IssueForm = reduxForm({
+NewBugForm = reduxForm({
   form: 'issueForm',
   initialValues: {
     delivery: 'delivery',
@@ -242,6 +242,6 @@ IssueForm = reduxForm({
     cheese: 'Cheddar',
     pizzas: 1,
   },
-})(IssueForm);
+})(NewBugForm);
 
-export default IssueForm;
+export default NewBugForm;

@@ -12,7 +12,12 @@
     text-align: center;
 }
 
-.productForm, .userForm{
+.productForm, .userForm, {
     margin: 20px auto 120px;
     text-align: center;
+}
+
+.bugForm{
+    width:80%;
+    margin: 20px auto 120px; 
 }
