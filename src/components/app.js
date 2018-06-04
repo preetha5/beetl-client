@@ -42,15 +42,7 @@ export class App extends Component {
     constructor(props){
         super(props);
     }
-    componentDidMount(){
-        // Check for token and update application state if required
-        //console.log(localStorage.getItem('authToken'));
-        if(localStorage.getItem('authToken')) {
-            // Try to get a fresh auth token if we had an existing one in
-            // localStorage
-            //props.dispatch(refreshAuthToken);
-        }
-    }
+   
     componentDidUpdate(prevProps) {
         if (!prevProps.loggedIn && this.props.loggedIn) {
             // When we are logged in, refresh the auth token periodically
@@ -82,22 +74,7 @@ export class App extends Component {
 
   render() {
     console.log("inside app.js ", this.props.loggedIn);
-    // if (!this.props.loggedIn){
-    //     return (
-    //         <MuiThemeProvider muiTheme={muiTheme}>
-    //             <Router >
-    //                 <div>
-    //                 <Header loggedIn={this.props.loggedIn} />
-    //                 <Route exact path="/" component={LandingPage} />
-    //                 <Route exact path="/login" component={Login} />
-    //                 <Route exact path="/signup" component={SignUp} />
-    //                 <Footer />
-    //             </div>
-    //             </Router>
-    //         </MuiThemeProvider>
-    //     )
-    // }
-    //console.log("rendering dash");
+   
     return (
         <MuiThemeProvider muiTheme={muiTheme}>
         <Router>

@@ -18,9 +18,7 @@ const initialState = {
 export default function authReducer(state = initialState, action) {
     if (action.type === SET_AUTH_TOKEN) {
         return Object.assign({}, state, {
-            authToken: action.authToken,
-            username: action.username,
-            email: action.email
+            authToken: action.authToken
         });
     } else if (action.type === CLEAR_AUTH) {
         console.log("in authreducer ", state)
