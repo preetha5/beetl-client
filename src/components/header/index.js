@@ -54,6 +54,7 @@ export class Header extends Component{
         clearAuthToken();
         this.props.dispatch(clearAuth());
         this.setState({open: false});
+        return <Redirect to="/" />;
     }
 
     render(){

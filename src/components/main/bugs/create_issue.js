@@ -5,6 +5,26 @@ import {bindActionCreators} from 'redux';
 import * as Actions from '../../../actions/bugActions';
 import NewBugForm from './newBugForm';
 import Grid from '@material-ui/core/Grid';
+import { Paper } from 'material-ui';
+import { withStyles } from '@material-ui/core/styles';
+import blueGrey from '@material-ui/core/colors/blueGrey';
+
+const styles = theme => ({
+    root: theme.mixins.gutters({
+      paddingTop: 16,
+      paddingBottom: 16,
+      marginTop: theme.spacing.unit * 3,
+    }),
+    headline: {
+        fontFamily: 'Libre Franklin, sans-serif',
+        fontWeight: 500,
+        letterSpacing: '0',
+        color: blueGrey[300],
+        paddingBottom: '5px',
+        marginTop: '20px',
+        textAlign: 'center'
+      }
+  });
 
 class CreateIssue extends React.Component{
     constructor(props){
@@ -72,16 +92,22 @@ class CreateIssue extends React.Component{
       };
 
     render(){
+        const { classes } = this.props;
+
         if(this.state.adding){
             return( <Redirect to="/view_issues" />);
          }
         console.log(this.state.bug);
         return(
-            <Grid container>
-                <Grid item xs={12} sm={10}>
-                    <h1 className="textCenter" >Create Issue</h1>
+            <section>
+                <Grid item xs={12} >
+                
+                    <h1 className={classes.headline} >Create Bug</h1>
+                
                 </Grid>
-                <Grid item xs={12} sm={10}>
+
+                <Grid item xs={12}>
+                
                     <NewBugForm 
                     bug={this.state.bug}
                     onSubmit={this.createBug}
@@ -89,7 +115,8 @@ class CreateIssue extends React.Component{
                     selectChange = {e =>{this.updateSelectField(e)}}
                     />
                 </Grid>
-            </Grid>
+                
+        </section>
         )
     }
 }
@@ -100,4 +127,4 @@ const mapDispatchToProps = (dispatch) => {
     };
   }
 
-export default connect(null, mapDispatchToProps)(CreateIssue);
+export default withStyles(styles)(connect(null, mapDispatchToProps)(CreateIssue));

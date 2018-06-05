@@ -5,12 +5,10 @@ import * as productActions from '../../../actions/productActions';
 import * as userActions from '../../../actions/userActions';
 import * as bugActions from '../../../actions/bugActions';
 import {bindActionCreators} from 'redux';
-import moment from 'moment';
-import momentLocalizer from "react-widgets-moment";
 
 import {DatePicker} from 'redux-form-material-ui'
 
-momentLocalizer(moment);
+//momentLocalizer(moment);
 
 class EditBugForm extends React.Component {
     constructor(props){

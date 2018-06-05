@@ -53,7 +53,13 @@ const muiTheme = getMuiTheme({
   });
 
 const style = {
-  background: blueGrey[300],
+  container :{
+      background: blueGrey[300],
+  },
+ main:{
+    background: 'white',
+    justify: 'center'
+}
 }
 
 export class App extends Component {
@@ -91,6 +97,8 @@ export class App extends Component {
     }
 
   render() {
+    
+    const {classes} = this.props;
     console.log("inside app.js ", this.props.loggedIn);
    
     return (
@@ -101,14 +109,14 @@ export class App extends Component {
                     <Grid container
                         direction='row'
                         justify='center'
-                        style={style}
+                        style={style.container}
                     >
                         <Grid item>
                             <Hidden xsDown>
                                 <Paper><Sidebar /></Paper>
                             </Hidden>
                         </Grid>
-                        <Grid item xs={12} sm={10}>
+                        <Grid item xs={12} sm={10} style={style.main}>
                             <Switch>
                                 <Route exact path="/" component={LandingPage} />
                                 <Route exact path="/login" component={Login} />

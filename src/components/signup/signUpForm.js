@@ -8,6 +8,20 @@ import MenuItem from 'material-ui/MenuItem';
 import asyncValidate from '../../utils/asyncValidate';
 import validate from '../../utils/validate';
 
+import Button from '@material-ui/core/Button';
+import deepPurple from '@material-ui/core/colors/deepPurple';
+
+const style = {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center'
+};
+
+const btnstyle = {
+  marginRight: '1em',
+  marginTop: '2em',
+};
+
 const renderTextField = (
   { input, label, meta: { touched, error }, ...custom },
 ) => (
@@ -54,7 +68,7 @@ export const renderSelectField = (
 const SignUpForm = props => {
   const { handleSubmit, pristine, reset, submitting } = props;
   return (
-    <form onSubmit={handleSubmit(values => props.onSubmit(values))}>
+    <form style={style} onSubmit={handleSubmit(values => props.onSubmit(values))}>
       <div>
         <Field name="firstName" component={renderTextField} label="First Name" />
       </div>
@@ -71,10 +85,10 @@ const SignUpForm = props => {
         <Field name="password" type="password" component={renderTextField} label="Password" />
       </div>
       <div>
-        <button type="submit" disabled={pristine || submitting}>Submit</button>
-        <button type="button" disabled={pristine || submitting} onClick={reset}>
+        <Button variant="raised" color="primary" style={btnstyle} type="submit" disabled={pristine || submitting}>Submit</Button>
+        <Button variant="raised" style={btnstyle} type="button" disabled={pristine || submitting} onClick={reset}>
           Clear Values
-        </button>
+        </Button>
       </div>
     </form>
   );

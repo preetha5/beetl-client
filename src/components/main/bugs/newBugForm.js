@@ -4,15 +4,18 @@ import {Field,select, reduxForm, formValueSelector} from 'redux-form';
 import {bindActionCreators} from 'redux';
 import * as productActions from '../../../actions/productActions';
 import * as userActions from '../../../actions/userActions';
+import FloatingLabel from 'floating-label-react'
 
 /* Material UI */
+import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import {RadioButton} from 'material-ui/RadioButton';
 import MenuItem from 'material-ui/MenuItem';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
-import {AutoComplete as MUIAutoComplete} from 'material-ui';
+import {AutoComplete as MUIAutoComplete, ActionSettingsApplications} from 'material-ui';
 import {
   AutoComplete,
   Checkbox,
@@ -41,14 +44,35 @@ const styles = theme => ({
     root: {
       display: 'flex',
       flexWrap: 'wrap',
+      backgroundColor:'white',
+      textAlign: 'center',
+      marginBottom: 150
     },
     formControl: {
-      margin: theme.spacing.unit,
+      marginBottom: 16,
       minWidth: 120,
+      fontSize: 16,
+      lineHeight: 24,
+      width: 256
     },
     selectEmpty: {
       marginTop: theme.spacing.unit * 2,
     },
+    btnStyle : {
+        marginRight: '1em'
+      },
+    btnDiv : {
+        marginTop: '1em',
+        [theme.breakpoints.up('xs')]: {
+            marginTop: '4em',
+          },
+        marginBottom: 20,
+        textAlign: 'center'
+    },
+    dateField:{
+        paddingLeft: 100,
+        color: 'black'
+    }
   });
 
 class NewBugForm extends Component {
@@ -102,62 +126,61 @@ class NewBugForm extends Component {
         <MenuItem key={index} value={user.id}>{user.email} </MenuItem>
     )
     console.log(usersList);
-    //const BugTitle = (this.props.bugId) ? (<h2>Bug ID : {this.props.bugId}</h2>):null;
-    
     //Buttons added while form is used to create an issue
-    const CreateButtons = <div>
-                            <button type="submit" disabled={pristine || submitting}>Add</button>
-                            <button
+    const CreateButtons = <Grid item xs={12} className={classes.btnDiv}>
+                            <Button 
+                                variant="raised" 
+                                color="primary" 
+                                className={classes.btnStyle} 
+                                type="submit" 
+                                disabled={pristine || submitting}>Add</Button>
+                            <Button
+                                variant="raised"
+                                className={classes.btnStyle}
                                 type="button"
                                 disabled={pristine || submitting}
                                 onClick={reset}
                             >
                                 Clear
-                            </button>
-                            </div>;
+                            </Button>
+                            </Grid>;
 
     //Buttons added while form is used to edit/save an issue
     const EditButtons = this.state.editing ? (
-        <div>
-            <button type="submit" disabled={submitting}>Save</button>
-            <button
+        <Grid item xs={12} textAlign = 'center' className={classes.btnDiv}>
+            <Button variant="raised" 
+            color="primary" 
+            type="submit" 
+            disabled={pristine || submitting}
+            >Save
+            </Button>
+            <Button variant="raised"
                 type="button"
                 disabled={pristine || submitting}
                 onClick={reset}
             >
                 Clear
-            </button>
-        </div>)
-        :<button onClick={() => this.setEditing(true)}>Edit</button>;
+            </Button>
+        </Grid>)
+        :<Button variant="raised" color="primary" onClick={() => this.setEditing(true)}>Edit</Button>;
     console.log(this.props.bug);
     return (
-        <div>
-            <form onSubmit={this.props.onSubmit} className="issueForm">
-            <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="product">Product</InputLabel>
-                <Select
-                value={this.props.bug.productId}
-                onChange={this.props.selectChange}
-                input={<Input name="productId" id="product" />}
-                >
-                {productsList}
-                    
-                </Select>
-            </FormControl> 
-                {/* <FormControl>
-                    <InputLabel htmlFor="product">Product</InputLabel>
+        <section>
+            <form id="newBugForm" onSubmit={this.props.onSubmit} className={classes.root}>
+            <Grid item xs={12} sm={6}>
+                <FormControl className={classes.formControl}>
+                    <InputLabel htmlFor="product">Select a Product</InputLabel>
                     <Select
-                        
-                        value={this.props.bug.product}
-                        onChange={this.props.selectChange}
-                        input={<Input name="product" id="product" />}
-                        onChange={this.props.onChange('product')}
-                        >
-                        {productsList}
+                    value={this.props.bug.productId}
+                    onChange={this.props.selectChange}
+                    input={<Input name="productId" id="product" />}
+                    >
+                    {productsList}    
                     </Select>
-                </FormControl> */}
-                <br />
-                <div>
+                </FormControl> 
+            </Grid>
+                
+            <Grid item xs={12} sm={6}>
                 <Field
                     name="version"
                     component={TextField}
@@ -166,18 +189,18 @@ class NewBugForm extends Component {
                     value={this.props.bug.version}
                     onChange={this.props.onChange('version')}
                 />
-                </div>
-                <div>
+            </Grid>
+            <Grid item xs={12} sm={6}>
                 <Field
                     name="component"
                     component={TextField}
-                    hintText="Component A"
-                    floatingLabelText="Enter Component"
+                    hintText="Enter Component"
+                    floatingLabelText="Component"
                     value={this.props.bug.component}
                     onChange={this.props.onChange('component')}
                 />
-                <br/>
-                <div>
+            </Grid>
+            <Grid item xs={12} sm={6}>
                 <Field
                     name="title"
                     component={TextField}
@@ -189,8 +212,8 @@ class NewBugForm extends Component {
                     ref="title"
                     withRef
                 />
-                </div>
-                <div>
+            </Grid>
+            <Grid item xs={12} sm={6}>
                 <Field
                     name="description"
                     component={TextField}
@@ -198,11 +221,9 @@ class NewBugForm extends Component {
                     floatingLabelText="Bug Description"
                     value={this.props.bug.description}
                     onChange={this.props.onChange('description')}
-                    multiLine
-                    rows={2}
                 />
-                </div>
-                <br/>
+            </Grid>
+            <Grid item xs={12} sm={6}>
                 <FormControl className={classes.formControl}>
                     <InputLabel htmlFor="severity">Severity</InputLabel>
                     <Select
@@ -218,48 +239,25 @@ class NewBugForm extends Component {
                         <MenuItem value="high" > high </MenuItem>
                     </Select>
                 </FormControl>
-                <div>
-                {/*// <InputLabel htmlFor="severity">Severity</InputLabel>
-                // <Select
-                //     value={this.props.bug.severity}
-                //     onChange={this.props.selectChange}
-                //     input={<Input name="severity" id="severity" />}
-                //     onChange={this.props.onChange('severity')}
-                //     >
-                //         <MenuItem value="low" primaryText="low" />
-                //         <MenuItem value="medium" primaryText="medium" />
-                //         <MenuItem value="high" primaryText="high" />
-                    // </Select>*/}
-                </div>
-                <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="priority">Priority</InputLabel>
-                    <Select
-                        value={this.props.bug.priority}
-                        onChange={this.props.selectChange}
-                        inputProps={{
-                        name: 'priority',
-                        id: 'priority',
-                        }}
-                    >
-                        <MenuItem value="p1" >P1 </MenuItem>
-                        <MenuItem value="p2">P2 </MenuItem>
-                        <MenuItem value="p3" > P3 </MenuItem>
-                    </Select>
-                </FormControl>
-                {/*<div>
-                    <Field
-                        name="priority"
-                        component={renderSelectField}
-                        label="priority"
-                        value={this.props.bug.priority}
-                        onChange={this.props.onChange('priority')}
-                    >
-                        <MenuItem value="p1" primaryText="P1" />
-                        <MenuItem value="p2" primaryText="P2" />
-                        <MenuItem value="p3" primaryText="P3" />
-                    </Field>
-                </div>*/}
-                    <br/>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+                    <FormControl className={classes.formControl}>
+                        <InputLabel htmlFor="priority">Priority</InputLabel>
+                        <Select
+                            value={this.props.bug.priority}
+                            onChange={this.props.selectChange}
+                            inputProps={{
+                            name: 'priority',
+                            id: 'priority',
+                            }}
+                        >
+                            <MenuItem value="p1" >P1 </MenuItem>
+                            <MenuItem value="p2">P2 </MenuItem>
+                            <MenuItem value="p3" > P3 </MenuItem>
+                        </Select>
+                    </FormControl>
+                    </Grid>
+            <Grid item xs={12} sm={6}>
                 <FormControl className={classes.formControl}>
                     <InputLabel htmlFor="status">Status</InputLabel>
                     <Select
@@ -276,23 +274,9 @@ class NewBugForm extends Component {
                         <MenuItem value="closed" > closed </MenuItem>
                     </Select>
                 </FormControl>
-                </div>
-                {/*<div>
-                    <Field
-                        name="status"
-                        component={renderSelectField}
-                        label="status"
-                        value={this.props.bug.status}
-                        onChange={this.props.onChange('status')}
-                    >
-                        <MenuItem value="open" primaryText="open" />
-                        <MenuItem value="inProgress" primaryText="in-progress" />
-                        <MenuItem value="fixed" primaryText="fixed" />
-                        <MenuItem value="closed" primaryText="closed" />
-                </Field>
-                </div>*/}
-                <br/>
-                <div>
+            </Grid>
+                
+            <Grid item xs={12} sm={6}>
                 <FormControl className={classes.formControl}>
                     <InputLabel htmlFor="reporter">reporter</InputLabel>
                     <Select
@@ -306,18 +290,9 @@ class NewBugForm extends Component {
                         {usersList}
                     </Select>
                 </FormControl>
-                {/*     <Field
-                        name="reporter"
-                        component={renderSelectField}
-                        label="Select an reporter"
-                        type="select"
-                        value={this.props.bug.reporter}
-                        onChange={this.props.onChange('reporter')}
-                        >
-                        {usersList}
-                    </Field> */}
-                </div>
-                <br/>
+                </Grid>
+
+            <Grid item xs={12} sm={6}>
                 <FormControl className={classes.formControl}>
                     <InputLabel htmlFor="assignee">assignee</InputLabel>
                     <Select
@@ -331,6 +306,7 @@ class NewBugForm extends Component {
                         {usersList}
                     </Select>
                 </FormControl>
+            </Grid>
                 {/* <Field
                     name="assignee"
                     component={renderSelectField}
@@ -341,32 +317,22 @@ class NewBugForm extends Component {
                     >
                     {usersList}
                 </Field> */}
-                {/* <div>
-                <Field
-                    name="dueDate"
-                    component={DatePicker}
-                    format={null}
-                    hintText="Due Date"
-                    validate={required}
-                    value={this.props.bug.description}
-                    onChange={this.props.onChange('dueDate')}
-                />
-                </div> */}
-                <div>
+    
+            <Grid item xs={12} sm={6}>
                 <TextField
                     id="date"
-                    label="Birthday"
+                    label="Due Date"
                     type="date"
-                    defaultValue="2017-05-24"
+                    inputStyle={{ paddingLeft: 100 }}
                     className={classes.textField}
-                    
+                    hintText="Due Date"
                     onChange={this.props.onChange('dueDate')}
-              />
-                </div>
-                            {CreateButtons}
+            />
+            </Grid>
+                        {CreateButtons}
                 
             </form>
-        </div>
+        </section>
     );
   }
 }

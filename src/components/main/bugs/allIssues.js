@@ -6,6 +6,7 @@ import {BootstrapTable,
     TableHeaderColumn} from 'react-bootstrap-table';
 import '../../../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css'
 // Material UI
+import blueGrey from '@material-ui/core/colors/blueGrey';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
@@ -18,6 +19,14 @@ const styles = theme => ({
       paddingBottom: 16,
       marginTop: theme.spacing.unit * 3,
     }),
+    headline: {
+        fontFamily: 'Libre Franklin, sans-serif',
+        fontWeight: 500,
+        letterSpacing: '0',
+        color: blueGrey[300],
+        paddingBottom: '5px',
+        marginTop: '20px'
+      }
   });
 
 class Table1 extends Component {
@@ -80,7 +89,7 @@ export class AllIssues extends Component{
             <div>
             <Grid container align="center">
                 <Grid item xs={12} style={{textAlign: 'center'}}>
-                    <h2>Issues at a glance</h2>
+                    <h1 className={classes.headline}>Issues at a glance</h1>
                     <Paper className={classes.root} elevation={4}>
                         <Table1 data={bugSummary}/>
                     </Paper>

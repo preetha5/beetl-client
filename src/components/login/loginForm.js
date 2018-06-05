@@ -16,6 +16,7 @@ import deepPurple from '@material-ui/core/colors/deepPurple';
 const style = {
     display: 'flex',
     flexWrap: 'wrap',
+    justifyContent: 'center'
 };
 
 const btnstyle = {

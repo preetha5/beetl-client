@@ -8,7 +8,8 @@ nav.sidebar-menu {
 }
 
 .sidebar-left {
-    margin-right: 10px;
+    padding-top: 1em;
+    border-right: solid 2px  rgb(144, 164, 174);
 }
 
 .sidebar-menu-list {

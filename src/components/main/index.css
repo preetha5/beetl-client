@@ -21,3 +21,8 @@
     width:80%;
     margin: 20px auto 120px; 
 }
+
+.ReduxForm-root-94 input#date{
+    padding-left: 100px;
+    color: black;
+}

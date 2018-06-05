@@ -29,10 +29,12 @@ const styles = theme => ({
   },
   pitch: {
     padding: '1.5rem .5rem .5rem',
+    textAlign: 'center'
   },
   demo: {
     padding: '.5rem',
     color: blueGrey[300],
+    textAlign: 'center'
   },
   demoType: {
     color: deepPurple[600]
