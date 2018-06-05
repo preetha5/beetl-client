@@ -64,7 +64,7 @@ class Login extends Component {
                     <h1 className={classes.headline}>Login</h1>
                 </Grid>
                 
-                <Grid item xs={11} sm={5}>
+                <Grid item >
                     <LoginForm onSubmit ={(values) => this.handleSubmit(values)}/>
                     <p className={classes.pitch}>New User? <Link to="/signup">Sign Up Here</Link></p>
                     <h6 className={classes.demo}>Demo Login use: </h6>

@@ -11,15 +11,13 @@ import validate from '../../utils/validate';
 import Button from '@material-ui/core/Button';
 import deepPurple from '@material-ui/core/colors/deepPurple';
 
-const style = {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center'
-};
+const fmStyle ={
+}
 
 const btnstyle = {
   marginRight: '1em',
   marginTop: '2em',
+  width: 140
 };
 
 const renderTextField = (
@@ -68,7 +66,7 @@ export const renderSelectField = (
 const SignUpForm = props => {
   const { handleSubmit, pristine, reset, submitting } = props;
   return (
-    <form style={style} onSubmit={handleSubmit(values => props.onSubmit(values))}>
+    <form style={fmStyle} onSubmit={handleSubmit(values => props.onSubmit(values))}>
       <div>
         <Field name="firstName" component={renderTextField} label="First Name" />
       </div>

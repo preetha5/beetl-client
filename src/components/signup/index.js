@@ -59,7 +59,7 @@ export class SignUp extends Component{
             <Grid item xs={12} style={{textAlign: 'center'}}>
                 <h1 className={classes.headline}> Register for Beetl</h1>
             </Grid>
-            <Grid item xs={11} sm={5}>
+            <Grid item xs={11} sm={5} style={{textAlign: 'center'}}>
                     <SignUpForm onSubmit ={(values) => this.handleSubmit(values)}/>
                     <p className={classes.pitch}>Already Registered? <Link to="/login">Login Here</Link></p>
                 </Grid>
