@@ -1,44 +1,37 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Field,select, reduxForm, formValueSelector} from 'redux-form';
+import {Field, reduxForm, formValueSelector} from 'redux-form';
 import {bindActionCreators} from 'redux';
 import * as productActions from '../../../actions/productActions';
 import * as userActions from '../../../actions/userActions';
-import FloatingLabel from 'floating-label-react'
+//import FloatingLabel from 'floating-label-react'
 
 /* Material UI */
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import {RadioButton} from 'material-ui/RadioButton';
 import MenuItem from 'material-ui/MenuItem';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
-import {AutoComplete as MUIAutoComplete, ActionSettingsApplications} from 'material-ui';
+//import {AutoComplete as MUIAutoComplete, ActionSettingsApplications} from 'material-ui';
 import {
-  AutoComplete,
-  Checkbox,
-  DatePicker,
+  //AutoComplete,
+  //Checkbox,
+  //DatePicker,
 //   TimePicker,
 //   RadioButtonGroup,
   //SelectField,
  // Slider,
   TextField,
   //Toggle,
-  DropDownMenu
 } from 'redux-form-material-ui';
-import SelectField from 'material-ui/SelectField';
+//import SelectField from 'material-ui/SelectField';
 import Select from '@material-ui/core/Select';
 //import {renderSelectField} from './material-ui-form.js';
 
 // validation functions
 const required = value => (value == null ? 'Required' : undefined);
-const email = value =>
-  (value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
-    ? 'Invalid email'
-    : undefined);
-const tooManyPizzas = value => (value > 15 ? 'Are you mad?' : undefined);
 
 const styles = theme => ({
     root: {
@@ -47,7 +40,7 @@ const styles = theme => ({
       backgroundColor:'white',
       paddingLeft: 70,
         [theme.breakpoints.up('sm')]: {
-            paddingLeft: 50,
+            alignItems: 'center',
           },
     },
     formControl: {
@@ -77,6 +70,9 @@ const styles = theme => ({
     dateField:{
         paddingLeft: 100,
         color: 'black'
+    },
+    alignField:{
+        
     }
   });
 
@@ -172,7 +168,7 @@ class NewBugForm extends Component {
     return (
         <Grid container justify='center'>
             <form id="newBugForm" onSubmit={this.props.onSubmit} className={classes.root}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6} className={classes.alignField}>
                 <FormControl className={classes.formControl}>
                     <InputLabel htmlFor="product">Select a Product</InputLabel>
                     <Select
@@ -343,7 +339,6 @@ class NewBugForm extends Component {
   }
 }
 
-const selector = formValueSelector('issueForm');
 const mapStateToProps = (state, props) => {
     console.log(state);
      return {

@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
-import RequiresLogin from '../../requires-login';
 import * as bugActions from '../../../actions/bugActions';
 import * as productActions from '../../../actions/productActions';
 import * as userActions from '../../../actions/userActions';

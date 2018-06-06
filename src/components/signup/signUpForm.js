@@ -1,18 +1,10 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import TextField from 'material-ui/TextField';
-import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
-import Checkbox from 'material-ui/Checkbox';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
 import asyncValidate from '../../utils/asyncValidate';
 import validate from '../../utils/validate';
-
 import Button from '@material-ui/core/Button';
-import deepPurple from '@material-ui/core/colors/deepPurple';
 
-const fmStyle ={
-}
 
 const btnstyle = {
   marginRight: '1em',
@@ -32,41 +24,11 @@ const renderTextField = (
   />
 );
 
-const renderCheckbox = ({ input, label }) => (
-  <Checkbox
-    label={label}
-    checked={input.value ? true : false}
-    onCheck={input.onChange}
-  />
-);
-
-const renderRadioGroup = ({ input, ...rest }) => (
-  <RadioButtonGroup
-    {...input}
-    {...rest}
-    valueSelected={input.value}
-    onChange={(event, value) => input.onChange(value)}
-  />
-);
-
-export const renderSelectField = (
-  { input, label, meta: { touched, error }, children, ...custom },
-) => (
-    
-  <SelectField
-    floatingLabelText={label}
-    errorText={touched && error}
-    {...input}
-    onChange={(event, index, value) => input.onChange(value)}
-    children={children}
-    {...custom}
-  />
-);
 
 const SignUpForm = props => {
   const { handleSubmit, pristine, reset, submitting } = props;
   return (
-    <form style={fmStyle} onSubmit={handleSubmit(values => props.onSubmit(values))}>
+    <form onSubmit={handleSubmit(values => props.onSubmit(values))}>
       <div>
         <Field name="firstName" component={renderTextField} label="First Name" />
       </div>

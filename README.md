@@ -15,27 +15,23 @@ Beetl is a bug tracking system for development teams. My intention was to create
 ## Screenshots
 
 Landing Page
+![Beetl Landing Page](./screenshots/landing_desktop.jpg?raw=true "Beetl Landing Page")
 
 Dashboard Home
 
-![My Currencies Page](./beetl-screenshots/desktop-currencies-compressor.png?raw=true "My Currencies Page")
+![My Dashboard Page](./screenshots/dashboard-desktop.jpg?raw=true "My Dashboard Page")
 
-View Issues
+View Bugs
 
-![Events Page](./beetl-screenshots/desktop-events-compressor.png?raw=true "Events Page")
+![View Bugs Page](./screenshots/view_bugs_desktop.jpg?raw=true "View Bugs Page")
 
-Create Issue
+Help/FAQ
 
-![Event Form](./beetl-screenshots/desktop-event-form-full-compressor.png?raw=true "Event Form")
-
-FAQ
-
-![Account Settings Page](./beetl-screenshots/desktop-account-compressor.png?raw=true "Account Settings Page")
-
+![Help](./screenshots/help_desktop.jpg?raw=true "Help")
 
 Responsive Mobile Views
 
-![Mobile Views](./beetl-screenshots/mobile-views-compressor.png?raw=true "Mobile Views")
+![Mobile Views](./screenshots/mobile_view.jpg?raw=true "Mobile Views")
 
 
 ## Technology

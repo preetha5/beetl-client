@@ -1,21 +1,16 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import './index.css';
-import logo from './logo.svg';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import Menu from 'material-ui/svg-icons/navigation/menu';
 import Close from 'material-ui/svg-icons/navigation/close';
-import {Route, Link, Redirect} from 'react-router-dom';
-import {withRouter} from 'react-router';
-import Login from '../login';
+import {Link, Redirect} from 'react-router-dom';
 import {clearAuth} from '../../actions/auth';
 import {clearAuthToken} from '../../utils/localStorage';
 
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
 import Grid from '@material-ui/core/Grid';
 // easy and its affecting the styles of Mui-UI
 const logo_style = {

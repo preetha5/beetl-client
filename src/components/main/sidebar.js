@@ -1,29 +1,14 @@
 import React from 'react';
 import './sidebar.css';
-import {Route, Link, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import Dashboard from '@material-ui/icons/Dashboard';
 import Create from '@material-ui/icons/Create';
 import ViewList from '@material-ui/icons/ViewList';
 import HelpOutline from '@material-ui/icons/HelpOutline';
-import MenuItem from 'material-ui/MenuItem';
 import RequiresLogin from '../requires-login';
-import { withStyles } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
 
-const styles = theme => ({
-    active: {
-      backgroundColor: 'rgba(255, 255, 255, 0.12)',
-    }
-  })
-
 export function Sidebar(props) {
-    const { classes } = props;
-    const sideMenuList = ['Dashboard', 'Create Issue', 'View Issues', 'Documentation']
-    const links = sideMenuList.map((menu ,index) =>
-        <li key={index} className="folder-menu-list-item">
-            {menu}
-        </li>
-    );
 
     return (
         <div className="sidebar sidebar-left">

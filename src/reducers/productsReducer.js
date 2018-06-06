@@ -1,10 +1,5 @@
 import * as actions from '../actions/productActions';
-import React, {Component} from 'react';
-import {Redirect} from 'react-router';
-//import initialState from './initialState';
 
-//temp code until backend is ready
-let temp = Math.floor(Math.random()*20);
 let indexOfProductToUpdate='';
 const initialState = {
     products: [],
@@ -32,7 +27,7 @@ export const productsReducer =(state=initialState, action) => {
             const fieldUpdateState = [...state.products];
             console.log(fieldUpdateState);
             indexOfProductToUpdate = state.products.findIndex((product) => {
-                return product._id == action.product._id
+                return product._id === action.product._id
               })
             console.log("indexOfProductToUpdate ", indexOfProductToUpdate);
             fieldUpdateState[indexOfProductToUpdate] = action.product;
@@ -44,7 +39,7 @@ export const productsReducer =(state=initialState, action) => {
             console.log("state in product update to db",state);
             const updateProductState = [...state.products];
             const indexOfProductObj = state.products.findIndex((product) => {
-                return product._id == action.product._id
+                return product._id === action.product._id
               })
               updateProductState[indexOfProductObj] = action.product;
               return Object.assign({}, state,{products:updateProductState});
@@ -53,7 +48,7 @@ export const productsReducer =(state=initialState, action) => {
             const newState = [...state.products];
             console.log(action.product);
             const indexOfProductToDelete = state.products.findIndex((product) => {
-                return product._id == action.productId;
+                return product._id === action.productId;
               })
             newState.splice(indexOfProductToDelete, 1);
             console.log(newState);

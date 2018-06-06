@@ -3,17 +3,12 @@ import { Field, reduxForm } from 'redux-form';
 
 // Material-UI
 import TextField from 'material-ui/TextField';
-import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
-import Checkbox from 'material-ui/Checkbox';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
 import asyncValidate from '../../utils/asyncValidate';
 import validate from '../../utils/validate';
 
 /*Material UI */
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import deepPurple from '@material-ui/core/colors/deepPurple';
 
 const fieldStyle = {
     width:'100%'

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import propTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {BootstrapTable, 
     TableHeaderColumn} from 'react-bootstrap-table';
