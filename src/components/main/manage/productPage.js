@@ -73,9 +73,9 @@ class ProductPage extends Component{
         }
         return(
             <div>
-                <p> Name: {this.props && this.props.product.name} </p>
-                <p> Title: {this.props && this.props.product.title} </p>
-                <p> Description: {this.props && this.props.product.description} </p>
+                <p> Name: {this.props.product && this.props.product.name} </p>
+                <p> Title: {this.props.product && this.props.product.title} </p>
+                <p> Description: {this.props.product && this.props.product.description} </p>
                 <Button variant="raised"
                 onClick={() => this.handleEditProduct()}>
                 Edit

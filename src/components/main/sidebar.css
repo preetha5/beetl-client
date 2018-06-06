@@ -4,12 +4,13 @@
 
 nav.sidebar-menu {
     text-align: center;
-    height: 120vh;
+
 }
 
 .sidebar-left {
     padding-top: 1em;
     border-right: solid 2px  rgb(144, 164, 174);
+    height: 100vh;
 }
 
 .sidebar-menu-list {

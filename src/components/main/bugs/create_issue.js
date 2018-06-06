@@ -101,13 +101,9 @@ class CreateIssue extends React.Component{
         return(
             <section>
                 <Grid item xs={12} >
-                
                     <h1 className={classes.headline} >Create Bug</h1>
-                
                 </Grid>
-
-                <Grid item xs={12}>
-                
+                <Grid item xs={12}>              
                     <NewBugForm 
                     bug={this.state.bug}
                     onSubmit={this.createBug}

@@ -8,10 +8,28 @@ import * as userActions from '../../../actions/userActions';
 import {bindActionCreators} from 'redux';
 import EditBugForm from './editBugForm';
 
-//import ViewBugForm from '../../utils/viewBugForm';
+/* MAterial UI */
 import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core/styles';
+import blueGrey from '@material-ui/core/colors/blueGrey';
 
-
+const styles = theme => ({
+    root: theme.mixins.gutters({
+      paddingTop: 16,
+      paddingBottom: 16,
+      marginTop: theme.spacing.unit * 3,
+    }),
+    headline: {
+        fontFamily: 'Libre Franklin, sans-serif',
+        fontWeight: 500,
+        letterSpacing: '0',
+        color: blueGrey[300],
+        paddingBottom: '5px',
+        marginTop: '20px',
+        marginBottom: '2rem',
+        textAlign: 'center'
+      }
+  });
 
 export class IssueDetails extends React.Component{
     constructor(props){
@@ -65,37 +83,30 @@ export class IssueDetails extends React.Component{
     }
     
     render(){
+        const { classes } = this.props;
+
         if(this.state.redirect){ 
             return (<Redirect to='/view_issues' />);
         }
 
         return(
-            <Grid container>
+            <section>
                 <Grid item xs={12} sm={10}>
-                    <h1 className="textCenter" >Bug Details</h1>
+                    <h1 className={classes.headline} >Bug Details</h1>
                 </Grid>
-                {/* <Grid item xs={12} sm={10}>
-                    <EditBugForm 
-                    currentBug={this.props.bug} 
-                    products={products} 
-                    users={users} 
-                    buttonName="Edit Issue"
-                    bugNumber = {this.props.bugNumber}
-                    onChange= {field =>this.updateTextField(field)}
-                    selectChange = {e =>{this.updateSelectField(e)}}
-                    />
-                </Grid> */}
-                <Grid item>
-                    <EditBugForm currentBug={this.props.bug} 
-                    onSubmit={this.saveForm} 
-                    onDelete={this.deleteBug}/>
+                <Grid container spacing={0} justify="center" >
+                    <Grid item xs={12}>
+                        <EditBugForm currentBug={this.props.bug} 
+                        onSubmit={this.saveForm} 
+                        onDelete={this.deleteBug}/>
+                    </Grid>
                 </Grid>
                 {/*<Grid item xs={12} sm={10}>
                     <EditForm products={products} users={users} 
                         bugId={props.match.params.bugId} buttonName="Edit Issue"/>
         </Grid>*/}
                 
-            </Grid>
+            </section>
         )
     }
 }
@@ -114,4 +125,4 @@ const mapDispatchToProps = (dispatch) => {
     };
     }
 
-export default connect(mapStateToProps, mapDispatchToProps)(IssueDetails);
+export default  withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(IssueDetails));

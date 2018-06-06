@@ -365,12 +365,6 @@ NewBugForm = connect(mapStateToProps,mapDispatchToProps)(NewBugForm);
 
 NewBugForm = reduxForm({
   form: 'issueForm',
-  initialValues: {
-    delivery: 'delivery',
-    name: 'Jane Doe',
-    cheese: 'Cheddar',
-    pizzas: 1,
-  },
 })(NewBugForm);
 
 export default withStyles(styles)(NewBugForm);
