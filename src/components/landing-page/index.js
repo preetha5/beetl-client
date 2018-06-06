@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Header} from '../header';
 import Footer from '../footer';
 import ContactForm from './contact-form';
-import HowItWorks from './how-it-works';
 import {Link, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 
@@ -15,7 +14,7 @@ import { withStyles } from '@material-ui/core/styles';
 import amber from '@material-ui/core/colors/amber';
 import deepPurple from '@material-ui/core/colors/deepPurple';
 import blueGrey from '@material-ui/core/colors/blueGrey';
-
+import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -29,6 +28,16 @@ const styles = theme => ({
     display: 'flex',
     padding: '10px',
     margin: '0px',
+  },
+  btnStyle: {
+    margin: theme.spacing.unit,
+    marginTop: 10,
+    fontWeight: 'bold',
+    background:'rgb(255, 193, 7)',
+    '&:hover': {
+        backgroundColor: '#f50057',
+        color:'white'
+    }
   },
   cover: {
     width: 650,
@@ -154,10 +163,13 @@ export function LandingPage(props){
                             <p>
                                 <span className={classes.accent}> Easily & Efficiently </span> manage the issues related to all your products 
                                 in one responsive app. BEETL is an issue tracking system that can be 
-                                easily integrated into all of your software development cycles. 
+                                easily integrated into your software or hardware development cycles. 
                                 Killing Bugs has never been so much fun.
                             </p>
-                            <h6 className={classes.logo}>BEETL {"\n"}<span className={classes.tagline}>A Lightweight Bug Tracking System</span></h6>
+                            <h6 className={classes.logo}>BEETL {"\n"}<span className={classes.tagline}>A Lightweight Bug Tracking System</span>
+                            <Button variant="raised" color="primary" className={classes.btnStyle}>
+                            <Link to="/signup">SIGN UP FOR A FREE ACCOUNT</Link>
+                            </Button></h6>
                         </CardContent>
                     </div>
                 </Card>
@@ -174,13 +186,13 @@ export function LandingPage(props){
                         </div>
                         <CardContent>
                           <h6 className={classes.gridded}>
-                            ADD PRODCTS + USERS<span className={classes.tiny_headline}>BUILD TEAMS </span> 
+                            ADD PRODUCTS + USERS<span className={classes.tiny_headline}>BUILD TEAMS </span> 
                             <span className={classes.accent}>EASILY</span>
                           </h6>
                           <p>
-                            Add products and users
-                            Praesent ac odio at erat ullamcorper finibus id a leo. Nunc tellus tellus, 
-                            cursus sed finibus id, consequat eu.
+                            Easily manage all your products and users. As an admin, 
+                            you have the privilege of adding your company products and also adding the rest of your 
+                            development team into the system.
                           </p>
                           <h6 className={classes.logo}>BEETL {"\n"}<span className={classes.tagline}>A Lightweight Bug Tracking System</span></h6>
                         </CardContent>
@@ -202,9 +214,10 @@ export function LandingPage(props){
                             <span className={classes.accent}>EFFECTIVELY</span>
                           </h6>
                           <p>
-                            Create issues and assign to your team
-                            Praesent ac odio at erat ullamcorper finibus id a leo. Nunc tellus tellus, 
-                            cursus sed finibus id.
+                            Any user, either admin, developer or tester can
+                            create bugs. You can then assign it to the right user in your
+                            team. Store and retrieve all the relevant details related to the bug in 
+                            an easy to use optimized form.
                           </p>
                           <h6 className={classes.logo}>BEETL {"\n"}<span className={classes.tagline}>A Lightweight Bug Tracking System</span></h6>
                         </CardContent>
@@ -227,7 +240,8 @@ export function LandingPage(props){
                           </h6>
                           <p className={classes.content}>
                             Update and track issues during all their stages from open to built. 
-                            Praesent ac odio at erat ullamcorper finibus id a leo. Nunc tellus.
+                            as the bug moves through the system. Your dashboard shows the status
+                            of all the bugs across all products in a quick summary. 
                           </p> 
                           <h6 className={classes.logo}>BEETL {"\n"}<span className={classes.tagline}>A Lightweight Bug Tracking System</span></h6>
                         </CardContent>
@@ -235,7 +249,7 @@ export function LandingPage(props){
                 </Grid>
 
                 <Grid item xs={12} sm={12} className={classes.mainForm} style={{textAlign: 'center'}}>
-                    <h3 className={classes.med_headline}>Need a Customized Version? <span className={classes.accentDark}>Make Contact</span></h3>
+                    <h3 className={classes.med_headline}>Need a Customized Beetl? <span className={classes.accentDark}>GET IN TOUCH</span></h3>
                     <ContactForm />
                 </Grid>
             </Grid>
