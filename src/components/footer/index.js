@@ -1,11 +1,17 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 
+/* Material UI */
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import blueGrey from '@material-ui/core/colors/blueGrey';
 import amber from '@material-ui/core/colors/amber';
+
+/* Icons */
+import GithubIcon    from '../../utils/github-icon';
+import LinkedInIcon  from '../../utils/linkedin-icon';
 
 import './index.css';
 
@@ -37,6 +43,13 @@ const styles = {
     backgroundRepeat: 'no-repeat',
     backgroundSize: '60%',
     backgroundPosition: 'center'
+  },
+  icon:{
+    width: 30,
+    height: 30,
+    backgroundColor: amber[500],
+    marginRight: '1rem',
+    padding: 4,
   }
 };
 
@@ -46,15 +59,21 @@ function Footer(props){
 
   return(
     <Grid container className="footer">
-        <Grid item xs={12}>
 	      	<Grid item xs={12} sm={6} md={6}>
-            <Avatar alt="" className={classes.bug} />
-            <h6 className={classes.logo}>BEETL {"\n"}<span className={classes.tagline}>A Lightweight Bug Tracking System</span></h6>
-					</Grid>
-					<Grid item xs={12} sm={6} md={6}>
-						<p className={classes.legalease}>Copyright &copy; 2018 | Beetl Inc </p>
-					</Grid>
-        </Grid>
+                <Avatar alt="" className={classes.bug} />
+                <h6 className={classes.logo}>BEETL {"\n"}<span className={classes.tagline}>A Lightweight Bug Tracking System</span></h6>
+            </Grid>
+            <Grid item xs={6} style={{textAlign:'right'}}>
+                <Link to={"https://github.com/preetha5"} target="_blank">
+                    <GithubIcon className={classes.icon} />
+                </Link>
+                <Link to={"https://www.linkedin.com/in/preetha-ramakrishnan-07b1891/"} target="_blank">
+                    <LinkedInIcon className={classes.icon} />
+                </Link>
+            </Grid>
+            <Grid item xs={12} sm={6} md={6}>
+                <p className={classes.legalease}>Copyright &copy; 2018 | Beetl Inc </p>
+            </Grid>
     </Grid>
 	)
 }
