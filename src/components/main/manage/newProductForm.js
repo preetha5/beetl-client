@@ -18,6 +18,11 @@ const styles = theme => ({
     menu: {
       width: 200,
     },
+    btnStyle : {
+        marginRight: '1em',
+        marginTop: '2em',
+        background: 'lightgrey'
+      },
   });
 
 class NewProductForm extends Component{
@@ -65,7 +70,9 @@ class NewProductForm extends Component{
                 </div>
                 <div>
                     <Button variant="raised"
-                    type="submit" disabled={invalid|| submitting || pristine}>Add</Button>
+                    className={classes.btnStyle}
+                    type="submit"
+                    disabled={invalid|| submitting || pristine}>Add</Button>
                 </div>
             </form>
             </div>

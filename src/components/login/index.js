@@ -60,7 +60,7 @@ class Login extends Component {
             <Grid container 
             justify='center'
             className={classes.root}>
-                <Grid item xs={12}style={{textAlign: 'center'}}>
+                <Grid item xs={12} style={{textAlign: 'center'}}>
                     <h1 className={classes.headline}>Login</h1>
                 </Grid>
                 

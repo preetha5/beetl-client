@@ -16,7 +16,7 @@ import {clearAuthToken} from '../../utils/localStorage';
 
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-
+import Grid from '@material-ui/core/Grid';
 // easy and its affecting the styles of Mui-UI
 const logo_style = {
     flexGrow: 1,
@@ -74,7 +74,7 @@ export class Header extends Component{
             </div>);
         
         return (
-            <div>
+            <Grid container className="header">
                 <AppBar 
                     title={<Link style={logo_style} to="/">BEETL</Link>}
                     iconElementLeft={
@@ -84,7 +84,7 @@ export class Header extends Component{
                 <Drawer width={200} openSecondary={true} open={this.state.open}>
                     {menulinks}
                 </Drawer>
-            </div>
+            </Grid>
         )
     }
 }

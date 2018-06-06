@@ -43,10 +43,10 @@ export const productsReducer =(state=initialState, action) => {
             console.log(action.product);
             console.log("state in product update to db",state);
             const updateProductState = [...state.products];
-            indexOfProductToUpdate = state.products.findIndex((product) => {
-                return product.id == action.product.id
+            const indexOfProductObj = state.products.findIndex((product) => {
+                return product._id == action.product._id
               })
-              updateProductState[indexOfProductToUpdate] = action.product;
+              updateProductState[indexOfProductObj] = action.product;
               return Object.assign({}, state,{products:updateProductState});
 
         case actions.DELETE_PRODUCT_SUCCESS:

@@ -58,7 +58,8 @@ const style = {
   },
  main:{
     background: 'white',
-    justify: 'center'
+    justify: 'center',
+    paddingTop: '4rem'
 }
 }
 

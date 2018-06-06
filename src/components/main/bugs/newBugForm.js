@@ -45,11 +45,16 @@ const styles = theme => ({
       display: 'flex',
       flexWrap: 'wrap',
       backgroundColor:'white',
-      textAlign: 'center',
-      marginBottom: 150
+      paddingLeft: 70,
+        [theme.breakpoints.up('sm')]: {
+            paddingLeft: 50,
+          },
     },
     formControl: {
       marginBottom: 16,
+      [theme.breakpoints.up('sm')]: {
+        marginBottom: 0,
+      },
       minWidth: 120,
       fontSize: 16,
       lineHeight: 24,
@@ -165,7 +170,7 @@ class NewBugForm extends Component {
         :<Button variant="raised" color="primary" onClick={() => this.setEditing(true)}>Edit</Button>;
     console.log(this.props.bug);
     return (
-        <section>
+        <Grid container justify='center'>
             <form id="newBugForm" onSubmit={this.props.onSubmit} className={classes.root}>
             <Grid item xs={12} sm={6}>
                 <FormControl className={classes.formControl}>
@@ -326,13 +331,14 @@ class NewBugForm extends Component {
                     inputStyle={{ paddingLeft: 100 }}
                     className={classes.textField}
                     hintText="Due Date"
+                    props={{ floatingLabelText: 'DueDate'}}
                     onChange={this.props.onChange('dueDate')}
             />
             </Grid>
                         {CreateButtons}
                 
             </form>
-        </section>
+        </Grid>
     );
   }
 }

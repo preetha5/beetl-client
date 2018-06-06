@@ -24,20 +24,10 @@ const styles = theme => ({
       textAlign: 'center',
       color: theme.palette.text.secondary,
     },
-    papermedia: {
-      height: 0,
-      paddingTop: '31%',
-    },
-    logo: {
-      fontFamily: 'Kanit, sans-serif',
-      fontWeight: 800,
-      letterSpacing: '.2rem',
-      whiteSpace: 'pre-wrap',
-      color: '#0057ff'
-    },
     question: {
       fontFamily: 'Libre Franklin, sans-serif',
       fontWeight: 400,
+      fontSize: 12,
       letterSpacing: '0',
       color: blueGrey[700]
     },
@@ -77,8 +67,9 @@ const styles = theme => ({
     mainForm:{
         backgroundColor: amber[500],
         marginTop: '1.5%',
-        marginBottom: '180px',
-        paddingBottom: '50px !important'
+        // marginBottom: '180px',
+        paddingBottom: '50px !important',
+        padding:10,
       }
 })
 

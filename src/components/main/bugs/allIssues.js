@@ -12,6 +12,7 @@ import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import * as productActions from '../../../actions/productActions';
 import RequiresLogin from '../../requires-login';
+import deepPurple from '@material-ui/core/colors/deepPurple';
 
 const styles = theme => ({
     root: theme.mixins.gutters({
@@ -19,6 +20,9 @@ const styles = theme => ({
       paddingBottom: 16,
       marginTop: theme.spacing.unit * 3,
     }),
+    dashboard:{
+        
+    },
     headline: {
         fontFamily: 'Libre Franklin, sans-serif',
         fontWeight: 500,
@@ -26,8 +30,11 @@ const styles = theme => ({
         color: blueGrey[300],
         paddingBottom: '5px',
         marginTop: '20px'
-      }
+      },
   });
+  const  headerStyle ={
+    background:'deepPurple'
+  }
 
 class Table1 extends Component {
     render() {
@@ -35,7 +42,9 @@ class Table1 extends Component {
         <div>
                 <BootstrapTable data={this.props.data} responsive>
                     <TableHeaderColumn columnTitle isKey 
-                        dataField='productName' tdStyle={ { whiteSpace: 'normal'} }>
+                        dataField='productName' 
+                        style={ headerStyle }
+                        tdStyle={ { whiteSpace: 'normal'} }>
                     Product
                     </TableHeaderColumn>
                     <TableHeaderColumn dataField='total'>
@@ -88,7 +97,7 @@ export class AllIssues extends Component{
         return(
             <div>
             <Grid container align="center">
-                <Grid item xs={12} style={{textAlign: 'center'}}>
+                <Grid item xs={12} className={classes.dashboard}>
                     <h1 className={classes.headline}>Issues at a glance</h1>
                     <Paper className={classes.root} elevation={4}>
                         <Table1 data={bugSummary}/>

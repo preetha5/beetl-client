@@ -5,6 +5,9 @@ import {bindActionCreators} from 'redux';
 import * as Actions from '../../../actions/productActions';
 import NewProductForm from './newProductForm';
 
+//Material UI imports
+import Grid from '@material-ui/core/Grid';
+
 class NewProduct extends React.Component{
     constructor(props){
         super(props);
@@ -40,12 +43,14 @@ class NewProduct extends React.Component{
             return( <Redirect to="/products" />);
          }
         return(
-            <div>
-                <h2>Add Product</h2>
+            <Grid container justify='center'>
+                <Grid item xs={12} style={{textAlign: 'center'}}>
+                <h3>Add Product</h3>
                 <NewProductForm product={this.state.product}
                 onSubmit={this.createProduct} 
                 onChange= {field =>this.updateProductState(field) }/>
-            </div>
+            </Grid>
+            </Grid>
         );
     }
 }

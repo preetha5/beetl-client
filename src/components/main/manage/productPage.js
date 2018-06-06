@@ -7,6 +7,8 @@ import ProductForm from './productForm';
 
 /*Material UI imports */
 import Button from '@material-ui/core/Button';
+//Material UI imports
+import Grid from '@material-ui/core/Grid';
 
 class ProductPage extends Component{
     constructor(props){
@@ -72,20 +74,22 @@ class ProductPage extends Component{
              )   
         }
         return(
-            <div>
-                <p> Name: {this.props.product && this.props.product.name} </p>
-                <p> Title: {this.props.product && this.props.product.title} </p>
-                <p> Description: {this.props.product && this.props.product.description} </p>
-                <Button variant="raised"
-                onClick={() => this.handleEditProduct()}>
-                Edit
-                </Button>
+            <Grid container justify='center'>
+                <Grid item style={{textAlign: 'center'}}>
+                    <p> Name: {this.props.product && this.props.product.name} </p>
+                    <p> Title: {this.props.product && this.props.product.title} </p>
+                    <p> Description: {this.props.product && this.props.product.description} </p>
+                    <Button variant="raised"
+                    onClick={() => this.handleEditProduct()}>
+                    Edit
+                    </Button>
             
                 <Button variant="raised"
                     onClick={() => this.handleDeleteProduct()}>
                     Delete
                 </Button>
-            </div>
+            </Grid>
+        </Grid>
         )
     }
 }

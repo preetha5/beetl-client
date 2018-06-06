@@ -8,6 +8,7 @@ import UserForm from './userForm';
 
 /*Material UI imports */
 import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 
 class UserPage extends Component{
     constructor(props){
@@ -70,7 +71,8 @@ class UserPage extends Component{
              )   
         }
         return(
-            <div>
+            <Grid container justify='center'>
+            <Grid item style={{textAlign: 'center'}}>
                 <p> Username: {this.props.user && this.props.user.username} </p>
                 <p> FirstName: {this.props.user && this.props.user.firstName} </p>
                 <p> LastName: {this.props.user && this.props.user.lastName} </p>
@@ -85,7 +87,8 @@ class UserPage extends Component{
                     onClick={() => this.handleDeleteUser()}>
                     Delete
                 </Button>
-            </div>
+            </Grid>
+        </Grid>
         )
     }
 }

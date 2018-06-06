@@ -5,6 +5,9 @@ import {bindActionCreators} from 'redux';
 import * as Actions from '../../../actions/userActions';
 import NewUserForm from './newUserForm';
 
+//Material UI imports
+import Grid from '@material-ui/core/Grid';
+
 class NewUser extends React.Component{
     constructor(props){
         super(props);
@@ -40,12 +43,14 @@ class NewUser extends React.Component{
             return( <Redirect to="/users" />);
          }
         return(
-            <div>
+            <Grid container justify='center'>
+            <Grid item xs={12} style={{textAlign: 'center'}}>
                 <h2>Add User</h2>
                 <NewUserForm user={this.state.user}
                 onSubmit={this.createUser} 
                 onChange= {field =>this.updateUserState(field) }/>
-            </div>
+            </Grid>
+        </Grid>
         );
     }
 }

@@ -46,7 +46,7 @@ class Table1 extends Component {
     render() {
         return (
         <div>
-                <BootstrapTable data={this.props.data} responsive search searchPlaceholder='Enter search...' version='4'>
+                <BootstrapTable data={this.props.data} responsive search searchPlaceholder='Enter keywords to filter...' version='4'>
                     <TableHeaderColumn dataField='bugId' 
                         dataFormat={bugIdFormatter} isKey={true}>
                     BUG ID

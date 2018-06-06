@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 
 const styles = theme => ({
     container: {
@@ -28,9 +29,9 @@ class ProductForm extends Component{
         const { classes,invalid, handleSubmit, load, pristine, reset, submitting } = this.props;
 
         return(
-            <div>
+            <Grid container justify="center">
             <form className="productForm" onSubmit={this.props.onSubmit}>
-                <div>
+                <Grid item>
                     <TextField
                     id="name"
                     label="Product Name"
@@ -40,8 +41,8 @@ class ProductForm extends Component{
                     margin="normal"
                     required
                     />
-                </div>
-                <div>
+                </Grid>
+                <Grid item>
                     <TextField
                     id="title"
                     label="Title"
@@ -51,8 +52,8 @@ class ProductForm extends Component{
                     margin="normal"
                     required
                 />
-                </div>
-                <div>
+                </Grid>
+                <Grid item>
                     <TextField
                     id="description"
                     label="Description"
@@ -62,13 +63,13 @@ class ProductForm extends Component{
                     onChange={this.props.onChange('description')}
                     margin="normal"
                     />
-                </div>
-                <div>
+                </Grid>
+                <Grid item>
                     <Button variant="raised"
-                    type="submit" disabled={invalid|| submitting || pristine}>Save</Button>
-                </div>
+                    type="submit" disabled={submitting || pristine}>Save</Button>
+                </Grid>
             </form>
-            </div>
+            </Grid>
         )
     }
 }

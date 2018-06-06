@@ -99,7 +99,7 @@ class CreateIssue extends React.Component{
          }
         console.log(this.state.bug);
         return(
-            <section>
+            <Grid container justify='center'>
                 <Grid item xs={12} >
                     <h1 className={classes.headline} >Create Bug</h1>
                 </Grid>
@@ -112,7 +112,7 @@ class CreateIssue extends React.Component{
                     />
                 </Grid>
                 
-        </section>
+        </Grid>
         )
     }
 }
