@@ -19,7 +19,7 @@ Landing Page
 
 Dashboard Home
 
-![My Dashboard Page](./screenshots/dashboard-desktop.jpg?raw=true "My Dashboard Page")
+![My Dashboard Page](./screenshots/dashboard_desktop.jpg?raw=true "My Dashboard Page")
 
 View Bugs
 
