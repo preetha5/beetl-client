@@ -120,7 +120,7 @@ const styles = theme => ({
   mainForm:{
     backgroundColor: amber[500],
     marginTop: '1.5%',
-    marginBottom: '150px',
+    marginBottom: 10,
     paddingBottom: '50px !important'
   }
 });
