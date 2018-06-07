@@ -260,6 +260,5 @@ LandingPage.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-const styledComponent = withStyles(styles)(LandingPage);
-export default connect(mapStateToProps)(styledComponent);
+export default withStyles(styles)(connect(mapStateToProps)(LandingPage));
 
