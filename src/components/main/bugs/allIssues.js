@@ -12,7 +12,6 @@ import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import * as productActions from '../../../actions/productActions';
 import RequiresLogin from '../../requires-login';
-import deepPurple from '@material-ui/core/colors/deepPurple';
 
 const styles = theme => ({
     root: theme.mixins.gutters({

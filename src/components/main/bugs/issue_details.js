@@ -112,8 +112,10 @@ export class IssueDetails extends React.Component{
 
 const mapStateToProps = (state, props) => {
     const bugNumber = props.match.params.bugId;
+    console.log(bugNumber);
     const currentBug = state.bugsReducer.bugs.find(bug =>
         bug.bugId === bugNumber);
+    console.log(currentBug);
     return {bug:currentBug , bugNumber};  
 };
 

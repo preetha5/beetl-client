@@ -1,11 +1,10 @@
 import React,{Component} from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import validate from '../../../utils/validate';
-import asyncValidate from '../../../utils/asyncValidate';
 
 const styles = theme => ({
     container: {
@@ -28,11 +27,9 @@ const styles = theme => ({
   });
 
 class NewUserForm extends Component{
-    constructor(props){
-        super(props);
-    }
+
     render(){
-        const { classes,invalid, handleSubmit, load, pristine, reset, submitting } = this.props;
+        const { classes,invalid, submitting } = this.props;
 
         return(
             <div>

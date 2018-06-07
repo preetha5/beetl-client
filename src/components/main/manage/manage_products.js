@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Switch, Route, Link, Redirect} from 'react-router-dom';
 import ProductPage from './productPage';
@@ -11,10 +10,7 @@ import * as productActions from '../../../actions/productActions';
 //Material UI imports
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
-import Icon from '@material-ui/core/Icon';
 import {List, ListItem} from 'material-ui/List';
 import blueGrey from '@material-ui/core/colors/blueGrey';
 import Divider from '@material-ui/core/Divider';

@@ -34,7 +34,6 @@ const styles = theme => ({
   });
 
 function bugIdFormatter(cell, row){
-    console.log('calling formatter', {cell});
     return (
         <Link to={`/view_issues/${cell}`}>{cell}</Link>
     );
@@ -83,7 +82,6 @@ export class ViewIssues extends Component{
     const buglist = this.props.bugs && this.props.bugs.map(bug =>{
         
         let _bug = bug;
-        console.log(bug);
        _bug['productName'] = bug.productId.name;
        _bug['assigneeName'] = bug.assignee.email;
         
@@ -105,10 +103,6 @@ export class ViewIssues extends Component{
     }
 }
 
-// AllIssues.propTypes = {
-//     classes: propTypes.object.isRequired
-// }
-
 const mapStateToProps = (state) => {
     console.log(state);
     return {
@@ -126,5 +120,3 @@ const mapDispatchToProps = (dispatch) => {
     }
 
 export default RequiresLogin()(withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(ViewIssues)));
-
-//export default connect(mapStateToProps, mapDispatchToProps)(CreateIssue);

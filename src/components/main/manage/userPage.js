@@ -35,7 +35,6 @@ class UserPage extends Component{
         const user = this.props.user;
         
         user[field] = event.target.value;
-        console.log("updating input for user", user)
         //this.setState({user: user});
         //Add dispatch
         this.props.actions.updateUserField(user);  
@@ -62,7 +61,7 @@ class UserPage extends Component{
         if(this.state.deleting){ 
             return (<Redirect to='/users' />);
         }
-        console.log(this.props.user);
+
         if(this.state.editing){
              return(
                 <UserForm user={this.props.user}
@@ -101,11 +100,10 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state, props) => {
     const userId = props.match.params.userId;
-    console.log(userId);
-    console.log(state.usersReducer.users);
+
     const currentUser = state.usersReducer.users.find(user => 
         user.id === userId);
-    console.log(currentUser);
+
 
     return {user:currentUser, userId};    
 };

@@ -1,22 +1,17 @@
-import React, {Component} from 'react';
-import {Header} from '../header';
-import Footer from '../footer';
+import React from 'react';
 import ContactForm from './contact-form';
 import {Link, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 // Material UI
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import amber from '@material-ui/core/colors/amber';
-import deepPurple from '@material-ui/core/colors/deepPurple';
 import blueGrey from '@material-ui/core/colors/blueGrey';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 

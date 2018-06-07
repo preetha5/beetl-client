@@ -6,12 +6,7 @@ import { Field, reduxForm } from 'redux-form';
 
 import SelectField from 'material-ui/SelectField';
 import Grid from '@material-ui/core/Grid';
-// import PropTypes from 'prop-types';
-// import { withStyles } from '@material-ui/core/styles';
-
 import Button from '@material-ui/core/Button';
-import deepPurple from '@material-ui/core/colors/deepPurple';
-
 import asyncValidate from '../../utils/asyncValidate';
 import validate from '../../utils/validate';
 
@@ -51,13 +46,34 @@ const renderTextField = (
   );
 
 //export default function ContactForm(){
-const ContactForm = props => {
-  const { handleSubmit, pristine, reset, submitting } = props;
-  
-  return (
+export class ContactForm extends React.Component{
+    constructor(props){
+        super(props);
+        this.state ={
+            postSuccess:false
+        }
+        this.onSubmit = this.onSubmit.bind(this);
+
+    }
+    onSubmit(values){
+        console.log('posting...');
+        return this.setState({postSuccess: true});
+    }
+
+  render(){
+    const { handleSubmit, pristine, reset, submitting } = this.props;
+    let successMessage;
+    if(this.state.postSuccess){
+        successMessage = (
+            <div className="message message-success">
+                Message submitted successfully
+            </div>
+        );
+    }
+    return (
       <section>
-        <form style={style} onSubmit={handleSubmit(values => props.onSubmit(values))}>
-          <Grid item xs={12} sm={6}>
+        <form style={style} onSubmit={handleSubmit(values => this.onSubmit(values))}>
+            <Grid item xs={12} sm={6}>
               <Field 
               name="firstName" 
               component={renderTextField} 
@@ -114,9 +130,13 @@ const ContactForm = props => {
                 Clear Values
               </Button>
           </Grid>
+          <Grid item xs={12} style={{color:'green'}}>
+            {successMessage}
+          </Grid>
         </form>
       </section>
   )
+}
 }
 
 export default reduxForm({

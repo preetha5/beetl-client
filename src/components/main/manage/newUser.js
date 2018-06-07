@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
 import {bindActionCreators} from 'redux';
@@ -34,7 +34,6 @@ class NewUser extends React.Component{
         const field = name;
         const user = this.state.user;
         user[field] = event.target.value;
-        console.log(user);
         return this.setState({user: user});
       }
 

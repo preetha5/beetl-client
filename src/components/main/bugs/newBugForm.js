@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Field, reduxForm, formValueSelector} from 'redux-form';
+import {Field, reduxForm} from 'redux-form';
 import {bindActionCreators} from 'redux';
 import * as productActions from '../../../actions/productActions';
 import * as userActions from '../../../actions/userActions';
@@ -14,18 +14,7 @@ import MenuItem from 'material-ui/MenuItem';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
-//import {AutoComplete as MUIAutoComplete, ActionSettingsApplications} from 'material-ui';
-import {
-  //AutoComplete,
-  //Checkbox,
-  //DatePicker,
-//   TimePicker,
-//   RadioButtonGroup,
-  //SelectField,
- // Slider,
-  TextField,
-  //Toggle,
-} from 'redux-form-material-ui';
+import {TextField} from 'redux-form-material-ui';
 //import SelectField from 'material-ui/SelectField';
 import Select from '@material-ui/core/Select';
 //import {renderSelectField} from './material-ui-form.js';
@@ -84,7 +73,7 @@ class NewBugForm extends Component {
           editing: false,
           age: ''
       }
-      const {chosenProduct} = props;
+      
       this.handleProductChange = this.handleProductChange.bind(this);
   }
 
@@ -95,19 +84,14 @@ class NewBugForm extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
     this.props.actions.loadProducts();
     this.props.actions.loadUsers();
-
   }
 
   handleProductChange(val){
-      console.log(val);
       const products = this.props.products;
-      console.log(products);
       const result = products.find(product => `${product.id}` === val);
       this.setState({ components : result ? result.components : []});
-      console.log(this.state.components);
   }
   
   handleChange = event => {
@@ -115,18 +99,17 @@ class NewBugForm extends Component {
   };
 
   render() {
-    const {handleSubmit, pristine, classes, reset, submitting} = this.props;
+    const {pristine, classes, reset, submitting} = this.props;
     const productsList = this.props.products.map((product, index) =>
         //<MenuItem key={index} value={product.name} primaryText={product.name} />
         <MenuItem key={index} value={product._id} >{product.name} </MenuItem>
 
     );
-    console.log(productsList);
    
     const usersList = this.props.users.map((user, index) =>
         <MenuItem key={index} value={user.id}>{user.email} </MenuItem>
     )
-    console.log(usersList);
+
     //Buttons added while form is used to create an issue
     const CreateButtons = <Grid item xs={12} className={classes.btnDiv}>
                             <Button 
@@ -146,25 +129,6 @@ class NewBugForm extends Component {
                             </Button>
                             </Grid>;
 
-    //Buttons added while form is used to edit/save an issue
-    const EditButtons = this.state.editing ? (
-        <Grid item xs={12} textAlign = 'center' className={classes.btnDiv}>
-            <Button variant="raised" 
-            color="primary" 
-            type="submit" 
-            disabled={pristine || submitting}
-            >Save
-            </Button>
-            <Button variant="raised"
-                type="button"
-                disabled={pristine || submitting}
-                onClick={reset}
-            >
-                Clear
-            </Button>
-        </Grid>)
-        :<Button variant="raised" color="primary" onClick={() => this.setEditing(true)}>Edit</Button>;
-    console.log(this.props.bug);
     return (
         <Grid container justify='center'>
             <form id="newBugForm" onSubmit={this.props.onSubmit} className={classes.root}>
@@ -172,6 +136,7 @@ class NewBugForm extends Component {
                 <FormControl className={classes.formControl}>
                     <InputLabel htmlFor="product">Select a Product</InputLabel>
                     <Select
+                    required
                     value={this.props.bug.productId}
                     onChange={this.props.selectChange}
                     input={<Input name="productId" id="product" />}
@@ -219,6 +184,7 @@ class NewBugForm extends Component {
                     name="description"
                     component={TextField}
                     hintText="Bug Description"
+                    validate={required}
                     floatingLabelText="Bug Description"
                     value={this.props.bug.description}
                     onChange={this.props.onChange('description')}
@@ -308,17 +274,6 @@ class NewBugForm extends Component {
                     </Select>
                 </FormControl>
             </Grid>
-                {/* <Field
-                    name="assignee"
-                    component={renderSelectField}
-                    label="Select an assignee"
-                    type="select"
-                    value={this.props.bug.assignee}
-                    onChange={this.props.onChange('assignee')}
-                    >
-                    {usersList}
-                </Field> */}
-    
             <Grid item xs={12} sm={6}>
                 <TextField
                     id="date"
@@ -340,7 +295,7 @@ class NewBugForm extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-    console.log(state);
+
      return {
          products:state.productsReducer.products,
          users:state.usersReducer.users,

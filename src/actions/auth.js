@@ -3,7 +3,7 @@ import {SubmissionError} from 'redux-form';
 
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from '../utils//normalizeErrors';
-import {saveAuthToken, clearAuthToken} from '../utils/localStorage';
+import {saveAuthToken} from '../utils/localStorage';
 
 export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN';
 export const setAuthToken = (authToken) => ({
@@ -93,7 +93,6 @@ export const refreshAuthToken = () => (dispatch, getState) => {
         .then(res => normalizeResponseErrors(res))
         .then(res =>  res.json())
         .then(response => {
-            console.log(response);
             return response;
         })
         .then(({authToken}) => storeAuthInfo(authToken, dispatch))

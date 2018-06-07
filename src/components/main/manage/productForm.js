@@ -1,5 +1,4 @@
 import React,{Component} from 'react';
-import { Field, reduxForm } from 'redux-form';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
@@ -22,11 +21,9 @@ const styles = theme => ({
   });
 
 class ProductForm extends Component{
-    constructor(props){
-        super(props);
-    }
+
     render(){
-        const { classes,invalid, handleSubmit, load, pristine, reset, submitting } = this.props;
+        const { classes, pristine, submitting } = this.props;
 
         return(
             <Grid container justify="center">

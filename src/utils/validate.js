@@ -2,7 +2,6 @@ const passwordLength = {min: 8, max: 72};
 
 export default function(values) {
     const errors = {};
-    console.log(values);
     const requiredFields = [
       'username',
       'email',

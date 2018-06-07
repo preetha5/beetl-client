@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {BrowserRouter as Router, Route, withRouter, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './app.css';
 import Header from './header';
 import LandingPage from './landing-page';
@@ -14,16 +14,11 @@ import IssueDetails from './main/bugs/issue_details';
 import Sidebar from './main/sidebar';
 import Help from './main/help';
 import ManageUsers from './main/manage/manage_users';
-import UserPage from './main/manage/userPage';
-import NewUser from './main/manage/newUser';
 import ManageProducts from './main/manage/manage_products';
 import {refreshAuthToken} from '../actions/auth';
-import {loadAuthToken} from '../utils/localStorage';
 
 // Import for Material UI
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
-import { createMuiTheme } from '@material-ui/core/styles';
 import amber from '@material-ui/core/colors/amber';
 import deepPurple from '@material-ui/core/colors/deepPurple';
 import blueGrey from '@material-ui/core/colors/blueGrey';
@@ -64,10 +59,7 @@ const style = {
 }
 
 export class App extends Component {
-    constructor(props){
-        super(props);
-    }
-
+    
     componentDidUpdate(prevProps) {
         if (!prevProps.loggedIn && this.props.loggedIn) {
             // When we are logged in, refresh the auth token periodically
@@ -99,7 +91,6 @@ export class App extends Component {
 
   render() {
     
-    const {classes} = this.props;
     console.log("inside app.js ", this.props.loggedIn);
    
     return (

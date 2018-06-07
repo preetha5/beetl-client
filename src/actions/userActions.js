@@ -1,5 +1,3 @@
-import React from 'react';
-import {Redirect} from 'react-router';
 import {SubmissionError} from 'redux-form';
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from '../utils/normalizeErrors';
@@ -144,9 +142,11 @@ export const deleteUser = (userId) => dispatch => {
         }
         })
         .then(res => normalizeResponseErrors(res))
-        .then(() => dispatch(deleteUserSuccess(userId)))
+        .then(() => {
+            console.log("deleting..", userId);
+            dispatch(deleteUserSuccess(userId))
+        })
         .catch(err => {
             dispatch(usersError(err));
         })
-    console.log("deleting..", userId);
 }

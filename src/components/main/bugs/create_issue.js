@@ -1,11 +1,10 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
 import {bindActionCreators} from 'redux';
 import * as Actions from '../../../actions/bugActions';
 import NewBugForm from './newBugForm';
 import Grid from '@material-ui/core/Grid';
-import { Paper } from 'material-ui';
 import { withStyles } from '@material-ui/core/styles';
 import blueGrey from '@material-ui/core/colors/blueGrey';
 
@@ -23,6 +22,10 @@ const styles = theme => ({
         paddingBottom: '5px',
         marginTop: '20px',
         textAlign: 'center'
+      },
+      errorMsg:{
+          color:'red',
+          textAlign:'center'
       }
   });
 
@@ -65,21 +68,18 @@ class CreateIssue extends React.Component{
     createBug(event){
         event.preventDefault();
         this.state.bug.bugId = this.createBugId();
-        console.log(this.state.bug);
         this.props.actions.createBug(this.state.bug)
         .then(() =>{
             this.setState(
                 {adding:true}
-            );
-        })
+            )
+        });
     }
 
     updateBugState = (field) => event =>{
         //const field = name;
         const bug = this.state.bug;
-        console.log(bug);
         bug[field] = event.target.value;
-        console.log(bug);
         return this.setState({bug: bug});
       }
     
@@ -93,11 +93,13 @@ class CreateIssue extends React.Component{
 
     render(){
         const { classes } = this.props;
-
-        if(this.state.adding){
+        const errorMsg = this.props.error ? 
+        `${this.props.error}`:null
+        
+        if(!this.props.error && this.state.adding){
             return( <Redirect to="/view_issues" />);
          }
-        console.log(this.state.bug);
+
         return(
             <Grid container justify='center'>
                 <Grid item xs={12} >
@@ -111,16 +113,23 @@ class CreateIssue extends React.Component{
                     selectChange = {e =>{this.updateSelectField(e)}}
                     />
                 </Grid>
-                
+                <Grid item xs={12} className={classes.errorMsg}>
+                    {errorMsg}
+                </Grid>
         </Grid>
         )
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        error: state.bugsReducer.error
+    } 
+}
 const mapDispatchToProps = (dispatch) => {
     return {
       actions: bindActionCreators(Actions, dispatch)
     };
   }
 
-export default withStyles(styles)(connect(null, mapDispatchToProps)(CreateIssue));
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(CreateIssue));

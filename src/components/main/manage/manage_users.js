@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Switch, Route, Link, Redirect} from 'react-router-dom';
 import UserPage from './userPage';
@@ -10,11 +9,7 @@ import * as UserActions from '../../../actions/userActions';
 //Material UI imports
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import {loadUsers} from '../../../actions/userActions';
 import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
-import Icon from '@material-ui/core/Icon';
 import {List, ListItem} from 'material-ui/List';
 import blueGrey from '@material-ui/core/colors/blueGrey';
 import Divider from '@material-ui/core/Divider';
@@ -64,7 +59,6 @@ class ManageUsers extends Component{
     
     componentWillMount(){
         this.props.actions.loadUsers();
-        console.log(this.props);
     }
 
     render(){
@@ -72,7 +66,6 @@ class ManageUsers extends Component{
         const errorMsg = this.props.error ? 
         `${this.props.error}`:null
 
-        console.log(this.props.users);
         return(
             <Grid container>
                 <Grid item xs={12}>
@@ -124,7 +117,6 @@ class ManageUsers extends Component{
 }
 
 const mapStateToProps = (state, props) => {
-     console.log(state);
      return {
          users:state.usersReducer.users,
          error: state.usersReducer.error

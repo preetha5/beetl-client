@@ -1,6 +1,3 @@
-import React from 'react';
-import {Redirect} from 'react-router';
-import {SubmissionError} from 'redux-form';
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from '../utils/normalizeErrors';
 

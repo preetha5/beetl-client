@@ -1,21 +1,13 @@
-import React, {Component} from 'react';
+import React from 'react';
 import AllIssues from './bugs/allIssues';
 import MyBugs from './bugs/myBugs';
 import {Link} from 'react-router-dom';
 import RequiresLogin from '../requires-login';
 
 // Material ui import
-import MenuItem from 'material-ui/MenuItem';
-import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
-import Paper from '@material-ui/core/Paper';
-import Hidden from '@material-ui/core/Hidden';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import purple from '@material-ui/core/colors/purple';
-import green from '@material-ui/core/colors/green';
-import deepPurple from '@material-ui/core/colors/deepPurple';
 import './index.css';
 
 const styles = theme => ({

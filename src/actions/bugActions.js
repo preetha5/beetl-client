@@ -1,6 +1,3 @@
-import React from 'react';
-import {Redirect} from 'react-router';
-import {SubmissionError} from 'redux-form';
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from '../utils/normalizeErrors';
 
@@ -50,13 +47,20 @@ export const createBug = (newBug) => dispatch => {
         body: JSON.stringify(newBug)
         })
         .then(res => {
-            if (!res.ok) {
-                return Promise.reject(res.statusText);
-            }
+            
             return res.json();
         })
         .then((bug) => {
-            dispatch(createBugSuccess(bug));
+            if (!bug.ok) {
+                console.log(bug);
+                //dispatch(bugsError(res));
+                return Promise.reject(bug.error);
+            }
+            return dispatch(createBugSuccess(bug));
+        })
+        .catch(err =>{
+            console.log(err)
+            dispatch(bugsError(err));
         });
 } //End Create bugs actions
 
@@ -71,6 +75,9 @@ export const loadBugs = () => dispatch => {
         .then(res => res.json())
         .then(bugs => {
             dispatch(loadBugsSuccess(bugs));
+        })
+        .catch(err =>{
+            dispatch(bugsError(err));
         });
 };//End Load Bugs action
 

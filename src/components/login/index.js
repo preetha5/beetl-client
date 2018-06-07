@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import MaterialUiForm from '../../utils/material-ui-form';
 import LoginForm from './loginForm';
 import {connect} from 'react-redux';
 import {Link, Redirect} from 'react-router-dom';
@@ -10,7 +9,6 @@ import Grid from '@material-ui/core/Grid';
 import blueGrey from '@material-ui/core/colors/blueGrey';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import deepPurple from '@material-ui/core/colors/deepPurple';
 
 
