@@ -33,8 +33,8 @@ const styles = {
     color: blueGrey[200],
   },
   legalease: {
-  	color: blueGrey[600],
-  	fontSize: '.75rem',
+  	color: blueGrey[200],
+  	fontSize: '.8rem',
   },
   bug:{
     position: 'absolute',
@@ -59,11 +59,12 @@ function Footer(props){
 
   return(
     <Grid container className="footer">
-	      	<Grid item xs={12} sm={6} md={6}>
+	      	<Grid item xs={6} sm={6} md={6}>
                 <Avatar alt="" className={classes.bug} />
                 <h6 className={classes.logo}>BEETL {"\n"}<span className={classes.tagline}>A Lightweight Bug Tracking System</span></h6>
             </Grid>
-            <Grid item xs={6} style={{textAlign:'right'}}>
+            
+            <Grid item xs={6} sm={6} style={{textAlign:'right'}}>
                 <Link to={"https://github.com/preetha5"} target="_blank">
                     <GithubIcon className={classes.icon} />
                 </Link>
@@ -71,9 +72,10 @@ function Footer(props){
                     <LinkedInIcon className={classes.icon} />
                 </Link>
             </Grid>
-            <Grid item xs={12} sm={6} md={6}>
-                <p className={classes.legalease}>Copyright &copy; 2018 | Beetl Inc </p>
+            <Grid item xs={12}>
+                <p className={classes.legalease} style={{textAlign:"center"}}>Copyright &copy; 2018 | Beetl Inc </p>
             </Grid>
+            
     </Grid>
 	)
 }

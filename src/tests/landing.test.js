@@ -7,6 +7,6 @@ const mockStore = configureStore();
 
 describe('<LandingPage />', () =>{
     it('should render component without crashing', () =>{
-        shallow(<LandingPage store={mockStore({ runtime: {} })}/>);
+        shallow(<LandingPage />);
     });
 })
