@@ -101,7 +101,7 @@ class CreateIssue extends React.Component{
          }
 
         return(
-            <Grid container justify='center'>
+            <Grid container justify='center' className='createIssueContainer'>
                 <Grid item xs={12} >
                     <h1 className={classes.headline} >Create Bug</h1>
                 </Grid>
